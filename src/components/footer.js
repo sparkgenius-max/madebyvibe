@@ -122,8 +122,8 @@ export function Footer() {
 
             <!-- Big Text SVG -->
             <div class="footer-big-text">
-                <svg viewBox="0 0 1400 130" preserveAspectRatio="xMinYMid slice" class="footer-big-svg">
-                    <text x="0" y="105" fill="#FFFFFF" font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="110" font-weight="500">Crafting since 2024</text>
+                <svg id="footerBigSvg" viewBox="0 0 1400 130" preserveAspectRatio="xMidYMid meet" class="footer-big-svg">
+                    <text id="footerBigText" x="0" y="105" fill="#FFFFFF" font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="110" font-weight="500">Crafting since 2024</text>
                 </svg>
             </div>
 
@@ -155,5 +155,23 @@ export function initFooter() {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
+    }
+
+    // Adjust Footer Big Text to perfectly fit width
+    const svg = document.getElementById('footerBigSvg');
+    const text = document.getElementById('footerBigText');
+
+    if (svg && text) {
+        const adjustText = () => {
+            const bbox = text.getBBox();
+            // Set viewBox to exactly match the text width (plus small buffer if needed, but strict is requested)
+            // We keep y and height constant (0 0 width 130)
+            svg.setAttribute('viewBox', `${bbox.x} 0 ${bbox.width} 130`);
+        };
+
+        // Run immediately and after fonts load
+        adjustText();
+        document.fonts.ready.then(adjustText);
+        window.addEventListener('resize', adjustText); // In case of fluid font resizing (though here it's fixed SVG)
     }
 }

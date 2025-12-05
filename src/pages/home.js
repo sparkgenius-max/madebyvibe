@@ -1,7 +1,7 @@
 import { Navbar } from '../components/navbar.js';
 import { Hero } from '../components/hero.js';
 import { Marquee } from '../components/marquee.js';
-import { About } from '../components/about.js';
+import { About, initAbout } from '../components/about.js';
 import { Work } from '../components/work.js';
 import { initProjectSlider } from '../components/project-slider.js';
 import { Expertise, initExpertise } from '../components/expertise.js';
@@ -43,6 +43,13 @@ export function Home() {
     ${Marquee()}
     ${About()}
     ${Work()}
+    ${Marquee({
+        items: [
+            "Sleep is a rendering error — MadeByVibe © 2025",
+            "404: Work-Life balance not found — MadeByVibe © 2025",
+            "We fix what your nephew did —  MadeByVibe © 2025"
+        ]
+    })}
     ${Expertise()}
     ${Blog()}
     ${Footer()}
@@ -52,6 +59,7 @@ export function Home() {
 export function initHome() {
     // Initialize interactive components after DOM is ready
     initProjectSlider();
+    initAbout();
     initExpertise();
     initBlog();
     initFooter();

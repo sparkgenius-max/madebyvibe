@@ -1,4 +1,7 @@
 export function Button({ text, href, variant = 'primary', className = '', icon = true }) {
+    // Capitalize only the first letter of the first word
+    const processedText = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+
     const Tag = href ? 'a' : 'button';
     const attr = href ? `href="${href}"` : '';
 
@@ -12,8 +15,8 @@ export function Button({ text, href, variant = 'primary', className = '', icon =
     <${Tag} ${attr} class="btn btn-${variant} ${className}">
         <div class="btn-content">
             <div class="btn-text-group">
-                <span class="btn-text-primary">${text}</span>
-                <span class="btn-text-secondary">${text}</span>
+                <span class="btn-text-primary">${processedText}</span>
+                <span class="btn-text-secondary">${processedText}</span>
             </div>
             ${icon ? `
             <div class="btn-icon-group">
