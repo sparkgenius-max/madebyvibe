@@ -1,3 +1,5 @@
+import { Button } from './button.js';
+
 export function Expertise() {
     return `
     <section class="expertise-section">
@@ -17,7 +19,7 @@ export function Expertise() {
                 <div class="expertise-col-3">
                     <div class="expertise-desc">
                         <p>We are a digital marketing agency with expertise,<br>and we're on a mission to help you take the next<br>step in your business.</p>
-                        <a href="#" class="expertise-btn">See all services ↗</a>
+                        ${Button({ text: 'See all services', variant: 'outline-dark', href: '#' })}
                     </div>
                 </div>
             </div>

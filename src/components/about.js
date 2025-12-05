@@ -1,3 +1,5 @@
+import { Button } from './button.js';
+
 export function About() {
     return `
     <section class="about-section">
@@ -8,20 +10,8 @@ export function About() {
                 Branding that elevates your digital presence.
             </p>
             <div class="about-actions">
-                <a href="#" class="about-btn primary">
-                    About Vibe
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a>
-                <a href="#" class="about-btn secondary">
-                    Meet the Team
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </a>
+                ${Button({ text: 'About Vibe', variant: 'primary', href: '#' })}
+                ${Button({ text: 'Meet the Team', variant: 'outline-dark', href: '#' })}
             </div>
         </div>
     </section>

@@ -32,6 +32,42 @@ function attachListeners() {
             orb.style.transform = `translate(${x * 30}px, ${y * 30}px)`;
         });
     }
+
+    // Navbar Scroll Effect
+    const nav = document.querySelector('.floating-nav');
+    let lastScrollY = window.scrollY;
+
+    if (nav) {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            const isScrollingDown = currentScrollY > lastScrollY;
+            const scrollDiff = Math.abs(currentScrollY - lastScrollY);
+
+            // 1. Morph Logic (Glass -> Dark Pill)
+            // Trigger earlier for smoother feel
+            if (currentScrollY > 20) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+
+            // 2. Headroom Logic (Hide/Show)
+            // Show longer on first scroll (threshold 600px)
+            if (isScrollingDown && currentScrollY > 600) {
+                // Hide when scrolling down past 600px
+                nav.classList.add('nav-hidden');
+            } else {
+                // Show when scrolling up OR when near top
+                nav.classList.remove('nav-hidden');
+            }
+
+            lastScrollY = currentScrollY;
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        // Check initial state
+        handleScroll();
+    }
 }
 
 attachListeners();

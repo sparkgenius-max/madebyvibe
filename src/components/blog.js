@@ -1,3 +1,5 @@
+import { Button } from './button.js';
+
 export function Blog() {
     const posts = [
         {
@@ -56,12 +58,9 @@ export function Blog() {
             <div class="blog-intro">
                 <span class="blog-label">● Blog</span>
                 <h2 class="blog-heading">The latest from<br>our design studio</h2>
-                <a href="#" class="blog-cta">
-                    View the blog
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </a>
+                <div class="blog-cta-wrapper" style="margin-bottom: 2rem;">
+                    ${Button({ text: 'View the blog', variant: 'outline-dark', href: '#' })}
+                </div>
                 <div class="blog-nav">
                     <button class="blog-nav-btn prev" id="blogPrev">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

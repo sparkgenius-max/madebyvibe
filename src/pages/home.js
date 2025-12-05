@@ -3,7 +3,7 @@ import { Hero } from '../components/hero.js';
 import { Marquee } from '../components/marquee.js';
 import { About } from '../components/about.js';
 import { Work } from '../components/work.js';
-import { ProjectSlider, initProjectSlider } from '../components/project-slider.js';
+import { initProjectSlider } from '../components/project-slider.js';
 import { Expertise, initExpertise } from '../components/expertise.js';
 import { Blog, initBlog } from '../components/blog.js';
 import { Footer, initFooter } from '../components/footer.js';
@@ -43,7 +43,6 @@ export function Home() {
     ${Marquee()}
     ${About()}
     ${Work()}
-    ${ProjectSlider()}
     ${Expertise()}
     ${Blog()}
     ${Footer()}

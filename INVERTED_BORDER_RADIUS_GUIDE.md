@@ -1,44 +1,96 @@
 # How to Create the "Inverted Border Radius" Effect
 
-Use this guide to instruct an AI agent (or developer) to create the seamless "melted" or "liquid" connection effect between UI elements.
+Use this guide to instruct an AI agent (or developer) to create the seamless "melted" or "liquid" connection effect where a UI element breaks out of a container or floats with curved connections to the surrounding space.
 
 ## 🎯 The Golden Prompt
 
 Copy and paste this instruction to get the result instantly:
 
-> "Create a floating notification card anchored to the **bottom-left** of the viewport, sitting **outside** the main container.
+> "Create a floating element (e.g., a notification or breakout card) anchored to the edge of the viewport.
 >
-> I want it to have an **'Inverted Border Radius'** (or **'Reverse Rounded Corner'**) effect where it connects to the surrounding space, making it look like the main container is curving around it.
+> I want it to have an **'Inverted Border Radius'** (or **'Reverse Rounded Corner'**) effect where it connects to the surrounding space.
 >
-> **Implementation Requirement:** Do **not** use CSS border-radius hacks. Instead, use **SVG Vector Spandrels** (small concave shapes) positioned absolutely at the junctions to create a pixel-perfect, smooth curve."
+> **Implementation Requirement:**
+> 1. Use **SVG Vector Spandrels** (small concave shapes) for the corners.
+> 2. Position them **absolutely** (e.g., `right: -32px`) or as **flex siblings** to the main box.
+> 3. Rotate the SVG using `transform: rotate(...)` to fit the specific corner junction."
 
 ## 🧠 Why this works
-1.  **"Inverted Border Radius"**: Clearly defines that the *negative space* should be rounded, not the element itself.
-2.  **"SVG Vector Spandrels"**: Forces the use of a robust, scalable vector shape instead of fragile CSS hacks (like `box-shadow` or `radial-gradient` masks).
-3.  **"Outside the Main Container"**: Ensures the correct DOM structure for "breakout" elements.
+1.  **"Inverted Border Radius"**: Clearly defines that the *negative space* should be rounded.
+2.  **"Vector Spandrels"**: Forces the use of robust SVGs instead of fragile CSS hacks (`box-shadow`, `mask`).
+3.  **"Rotation Strategy"**: Allows you to reuse a single SVG asset for all 4 corners (Top-Left, Top-Right, Bottom-Left, Bottom-Right).
 
 ## 🛠️ The "Cheat Sheet" Snippet
 
-Use this exact SVG path geometry for a perfect 40px inverted curve.
+### 1. The Shape (Reusable Asset)
+Use this standard 32x32 curve. It creates a 90-degree concave arc.
 
-**The Shape:**
 ```html
-<!-- The "Magic" Shape for Inverted Corners -->
-<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- 
-       Path Explanation:
-       M0 0   -> Start at Top-Left
-       v40    -> Line down to Bottom-Left (0,40)
-       h40    -> Line right to Bottom-Right (40,40)
-       C...   -> Cubic Bezier Curve back to Top-Left (0,0)
-                 Control points: (17.9, 40) and (0, 22.1) create the perfect circular arc.
-    -->
-    <path d="M0 0v40h40C17.9 40 0 22.1 0 0z" fill="YOUR_COLOR_HERE" />
+<!-- The "Smooth Corner" SVG -->
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Path: Starts top-left (0,0), goes down to (0,32), right to (32,32), 
+         then curves back to (0,0) to create the negative space. -->
+    <path d="M0 0v32h32C14.3 32 0 17.7 0 0z" fill="BLACK_OR_BG_COLOR" />
 </svg>
 ```
 
-**CSS Positioning Strategy:**
-- Place the SVG **absolutely** relative to the card.
-- **Top Junction**: `top: -40px; left: 0;` (No rotation needed if using the path above).
-- **Bottom/Right Junction**: `bottom: 0; right: -40px;` (No rotation needed if using the path above).
-- **Overlap**: You might need a `-1px` offset (e.g., `top: -39px`) to prevent sub-pixel rendering gaps on some screens.
+### 2. Positioning Strategy (Based on Footer Implementation)
+
+Assume you have a dark box (`.box`) and you want to connect it to the white space around it.
+
+#### Scenario A: Connecting Top-Right of Box to Space (e.g., Footer Left Breakout)
+*Goal: The curve fills the corner formed by the box's right edge and the space above it.*
+
+```css
+.corner-top-right {
+    position: absolute;
+    top: 0;
+    right: -32px; /* Move perfectly to the right */
+    transform: rotate(90deg); /* Rotate to fit the junction */
+    /* Ensure fill color matches the .box background */
+}
+```
+
+#### Scenario B: Connecting Bottom-Left of Box to Space (e.g., Footer Left Breakout)
+*Goal: The curve fills the corner formed by the box's bottom edge and the space to the left.*
+
+```css
+.corner-bottom-left {
+    position: absolute;
+    bottom: -32px; /* Move perfectly down */
+    left: 0;
+    transform: rotate(90deg); /* Rotate to fit */
+}
+```
+
+#### Scenario C: Flex Sibling (e.g., Footer Right Breakout)
+*Goal: Place the curve naturally next to text without absolute positioning calculations.*
+
+```html
+<div class="flex-container">
+   <!-- Curve sits on the left -->
+   <svg class="corner-smooth-left" style="transform: rotate(-90deg)"></svg>
+   
+   <div class="box-content">
+       <!-- Content here -->
+   </div>
+</div>
+```
+
+### 3. Rotation Reference Table
+
+If your SVG path is `M0 0v32h32C14.3 32 0 17.7 0 0z` (Top-Left Origin):
+
+| Desired Corner Location relative to Box | Transform Class | CSS Rotation | Position Example |
+| :--- | :--- | :--- | :--- |
+| **Top-Left** (Connecting Box Top & Left Space) | `.corner-tl` | `rotate(0deg)` | `top: 0; left: -32px;` |
+| **Top-Right** (Connecting Box Top & Right Space) | `.corner-tr` | `rotate(90deg)` | `top: 0; right: -32px;` |
+| **Bottom-Right** (Connecting Box Bottom & Right Space) | `.corner-br` | `rotate(180deg)` | `bottom: 0; right: -32px;` |
+| **Bottom-Left** (Connecting Box Bottom & Left Space) | `.corner-bl` | `rotate(270deg)` (or -90?) | `bottom: 0; left: -32px;` |
+
+*Note: You may need to adjust the `top/bottom/left/right` negative offsets based on the exact rotation and coordinate system of the SVG. Always inspect element to align.*
+
+## ⚠️ Critical Implementation Tips
+1.  **Match Dimensions**: The SVG `width/height` (e.g., 32px) must match the `negative offset` (e.g., `-32px`) exactly.
+2.  **Fill Color**: The `fill` of the SVG path must match the **background color of the floating element** (the box), NOT the background of the page. This creates the illusion that the box itself is curving out.
+3.  **Z-Index**: Ensure the corner SVGs are on the same stacking context level as the box so they blend seamlessy.

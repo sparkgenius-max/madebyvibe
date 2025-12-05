@@ -1,12 +1,17 @@
+import { Button } from './button.js';
+
 export function Footer() {
     return `
     <footer class="footer-section">
         <!-- Social Icons Breakout (Top Left) -->
         <div class="footer-social-breakout">
-            <svg class="corner-smooth-bottom" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0v40h40C17.9 40 0 22.1 0 0z" fill="#000000" />
-            </svg>
             <div class="footer-social">
+                <svg class="corner-smooth-top" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0v32h32C14.3 32 0 17.7 0 0z" fill="#000000ff" />
+                </svg>
+                <svg class="corner-smooth-bottom" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0v32h32C14.3 32 0 17.7 0 0z" fill="#000000" />
+                </svg>
                 <a href="#" class="social-icon" aria-label="LinkedIn">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -33,19 +38,19 @@ export function Footer() {
                     </svg>
                 </a>
             </div>
-            <svg class="corner-smooth-right" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0v40h40C17.9 40 0 22.1 0 0z" fill="#000000" />
-            </svg>
         </div>
 
         <!-- Back to Top Breakout (Top Right) -->
         <div class="footer-backtop-breakout">
-            <svg class="corner-smooth-left" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M40 0v40H0C22.1 40 40 22.1 40 0z" fill="#000000" />
+            <svg class="corner-smooth-left" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M32 0v32H0C17.7 32 32 17.7 32 0z" fill="#000000" />
             </svg>
             <a href="#" class="back-top-link" id="backToTop">
-                Sh*t I've gone too far, send me back up 👆
+                Sh*t I've gone too far, send me back up <span class="finger-bounce">👆</span>
             </a>
+            <svg class="corner-smooth-bottom-right" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M32 0v32H0C17.7 32 32 17.7 32 0z" fill="#000000" />
+            </svg>
         </div>
 
         <!-- Main Footer Container -->
@@ -56,12 +61,7 @@ export function Footer() {
                 <div class="footer-cta">
                     <h3 class="footer-cta-title">Do you like<br>what you see?</h3>
                     <div class="footer-cta-actions">
-                        <a href="#" class="footer-cta-btn">
-                            Start a project
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
+                        ${Button({ text: 'Start a project', href: '#', variant: 'primary' })}
                         <div class="footer-reviews">
                             <span class="review-icon">G</span>
                             <span class="review-stars">★★★★★</span>
@@ -120,9 +120,11 @@ export function Footer() {
                 </div>
             </div>
 
-            <!-- Big Text -->
+            <!-- Big Text SVG -->
             <div class="footer-big-text">
-                <span>Crafting since 2020</span>
+                <svg viewBox="0 0 1400 130" preserveAspectRatio="xMinYMid slice" class="footer-big-svg">
+                    <text x="0" y="105" fill="#FFFFFF" font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="110" font-weight="500">Crafting since 2024</text>
+                </svg>
             </div>
 
             <!-- Bottom Bar -->
