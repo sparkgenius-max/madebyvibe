@@ -553,7 +553,7 @@ body {
 }
 
 .about-label {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.6);
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -710,10 +710,10 @@ body {
 }
 
 .work-label {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     margin-bottom: 0.5rem;
     display: block;
 }
@@ -1195,10 +1195,10 @@ body {
 }
 
 .explore-label {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     display: block;
     margin-bottom: 0.5rem;
 }
@@ -1373,6 +1373,8 @@ body {
 .slider-label {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     display: block;
     margin-bottom: 1rem;
 }
@@ -1564,6 +1566,8 @@ body {
 .expertise-label {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -1801,6 +1805,8 @@ body {
 .blog-label {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     display: block;
     margin-bottom: 1.5rem;
 }
@@ -2487,7 +2493,7 @@ body {
     /* Added more padding for importance */
     color: #FFFFFF;
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; Removed to allow sticky positioning to work */
 }
 
 .about-container {
@@ -2497,7 +2503,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 3rem;
+    gap: 2rem;
 }
 
 .about-label {
@@ -2519,13 +2525,16 @@ body {
     letter-spacing: -0.02em;
     /* Modern tight tracking */
     margin: 0;
+    text-align: right;
+    margin-left: auto;
 }
 
 .about-actions {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 1.5rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 /* Ensure reveal words behave correctly */
@@ -2538,6 +2547,37 @@ body {
     /* Preserve inherent space if any, or rely on margin */
 }
 
+/* Desktop Grid Layout (Left Label, Right Content) */
+@media (min-width: 900px) {
+    .about-container {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        /* Label | Content (Pushed apart) */
+        gap: 4rem 4rem;
+        /* Row Gap | Col Gap */
+    }
+
+    .about-label {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        /* Span both text and buttons rows */
+        position: sticky;
+        top: 120px;
+        /* Clear the navbar */
+        align-self: start;
+    }
+
+    .about-text {
+        grid-column: 2;
+    }
+
+    .about-actions {
+        grid-column: 2;
+        margin-top: 0;
+        /* Reset margin, use grid row gap */
+    }
+}
+
 @media (max-width: 768px) {
     .about-text {
         font-size: 2rem;
@@ -2547,5 +2587,96 @@ body {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
+    }
+}
+
+/* ============================================
+   BIG FOOTER MARQUEE
+   ============================================ */
+.big-marquee-section {
+    background: #000000;
+    padding: 0 0 4rem 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    user-select: none;
+    /* Prevent selection for cleaner interactions */
+}
+
+.big-marquee-track {
+    display: flex;
+    white-space: nowrap;
+    gap: 2rem;
+    width: max-content;
+}
+
+.big-marquee-track.left {
+    animation: marquee-left 40s linear infinite;
+}
+
+.big-marquee-track.right {
+    animation: marquee-right 40s linear infinite;
+}
+
+.big-marquee-content {
+    display: flex;
+    gap: 2rem;
+}
+
+.big-marquee-content span {
+    font-size: 13rem;
+    /* Approx 210px */
+    font-weight: 700;
+    line-height: 0.8;
+    text-transform: uppercase;
+    color: #333;
+    /* Dark gray default */
+    transition: color 0.3s ease, -webkit-text-stroke 0.3s ease;
+    letter-spacing: -0.04em;
+    /* Tighter for impact */
+}
+
+/* Attractive Interaction: Hover over section lights up the text */
+.big-marquee-section:hover .big-marquee-content span {
+    color: var(--accent-brand);
+    /* Light up on hover */
+}
+
+/* Alternative: Outline style for the bottom row? */
+.big-marquee-track.right .big-marquee-content span {
+    color: transparent;
+    -webkit-text-stroke: 2px #333;
+}
+
+.big-marquee-section:hover .big-marquee-track.right .big-marquee-content span {
+    color: var(--accent-brand);
+    /* Fill on hover */
+    -webkit-text-stroke: 0px transparent;
+}
+
+@keyframes marquee-left {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes marquee-right {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@media (max-width: 900px) {
+    .big-marquee-content span {
+        font-size: 6rem;
     }
 }

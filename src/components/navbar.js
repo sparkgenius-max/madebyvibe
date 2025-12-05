@@ -4,7 +4,7 @@ export function Navbar() {
     return `
     <nav class="floating-nav">
         <div class="nav-content-wrapper">
-            <a href="#" class="nav-logo">Shape.</a>
+            <a href="#" class="nav-logo">Vibe.</a>
 
             <div class="nav-links">
                 <a href="#" class="nav-item">Services</a>

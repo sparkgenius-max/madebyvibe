@@ -35,9 +35,10 @@ export function initAbout() {
         const windowHeight = window.innerHeight;
 
         // Define interaction zone
-        // Start earlier (95%) and end slightly later (35%) for a longer smoother track
-        const startY = windowHeight * 0.95;
-        const endY = windowHeight * 0.35;
+        // Start revealing when top of element enters 75% of viewport (was 95%) - Starts later
+        // Finish revealing when bottom of element reaches 25% of viewport (was 35%)
+        const startY = windowHeight * 0.75;
+        const endY = windowHeight * 0.25;
 
         // Calculate global progress clamped 0 to 1
         let progress = (startY - rect.top) / (startY - endY);

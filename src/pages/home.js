@@ -7,6 +7,7 @@ import { initProjectSlider } from '../components/project-slider.js';
 import { Expertise, initExpertise } from '../components/expertise.js';
 import { Blog, initBlog } from '../components/blog.js';
 import { Footer, initFooter } from '../components/footer.js';
+import { BigFooterMarquee } from '../components/big-marquee.js';
 
 export function Home() {
     return `
@@ -52,6 +53,7 @@ export function Home() {
     })}
     ${Expertise()}
     ${Blog()}
+    ${BigFooterMarquee()}
     ${Footer()}
   `;
 }
