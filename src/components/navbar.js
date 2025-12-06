@@ -1,15 +1,22 @@
 import { Button } from './button.js';
+import { ServicesDropdown, AboutDropdown } from './dropdown-nav.js';
 
 export function Navbar() {
     return `
     <nav class="floating-nav">
         <div class="nav-content-wrapper">
-            <a href="#" class="nav-logo">Vibe.</a>
+            <a href="/" class="nav-logo">Vibe.</a>
 
             <div class="nav-links">
-                <a href="#" class="nav-item">Services</a>
-                <a href="#" class="nav-item">Work</a>
-                <a href="#" class="nav-item">About</a>
+                <div class="nav-item-wrapper group">
+                    <a href="/services" class="nav-item">Services</a>
+                    ${ServicesDropdown()}
+                </div>
+                <a href="/works" class="nav-item">Work</a>
+                <div class="nav-item-wrapper group">
+                    <a href="#" class="nav-item">About</a>
+                    ${AboutDropdown()}
+                </div>
                 <a href="#" class="nav-item">Blog</a>
                 <a href="#" class="nav-item">Contact</a>
             </div>

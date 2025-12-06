@@ -1,4 +1,5 @@
 import { Button } from './button.js';
+import { ScrollExplore } from './scroll-explore.js';
 
 export function Hero() {
     return `
@@ -20,20 +21,12 @@ export function Hero() {
             </h1>
             <div class="cta-container">
                 ${Button({ text: 'Start Project', variant: 'primary' })}
-                <span class="scroll-indicator">Scroll to explore</span>
             </div>
         </div>
 
-        <!-- Abstract Visual Element -->
-        <div class="hero-visual">
-            <div class="gradient-orb"></div>
-            <div class="glass-card">
-                <div class="card-content">
-                    <span class="tag">Latest Work</span>
-                    <h3>Ghost Protocol</h3>
-                    <p>Identity System</p>
-                </div>
-            </div>
+        <!-- Scroll Explore - Top Right -->
+        <div class="scroll-indicator-wrapper top-right">
+            ${ScrollExplore()}
         </div>
     </section>
   `;

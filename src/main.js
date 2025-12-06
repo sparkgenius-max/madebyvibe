@@ -1,116 +1,148 @@
 import './styles/main.css';
-import { Home, initHome } from './pages/home.js';
-import Lenis from '@studio-freight/lenis';
+import { initHome } from './pages/home.js';
+import { Home } from './pages/home.js';
+import { Services } from './pages/services.js';
+import { ServiceDetail } from './pages/service-detail.js';
+import { Works, initWorks } from './pages/works.js';
+import { initDropdownBlur } from './components/dropdown-interactions.js';
+import { initBlog } from './components/blog.js';
+import { initFooter } from './components/footer.js';
 
-document.querySelector('#app').innerHTML = Home();
-initHome();
-initSmoothScroll();
+// Simple router logic
+const app = document.getElementById('app');
 
-function initSmoothScroll() {
-    const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: 'vertical',
-        gestureDirection: 'vertical',
-        smooth: true,
-        mouseMultiplier: 1,
-        smoothTouch: false,
-        touchMultiplier: 2,
-    });
-
-    function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
+function render() {
+    const path = window.location.pathname;
+    
+    // Clear dropdown blur overlay state before re-rendering
+    document.body.classList.remove('dropdown-active');
+    
+    if (path === '/services') {
+        app.innerHTML = Services();
+        initBlog();
+        initFooter();
+    } else if (path.startsWith('/services/')) {
+        app.innerHTML = ServiceDetail();
+        initBlog();
+        initFooter();
+    } else if (path === '/works' || path.startsWith('/works/')) {
+        app.innerHTML = Works();
+        initWorks();
+        initFooter();
+    } else {
+        app.innerHTML = Home();
+        initHome();
     }
-
-    requestAnimationFrame(raf);
+    
+    // Initialize Theme Toggle, Scroll Navbar & Dropdown Blur (Global)
+    initThemeToggle();
+    initScrollNavbar();
+    initDropdownBlur();
 }
 
-// Re-attach listeners because we just replaced the DOM
-// Note: In a real framework, this would be handled by components mounting
-function attachListeners() {
-    // Add simple interaction for the nav items
-    const navItems = document.querySelectorAll('.nav-item');
-
-    navItems.forEach(item => {
-        item.addEventListener('click', (e) => {
+function setupNavigation() {
+    document.body.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        const href = link?.getAttribute('href');
+        if (href && href.startsWith('/')) {
             e.preventDefault();
-            // Remove active class from all
-            navItems.forEach(nav => nav.classList.remove('active'));
-            // Add active class to clicked
-            item.classList.add('active');
-        });
+            window.history.pushState({}, '', href);
+            render();
+            window.scrollTo(0, 0);
+        }
     });
 
-    // Parallax effect for the orb
-    const orb = document.querySelector('.gradient-orb');
-    const heroSection = document.querySelector('.hero-section');
+    window.addEventListener('popstate', render);
+}
 
-    if (orb && heroSection) {
-        heroSection.addEventListener('mousemove', (e) => {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
+function initThemeToggle() {
+    const toggleBtn = document.querySelector('.theme-toggle');
+    if (!toggleBtn) return;
 
-            orb.style.transform = `translate(${x * 30}px, ${y * 30}px)`;
-        });
-    }
-
-    // Navbar Scroll Effect
-    const nav = document.querySelector('.floating-nav');
-    let lastScrollY = window.scrollY;
-
-    if (nav) {
-        const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-            const isScrollingDown = currentScrollY > lastScrollY;
-            // Unused variable scrollDiff
-            // const scrollDiff = Math.abs(currentScrollY - lastScrollY);
-
-            // 1. Morph Logic (Glass -> Dark Pill)
-            // Trigger earlier for smoother feel
-            if (currentScrollY > 20) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-
-            // 2. Headroom Logic (Hide/Show)
-            // Show longer on first scroll (threshold 600px)
-            if (isScrollingDown && currentScrollY > 600) {
-                // Hide when scrolling down past 600px
-                nav.classList.add('nav-hidden');
-            } else {
-                // Show when scrolling up OR when near top
-                nav.classList.remove('nav-hidden');
-            }
-
-            lastScrollY = currentScrollY;
-        };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        // Check initial state
-        handleScroll();
-    }
-
-    // Theme Toggle Logic
-    const themeBtn = document.querySelector('.theme-toggle');
-    const htmlEl = document.documentElement;
+    const html = document.documentElement;
     
-    // 1. Check Saved Preference
+    // Check saved theme
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
-        htmlEl.setAttribute('data-theme', savedTheme);
+        html.setAttribute('data-theme', savedTheme);
     }
 
-    if (themeBtn) {
-        themeBtn.addEventListener('click', () => {
-            const currentTheme = htmlEl.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
-            htmlEl.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        });
-    }
+    // Remove existing listeners to avoid duplicates (cloning approach)
+    const newBtn = toggleBtn.cloneNode(true);
+    toggleBtn.parentNode.replaceChild(newBtn, toggleBtn);
+
+    newBtn.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
 }
 
-attachListeners();
+let scrollHandler = null;
+
+function initScrollNavbar() {
+    const navbar = document.querySelector('.floating-nav');
+    if (!navbar) return;
+
+    // Remove previous scroll listener if exists
+    if (scrollHandler) {
+        window.removeEventListener('scroll', scrollHandler);
+    }
+
+    let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    let scrollDownDistance = 0;
+    let ticking = false;
+    
+    const HIDE_THRESHOLD = 400; // Distance to scroll down before hiding navbar
+
+    function updateNavbar() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollDelta = scrollTop - lastScrollTop;
+        
+        // Add scrolled class when scrolled down (glassmorphic pill effect)
+        if (scrollTop > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+
+        // Track scroll direction and distance
+        if (scrollDelta > 0) {
+            // Scrolling down - accumulate distance
+            scrollDownDistance += scrollDelta;
+            
+            // Only hide after scrolling down enough distance
+            if (scrollDownDistance > HIDE_THRESHOLD && scrollTop > 100) {
+                navbar.classList.add('nav-hidden');
+            }
+        } else {
+            // Scrolling up - reset distance and show navbar
+            scrollDownDistance = 0;
+            navbar.classList.remove('nav-hidden');
+        }
+        
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        ticking = false;
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(updateNavbar);
+            ticking = true;
+        }
+    }
+
+    // Set initial state
+    updateNavbar();
+
+    // Store reference and add listener
+    scrollHandler = requestTick;
+    window.addEventListener('scroll', scrollHandler, { passive: true });
+}
+
+// Init navigation once
+setupNavigation();
+// Initial render
+render();

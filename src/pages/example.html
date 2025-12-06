@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MadeByVibe Works</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Brand Colors */
+        .bg-lime-custom { background-color: #D3F36B; }
+        .text-lime-custom { color: #D3F36B; }
+        
+        /* Smooth image rendering */
+        .image-card {
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+        }
+        .work-group:hover .image-card {
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body class="bg-[#0a0a0a] text-white antialiased">
+
+    <section class="max-w-[1400px] mx-auto px-6 py-24">
+        
+        <!-- Main Layout: Flex on Desktop to create independent columns (Masonry effect) -->
+        <div class="flex flex-col lg:flex-row gap-12 lg:gap-20">
+
+            <!-- LEFT COLUMN -->
+            <div class="flex-1 flex flex-col gap-24">
+
+                <!-- Card 1: Personal Branding (Identity) -->
+                <div class="work-group cursor-pointer group">
+                    <div class="overflow-hidden rounded-3xl bg-gray-800 mb-8">
+                        <img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?q=80&w=2500&auto=format&fit=crop" 
+                             alt="Executive Portrait" 
+                             class="w-full h-[500px] object-cover object-top image-card grayscale group-hover:grayscale-0 transition duration-500">
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 mb-3">
+                        <span>2024</span>
+                        <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                        <span>Marcus Stone</span>
+                    </div>
+                    <h3 class="text-3xl font-medium leading-tight group-hover:text-gray-300 transition">
+                        Forging a bold personal identity for a fintech visionary.
+                    </h3>
+                </div>
+
+                <!-- Card 2: Brand Strategy (Identity/Print) -->
+                <div class="work-group cursor-pointer group">
+                    <div class="overflow-hidden rounded-3xl bg-gray-800 mb-8">
+                        <img src="https://images.unsplash.com/photo-1606836591695-4d58a73eba1e?q=80&w=2671&auto=format&fit=crop" 
+                             alt="Brand Collateral" 
+                             class="w-full h-[600px] object-cover image-card">
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 mb-3">
+                        <span>2023</span>
+                        <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                        <span>Nexus Logistics</span>
+                    </div>
+                    <h3 class="text-3xl font-medium leading-tight group-hover:text-gray-300 transition">
+                        Modernizing a legacy brand through strategic visual storytelling.
+                    </h3>
+                </div>
+
+                <!-- Card 3: UI/UX (App Design) -->
+                <div class="work-group cursor-pointer group">
+                    <div class="overflow-hidden rounded-3xl bg-gray-800 mb-8">
+                        <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=2670&auto=format&fit=crop" 
+                             alt="UI Interface" 
+                             class="w-full h-[450px] object-cover image-card">
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 mb-3">
+                        <span>2025</span>
+                        <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                        <span>Neon Core</span>
+                    </div>
+                    <h3 class="text-3xl font-medium leading-tight group-hover:text-gray-300 transition">
+                        Immersive UI/UX design for a next-gen gaming platform.
+                    </h3>
+                </div>
+
+                <!-- Card 4: Retail Branding (Identity) -->
+                <div class="work-group cursor-pointer group">
+                    <div class="overflow-hidden rounded-3xl bg-gray-800 mb-8">
+                        <img src="https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?q=80&w=2670&auto=format&fit=crop" 
+                             alt="Retail Interior" 
+                             class="w-full h-[500px] object-cover image-card">
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 mb-3">
+                        <span>2024</span>
+                        <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                        <span>Aura Spaces</span>
+                    </div>
+                    <h3 class="text-3xl font-medium leading-tight group-hover:text-gray-300 transition">
+                        Translating physical luxury into a seamless digital brand.
+                    </h3>
+                </div>
+
+                <!-- Card 5: Website & SEO (Laptop) -->
+                <div class="work-group cursor-pointer group">
+                    <div class="overflow-hidden rounded-3xl bg-gray-100 mb-8 flex items-center justify-center p-8">
+                        <img src="https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?q=80&w=2670&auto=format&fit=crop" 
+                             alt="Website Mockup" 
+                             class="w-full h-[500px] object-cover image-card shadow-2xl rounded-lg">
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 mb-3">
+                        <span>2024</span>
+                        <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                        <span>Global Talent</span>
+                    </div>
+                    <h3 class="text-3xl font-medium leading-tight group-hover:text-gray-300 transition">
+                        Dominating search rankings with a high-performance web revamp.
+                    </h3>
+                </div>
+
+                <!-- Bottom CTA Block -->
+                <div class="py-16 flex flex-col items-center text-center justify-center">
+                    <h4 class="text-4xl md:text-5xl font-semibold mb-4">Seen enough?</h4>
+                    <p class="text-gray-400 mb-8">Let's build your brand's future.</p>
+                    <button class="flex items-center gap-2 bg-lime-custom text-black px-6 py-3 rounded-full font-medium hover:bg-white transition">
+                        Start a Project
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div class="flex-1 flex flex-col gap-24">
+                
+                <!-- 1. Testimonial Block (SEO/Results Focused) -->
+                <div class="mb-8 pt-4">
+                    <svg class="w-8 h-8 text-gray-500 mb-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M14.017 21L14.017 18C14.017 16.0547 15.337 14.7344 16.8828 14.7344C17.293 14.7344 17.5566 14.8516 18.084 15.1738C18.582 15.4961 19.1973 15.4961 19.5781 15.3496C19.9883 15.1738 20.3105 14.8223 20.3105 14.3535V11.1289C20.3105 10.6602 20.0176 10.2793 19.5781 10.1328C19.1387 9.98633 18.6406 10.0156 18.1426 10.1328C17.0586 10.3672 16.4141 10.2207 15.9453 9.54688C15.5352 8.96094 15.5352 8.25781 15.5352 7.58398V6.70508C15.5352 6.00195 16.0039 5.26953 16.7949 5.26953H19.1387C19.7832 5.26953 20.3105 4.74219 20.3105 4.09766V2.22266C20.3105 1.57812 19.7832 1.05078 19.1387 1.05078H16.7949C14.3105 1.05078 12.1426 3.24805 12.1426 6.70508V15.8477C12.1426 18.6895 13.0508 21 14.017 21ZM5.0166 21L5.0166 18C5.0166 16.0547 6.33691 14.7344 7.88281 14.7344C8.29297 14.7344 8.55664 14.8516 9.08398 15.1738C9.58203 15.4961 10.1973 15.4961 10.5781 15.3496C10.9883 15.1738 11.3105 14.8223 11.3105 14.3535V11.1289C11.3105 10.6602 11.0176 10.2793 10.5781 10.1328C10.1387 9.98633 9.64062 10.0156 9.14258 10.1328C8.05859 10.3672 7.41406 10.2207 6.94531 9.54688C6.53516 8.96094 6.53516 8.25781 6.53516 7.58398V6.70508C6.53516 6.00195 7.00391 5.26953 7.79492 5.26953H10.1387C10.7832 5.26953 11.3105 4.74219 11.3105 4.09766V2.22266C11.3105 1.57812 10.7832 1.05078 10.1387 1.05078H7.79492C5.31055 1.05078 3.14258 3.24805 3.14258 6.70508V15.8477C3.14258 18.6895 4.05078 21 5.0166 21Z"/>
+                    </svg>
+                    <h3 class="text-2xl md:text-3xl font-medium leading-tight mb-6">
+                        "Vibe didn't just design a website; they built a conversion engine. Our organic traffic doubled in 3 months."
+                    </h3>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-lime-custom text-black rounded font-bold flex items-center justify-center">S</div>
+                        <div class="flex flex-col text-sm">
+                            <span class="text-white font-medium">Sarah Jenkins</span>
+                            <span class="text-gray-500">CMO, TechFlow</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6: SaaS UI/UX -->
+                <div class="work-group cursor-pointer group">
+                    <div class="overflow-hidden rounded-3xl bg-gray-800 mb-8">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop" 
+                             alt="SaaS Dashboard" 
+                             class="w-full h-[450px] object-cover image-card">
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 mb-3">
+                        <span>2025</span>
+                        <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                        <span>Flux Analytics</span>
+                    </div>
+                    <h3 class="text-3xl font-medium leading-tight group-hover:text-gray-300 transition">
+                        Simplifying complex data through intuitive product design.
+                    </h3>
+                </div>
+
+                <!-- Card 7: Lifestyle Branding -->
+                <div class="work-group cursor-pointer group">
+                    <div class="overflow-hidden rounded-3xl bg-gray-800 mb-8">
+                        <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2670&auto=format&fit=crop" 
+                             alt="Event Branding" 
+                             class="w-full h-[400px] object-cover image-card">
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 mb-3">
+                        <span>2024</span>
+                        <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                        <span>Pulse Events</span>
+                    </div>
+                    <h3 class="text-3xl font-medium leading-tight group-hover:text-gray-300 transition">
+                        Capturing the energy of nightlife in a vibrant brand system.
+                    </h3>
+                </div>
+
+                <!-- Card 8: Corporate Web/SEO -->
+                <div class="work-group cursor-pointer group">
+                    <div class="overflow-hidden rounded-3xl bg-gray-800 mb-8">
+                        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2670&auto=format&fit=crop" 
+                             alt="Corporate Building" 
+                             class="w-full h-[550px] object-cover image-card">
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 mb-3">
+                        <span>2024</span>
+                        <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                        <span>Apex Structures</span>
+                    </div>
+                    <h3 class="text-3xl font-medium leading-tight group-hover:text-gray-300 transition">
+                        Structuring a digital presence as solid as their skyscrapers.
+                    </h3>
+                </div>
+
+                <!-- Card 9: Creative Portfolio (Web) -->
+                <div class="work-group cursor-pointer group">
+                    <div class="overflow-hidden rounded-3xl bg-[#2a1b2d] mb-8 flex items-center justify-center px-6 py-12">
+                        <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=2000&auto=format&fit=crop" 
+                             alt="Portfolio Site" 
+                             class="w-full h-[350px] object-cover image-card rounded shadow-lg opacity-90">
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 mb-3">
+                        <span>2024</span>
+                        <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                        <span>Lumina Lens</span>
+                    </div>
+                    <h3 class="text-3xl font-medium leading-tight group-hover:text-gray-300 transition">
+                        A cinematic showcase for award-winning visual artists.
+                    </h3>
+                </div>
+
+                <!-- Card 10: eCommerce (Furniture) -->
+                <div class="work-group cursor-pointer group">
+                    <div class="overflow-hidden rounded-3xl bg-gray-800 mb-8">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop" 
+                             alt="Furniture eCommerce" 
+                             class="w-full h-[500px] object-cover image-card">
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-400 mb-3">
+                        <span>2024</span>
+                        <span class="w-1 h-1 bg-gray-500 rounded-full"></span>
+                        <span>Haven Home</span>
+                    </div>
+                    <h3 class="text-3xl font-medium leading-tight group-hover:text-gray-300 transition">
+                        Scaling DTC sales with a conversion-led Shopify store.
+                    </h3>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
