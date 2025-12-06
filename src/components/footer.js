@@ -123,7 +123,7 @@ export function Footer() {
             <!-- Big Text SVG -->
             <div class="footer-big-text">
                 <svg id="footerBigSvg" viewBox="0 0 1400 130" preserveAspectRatio="xMidYMid meet" class="footer-big-svg">
-                    <text id="footerBigText" x="0" y="105" fill="#FFFFFF" font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="110" font-weight="500">Crafting since 2024</text>
+                    <text id="footerBigText" x="0" y="105" fill="#FFFFFF" font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="110" font-weight="500">Let's work together.</text>
                 </svg>
             </div>
 

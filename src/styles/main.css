@@ -2125,6 +2125,10 @@ body {
 /* CTA Section */
 .footer-cta {
     max-width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
 }
 
 .footer-cta-title {

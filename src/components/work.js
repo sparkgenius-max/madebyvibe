@@ -6,34 +6,34 @@ export function Work() {
         {
             id: 1,
             year: "2025",
-            client: "Keychron",
-            name: "Creator Micro 2",
-            categories: ["Hardware", "Product Design"],
-            description: "The Creator Micro is everything you asked for. Wireless, playfully tactile, and just as capable as you.",
-            image: "/images/project-1.png",
+            client: "EcoTech Solutions",
+            name: "Sustainable Brand Identity",
+            categories: ["Branding", "Strategy"],
+            description: "Complete brand identity for an eco-friendly tech startup, focusing on sustainability and innovation.",
+            image: "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800",
             featured: true,
             colorClass: "yellow"
         },
         {
             id: 2,
             year: "2024",
-            client: "Nexus Corp",
-            name: "Nexus Identity",
-            categories: ["Branding", "Strategy"],
-            description: "Complete brand identity including logo, typography, and visual guidelines.",
-            image: "/images/project-2.png",
-            layout: "info-first", // Info on left, image on right (or standard grid placement)
+            client: "Fashion Forward",
+            name: "E-commerce Platform",
+            categories: ["Web Design", "UI/UX"],
+            description: "Modern e-commerce website with seamless user experience and stunning visual design.",
+            image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800",
+            layout: "info-first",
             colorClass: "blue",
             textColor: "white"
         },
         {
             id: 3,
             year: "2024",
-            client: "K-Studio",
-            name: "K.Studio Website",
-            categories: ["Website", "UI/UX"],
-            description: "Evoking the look of both classic and modern technology for an architectural firm.",
-            image: "/images/project-3.png",
+            client: "FitLife App",
+            name: "Mobile Fitness App",
+            categories: ["Mobile App", "UI/UX"],
+            description: "Intuitive mobile app design for fitness tracking with engaging user interface.",
+            image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800",
             layout: "info-first",
             colorClass: "orange",
             textColor: "black"
@@ -77,9 +77,9 @@ export function Work() {
                     </div>
                     <!-- Small image placeholder or secondary view if needed, keeping structure but maybe use image logic -->
                     <div class="featured-image-small">
-                         <div class="work-image-container">
-                            <img src="/images/project-1-detail.png" alt="Creator Micro 2 Detail" class="project-image" style="object-fit: cover; width: 100%; height: 100%;">
-                        </div>
+                          <div class="work-image-container">
+                             <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400" alt="Sustainable Brand Identity Detail" class="project-image" style="object-fit: cover; width: 100%; height: 100%;">
+                         </div>
                     </div>
                 </div>
             </div>

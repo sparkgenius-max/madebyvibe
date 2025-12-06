@@ -2,82 +2,82 @@ export function ProjectSlider() {
     const projects = [
         {
             id: 1,
-            category: "UI/UX",
-            categoryColor: "#FE8A8A", // Neon Yellow
+            category: "Branding",
+            categoryColor: "#FE8A8A",
             textColor: "#000",
-            name: "Fintech Dashboard",
+            name: "Restaurant Identity",
             subtitle: "explore",
-            image: "/images/project-2.png", // Reusing existing
+            image: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=400",
             bg: "#E5E5E5"
         },
         {
             id: 2,
-            category: "Branding",
-            categoryColor: "#FF4D00", // Orange
+            category: "Web Design",
+            categoryColor: "#FF4D00",
             textColor: "#fff",
-            name: "Lumina Identity",
+            name: "Portfolio Website",
             subtitle: "explore",
-            image: "/images/product-keycap.png", // Reusing the artisan keycap image as a placeholder for "branding" object
+            image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400",
             bg: "#E5E5E5"
         },
         {
             id: 3,
-            category: "Mobile",
-            categoryColor: "#000000", // Black
+            category: "Mobile App",
+            categoryColor: "#000000",
             textColor: "#fff",
-            name: "Health App",
+            name: "Travel Companion",
             subtitle: "explore",
-            image: "/images/project-3.png",
+            image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400",
             bg: "#E5E5E5"
         },
         {
             id: 4,
-            category: "Design",
+            category: "UI/UX",
             categoryColor: "#FE8A8A",
             textColor: "#000",
-            name: "Creator Studio",
-            subtitle: "starting at $249",
-            image: "/images/product-workboard.png", // Reusing workboard
+            name: "SaaS Dashboard",
+            subtitle: "explore",
+            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400",
             bg: "#E5E5E5"
         },
         {
             id: 5,
-            category: "Concept",
+            category: "Motion",
             categoryColor: "#FE8A8A",
             textColor: "#000",
-            name: "Future Vision",
+            name: "Product Animation",
             subtitle: "explore",
-            image: null,
+            image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400",
             bg: "#E5E5E5"
         },
         {
             id: 6,
-            category: "Keyboard",
+            category: "Print",
             categoryColor: "#FF4D00",
             textColor: "#fff",
-            name: "Nomad [E] v1",
+            name: "Magazine Layout",
             subtitle: "explore",
-            image: "/images/project-1-detail.png", // Use available image
+            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
             bg: "#E5E5E5"
         },
         {
             id: 7,
-            category: "Accessory",
+            category: "Packaging",
             categoryColor: "#000000",
             textColor: "#fff",
-            name: "Macro Pad X",
+            name: "Product Packaging",
             subtitle: "explore",
-            image: "/images/project-1.png", // Use available image
+            image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400",
             bg: "#E5E5E5"
         },
         {
             id: 8,
-            category: "Lifestyle",
+            category: "Illustration",
             categoryColor: "#FE8A8A",
             textColor: "#000",
-            name: "Desk Mat Pro",
-            subtitle: "starting at $29",
-            image: "/images/project-2.png", // Use available image
+            name: "Brand Illustrations",
+            subtitle: "explore",
+            image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400",
             bg: "#E5E5E5"
         }
     ];
@@ -119,82 +119,82 @@ export function getSliderHTML() {
     const projects = [
         {
             id: 1,
-            category: "UI/UX",
+            category: "Branding",
             categoryColor: "#FE8A8A",
             textColor: "#000",
-            name: "Fintech Dashboard",
+            name: "Restaurant Identity",
             subtitle: "explore",
-            image: "/images/project-2.png",
+            image: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=400",
             bg: "#E5E5E5"
         },
         {
             id: 2,
-            category: "Branding",
+            category: "Web Design",
             categoryColor: "#FF4D00",
             textColor: "#fff",
-            name: "Lumina Identity",
+            name: "Portfolio Website",
             subtitle: "explore",
-            image: "/images/product-keycap.png",
+            image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400",
             bg: "#E5E5E5"
         },
         {
             id: 3,
-            category: "Mobile",
+            category: "Mobile App",
             categoryColor: "#000000",
             textColor: "#fff",
-            name: "Health App",
+            name: "Travel Companion",
             subtitle: "explore",
-            image: "/images/project-3.png",
+            image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400",
             bg: "#E5E5E5"
         },
         {
             id: 4,
-            category: "Design",
+            category: "UI/UX",
             categoryColor: "#FE8A8A",
             textColor: "#000",
-            name: "Creator Studio",
-            subtitle: "starting at $249",
-            image: "/images/product-workboard.png",
+            name: "SaaS Dashboard",
+            subtitle: "explore",
+            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400",
             bg: "#E5E5E5"
         },
         {
             id: 5,
-            category: "Concept",
+            category: "Motion",
             categoryColor: "#FE8A8A",
             textColor: "#000",
-            name: "Future Vision",
+            name: "Product Animation",
             subtitle: "explore",
-            image: null,
+            image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400",
             bg: "#E5E5E5"
         },
         {
             id: 6,
-            category: "Keyboard",
+            category: "Print",
             categoryColor: "#FF4D00",
             textColor: "#fff",
-            name: "Nomad [E] v1",
+            name: "Magazine Layout",
             subtitle: "explore",
-            image: "/images/project-1-detail.png",
+            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
             bg: "#E5E5E5"
         },
         {
             id: 7,
-            category: "Accessory",
+            category: "Packaging",
             categoryColor: "#000000",
             textColor: "#fff",
-            name: "Macro Pad X",
+            name: "Product Packaging",
             subtitle: "explore",
-            image: "/images/project-1.png",
+            image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400",
             bg: "#E5E5E5"
         },
         {
             id: 8,
-            category: "Lifestyle",
+            category: "Illustration",
             categoryColor: "#FE8A8A",
             textColor: "#000",
-            name: "Desk Mat Pro",
-            subtitle: "starting at $29",
-            image: "/images/project-2.png",
+            name: "Brand Illustrations",
+            subtitle: "explore",
+            image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400",
             bg: "#E5E5E5"
         }
     ];
