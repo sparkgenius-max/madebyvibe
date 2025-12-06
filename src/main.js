@@ -4,6 +4,8 @@ import { Home } from './pages/home.js';
 import { Services } from './pages/services.js';
 import { ServiceDetail } from './pages/service-detail.js';
 import { Works, initWorks } from './pages/works.js';
+import { BlogPage, initBlogPage } from './pages/blog.js';
+import { ContactPage, initContactPage } from './pages/contact.js';
 import { initDropdownBlur } from './components/dropdown-interactions.js';
 import { initBlog } from './components/blog.js';
 import { initFooter } from './components/footer.js';
@@ -13,10 +15,10 @@ const app = document.getElementById('app');
 
 function render() {
     const path = window.location.pathname;
-    
+
     // Clear dropdown blur overlay state before re-rendering
     document.body.classList.remove('dropdown-active');
-    
+
     if (path === '/services') {
         app.innerHTML = Services();
         initBlog();
@@ -29,11 +31,17 @@ function render() {
         app.innerHTML = Works();
         initWorks();
         initFooter();
+    } else if (path === '/blog' || path.startsWith('/blog/')) {
+        app.innerHTML = BlogPage();
+        initBlogPage();
+    } else if (path === '/contact') {
+        app.innerHTML = ContactPage();
+        initContactPage();
     } else {
         app.innerHTML = Home();
         initHome();
     }
-    
+
     // Initialize Theme Toggle, Scroll Navbar & Dropdown Blur (Global)
     initThemeToggle();
     initScrollNavbar();
@@ -60,7 +68,7 @@ function initThemeToggle() {
     if (!toggleBtn) return;
 
     const html = document.documentElement;
-    
+
     // Check saved theme
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
@@ -74,7 +82,7 @@ function initThemeToggle() {
     newBtn.addEventListener('click', () => {
         const currentTheme = html.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        
+
         html.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
     });
@@ -94,13 +102,13 @@ function initScrollNavbar() {
     let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
     let scrollDownDistance = 0;
     let ticking = false;
-    
+
     const HIDE_THRESHOLD = 400; // Distance to scroll down before hiding navbar
 
     function updateNavbar() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const scrollDelta = scrollTop - lastScrollTop;
-        
+
         // Add scrolled class when scrolled down (glassmorphic pill effect)
         if (scrollTop > 50) {
             navbar.classList.add('scrolled');
@@ -112,7 +120,7 @@ function initScrollNavbar() {
         if (scrollDelta > 0) {
             // Scrolling down - accumulate distance
             scrollDownDistance += scrollDelta;
-            
+
             // Only hide after scrolling down enough distance
             if (scrollDownDistance > HIDE_THRESHOLD && scrollTop > 100) {
                 navbar.classList.add('nav-hidden');
@@ -122,7 +130,7 @@ function initScrollNavbar() {
             scrollDownDistance = 0;
             navbar.classList.remove('nav-hidden');
         }
-        
+
         lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
         ticking = false;
     }

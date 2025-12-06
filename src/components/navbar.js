@@ -17,8 +17,8 @@ export function Navbar() {
                     <a href="#" class="nav-item">About</a>
                     ${AboutDropdown()}
                 </div>
-                <a href="#" class="nav-item">Blog</a>
-                <a href="#" class="nav-item">Contact</a>
+                <a href="/blog" class="nav-item">Blog</a>
+                <a href="/contact" class="nav-item">Contact</a>
             </div>
 
             <div class="nav-actions">

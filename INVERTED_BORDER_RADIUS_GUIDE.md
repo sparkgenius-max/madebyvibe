@@ -1,96 +1,110 @@
-# How to Create the "Inverted Border Radius" Effect
+# Inverted Border Radius (Fake Corner) Guide
 
-Use this guide to instruct an AI agent (or developer) to create the seamless "melted" or "liquid" connection effect where a UI element breaks out of a container or floats with curved connections to the surrounding space.
+This guide documents how to implement the "fake inverted border radius" effect (often called a "cutout" or "breakout") used in the Vibe Creative website. This effect creates seamless smooth corners where an element appears to "cut into" another element (like an image).
 
-## 🎯 The Golden Prompt
+## 1. The Core Concept
 
-Copy and paste this instruction to get the result instantly:
+The effect is achieved not by cutting the underlying element, but by layering a **container on top** (or overlapping it) that has the same background color as the page. This container holds your content (text, button) and uses **two SVG shapes** to create the smooth inverse curves at its connecting corners.
 
-> "Create a floating element (e.g., a notification or breakout card) anchored to the edge of the viewport.
->
-> I want it to have an **'Inverted Border Radius'** (or **'Reverse Rounded Corner'**) effect where it connects to the surrounding space.
->
-> **Implementation Requirement:**
-> 1. Use **SVG Vector Spandrels** (small concave shapes) for the corners.
-> 2. Position them **absolutely** (e.g., `right: -32px`) or as **flex siblings** to the main box.
-> 3. Rotate the SVG using `transform: rotate(...)` to fit the specific corner junction."
+### ⚠️ Critical Rule: Placement
+**Do NOT place the breakout container inside an element with `overflow: hidden` or `border-radius`.**
+*   **Wrong:** Putting the tag inside a `.card-image-wrapper` that clips hidden content. This causes white lines and clipping issues.
+*   **Right:** Place the breakout container as a **sibling** to the image wrapper, position it absolutely on top, and ensure the image wrapper does not have a border-radius on the corner you are "cutting" (or let the cutout sit on top to mask it).
 
-## 🧠 Why this works
-1.  **"Inverted Border Radius"**: Clearly defines that the *negative space* should be rounded.
-2.  **"Vector Spandrels"**: Forces the use of robust SVGs instead of fragile CSS hacks (`box-shadow`, `mask`).
-3.  **"Rotation Strategy"**: Allows you to reuse a single SVG asset for all 4 corners (Top-Left, Top-Right, Bottom-Left, Bottom-Right).
+---
 
-## 🛠️ The "Cheat Sheet" Snippet
+## 2. The Magic SVG
 
-### 1. The Shape (Reusable Asset)
-Use this standard 32x32 curve. It creates a 90-degree concave arc.
+We use a standard 20x20 SVG curve. This path draws a square that has one "inverted" round corner.
+
+**File:** `src/components/work-card.js` (example usage)
+**Dimensions:** 20px x 20px
+**Path Data:** `M20 0v20H0C11.05 20 20 11.05 20 0z`
 
 ```html
-<!-- The "Smooth Corner" SVG -->
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- Path: Starts top-left (0,0), goes down to (0,32), right to (32,32), 
-         then curves back to (0,0) to create the negative space. -->
-    <path d="M0 0v32h32C14.3 32 0 17.7 0 0z" fill="BLACK_OR_BG_COLOR" />
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <path d="M20 0v20H0C11.05 20 20 11.05 20 0z" fill="var(--bg-section)" />
 </svg>
 ```
 
-### 2. Positioning Strategy (Based on Footer Implementation)
+---
 
-Assume you have a dark box (`.box`) and you want to connect it to the white space around it.
+## 3. Implementation Patterns
 
-#### Scenario A: Connecting Top-Right of Box to Space (e.g., Footer Left Breakout)
-*Goal: The curve fills the corner formed by the box's right edge and the space above it.*
+### Case A: Top-Right Breakout (e.g., Work Card Tag)
+**Goal:** A tag sitting on the top-right corner of a card.
 
-```css
-.corner-top-right {
-    position: absolute;
-    top: 0;
-    right: -32px; /* Move perfectly to the right */
-    transform: rotate(90deg); /* Rotate to fit the junction */
-    /* Ensure fill color matches the .box background */
-}
-```
-
-#### Scenario B: Connecting Bottom-Left of Box to Space (e.g., Footer Left Breakout)
-*Goal: The curve fills the corner formed by the box's bottom edge and the space to the left.*
-
-```css
-.corner-bottom-left {
-    position: absolute;
-    bottom: -32px; /* Move perfectly down */
-    left: 0;
-    transform: rotate(90deg); /* Rotate to fit */
-}
-```
-
-#### Scenario C: Flex Sibling (e.g., Footer Right Breakout)
-*Goal: Place the curve naturally next to text without absolute positioning calculations.*
-
+**Structure:**
 ```html
-<div class="flex-container">
-   <!-- Curve sits on the left -->
-   <svg class="corner-smooth-left" style="transform: rotate(-90deg)"></svg>
+<div class="card-container" style="position: relative">
+   <div class="image-wrapper">...</div>
    
-   <div class="box-content">
-       <!-- Content here -->
+   <!-- Sibling Breakout -->
+   <div class="breakout-top-right">
+       <!-- 1. Left Curve (Rotated -90deg) -->
+       <svg class="corner-left">...</svg>
+       
+       <!-- 2. Content (The Tag) -->
+       <div class="content">Tag Name</div>
+       
+       <!-- 3. Bottom Curve (No Rotation / 0deg) -->
+       <svg class="corner-bottom">...</svg>
    </div>
 </div>
 ```
 
-### 3. Rotation Reference Table
+**Positioning & Rotation:**
+*   **Container:** `top: 0; right: 0;`
+*   **Left SVG:**  `position: relative;` | `transform: rotate(-90deg);`
+*   **Bottom SVG:** `position: absolute; bottom: -20px; right: 0;` | `transform: rotate(0deg);` or `rotate(-90deg)` depending on exact curve preference (Work Card uses -90deg for bottom to match vertical flow).
 
-If your SVG path is `M0 0v32h32C14.3 32 0 17.7 0 0z` (Top-Left Origin):
+---
 
-| Desired Corner Location relative to Box | Transform Class | CSS Rotation | Position Example |
-| :--- | :--- | :--- | :--- |
-| **Top-Left** (Connecting Box Top & Left Space) | `.corner-tl` | `rotate(0deg)` | `top: 0; left: -32px;` |
-| **Top-Right** (Connecting Box Top & Right Space) | `.corner-tr` | `rotate(90deg)` | `top: 0; right: -32px;` |
-| **Bottom-Right** (Connecting Box Bottom & Right Space) | `.corner-br` | `rotate(180deg)` | `bottom: 0; right: -32px;` |
-| **Bottom-Left** (Connecting Box Bottom & Left Space) | `.corner-bl` | `rotate(270deg)` (or -90?) | `bottom: 0; left: -32px;` |
+### Case B: Top-Left Breakout (e.g., Service Detail Button)
+**Goal:** A large button sitting on the top-left corner of a hero image.
 
-*Note: You may need to adjust the `top/bottom/left/right` negative offsets based on the exact rotation and coordinate system of the SVG. Always inspect element to align.*
+**Structure:**
+```html
+<div class="hero-container" style="position: relative">
+   
+   <!-- Sibling Breakout -->
+   <div class="breakout-top-left">
+       <!-- 1. Content (The Button) -->
+       <div class="content">Button</div>
+       
+       <!-- 2. Right Curve (Rotated 180deg) -->
+       <svg class="corner-right">...</svg>
+       
+       <!-- 3. Bottom Curve (Rotated 180deg) -->
+       <svg class="corner-bottom">...</svg>
+   </div>
 
-## ⚠️ Critical Implementation Tips
-1.  **Match Dimensions**: The SVG `width/height` (e.g., 32px) must match the `negative offset` (e.g., `-32px`) exactly.
-2.  **Fill Color**: The `fill` of the SVG path must match the **background color of the floating element** (the box), NOT the background of the page. This creates the illusion that the box itself is curving out.
-3.  **Z-Index**: Ensure the corner SVGs are on the same stacking context level as the box so they blend seamlessy.
+   <div class="image-wrapper">...</div>
+</div>
+```
+
+**Positioning & Rotation:**
+*   **Container:** `top: 0; left: 0;`
+*   **Right SVG:** `position: absolute; top: 0; right: -20px;` | `transform: rotate(180deg);`
+*   **Bottom SVG:** `position: absolute; bottom: -20px; left: 0;` | `transform: rotate(180deg);`
+
+---
+
+## 4. Rotation Cheat Sheet
+
+The SVG `M20 0v20H0C11.05 20 20 11.05 20 0z` by default fills the **Top-Left** of the 20x20 square (leaving the bottom-right transparent as the curve).
+
+| Desired Curve Location | Rotation Needed | Usage Context |
+|------------------------|-----------------|---------------|
+| **Bottom-Right** Curve matches | `0deg` | Standard bottom-left corner of a container |
+| **Bottom-Left** Curve matches | `-90deg` or `270deg` | **Top-Right Breakout** (Left side of tag) |
+| **Top-Left** Curve matches | `180deg` | **Top-Left Breakout** (Right side of button) |
+| **Top-Right** Curve matches | `90deg` | Bottom-Right Breakout |
+
+*(Note: "Curve matches" refers to which corner of the 20x20 box is the solid curved part connecting to your content)*
+
+## 5. CSS Adjustments for Perfection
+1.  **Overlap:** Always set top/left positions to `-1px` or add `margin: -1px` to SVGs to overlap content slightly. This prevents sub-pixel rendering gaps (white lines).
+2.  **Fill Color:** Ensure the `<path>` fill matches the **page background** (`var(--bg-section)`), NOT the card color.
+3.  **Z-Index:** Give the breakout container `z-index: 10` to sit above the image.
+4.  **Interaction:** If the breakout covers a large area, set `pointer-events: none` on the container and `pointer-events: auto` on the inner content so clicks pass through the invisible gaps.

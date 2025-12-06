@@ -8,7 +8,7 @@ import { Button } from '../components/button.js';
 export function ServiceDetail() {
     return `
     <div class="viewport-wrapper">
-        <main class="main-container">
+        <main class="main-container scrollable">
             ${Navbar()}
             <div class="sd-hero">
                 <!-- Video Background -->
@@ -48,16 +48,27 @@ export function ServiceDetail() {
         </div>
 
         <!-- Hero Image Section -->
-        <div class="sd-hero-image-wrapper">
-            <div class="sd-floating-badge">
-                <span>See our work</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round"/>
+        <div class="sd-hero-container" style="position: relative;">
+            <!-- Top Left Breakout Button -->
+            <div class="sd-image-breakout">
+                 <div class="sd-breakout-inner">
+                    ${Button({ text: 'See our work', href: '/works', variant: 'primary', className: 'sd-btn' })}
+                 </div>
+                
+                <!-- Smooth Corners to blend with image -->
+                <svg class="breakout-corner-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M20 0v20H0C11.05 20 20 11.05 20 0z" class="corner-svg-path" fill="#000000" />
+                </svg>
+                <svg class="breakout-corner-bottom" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M20 0v20H0C11.05 20 20 11.05 20 0z" class="corner-svg-path" fill="#000000" />
                 </svg>
             </div>
-            <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop" 
-                 alt="Service Detail Hero" 
-                 class="sd-hero-image">
+
+            <div class="sd-hero-image-wrapper">
+                <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop" 
+                     alt="Service Detail Hero" 
+                     class="sd-hero-image">
+            </div>
         </div>
 
         <!-- Approach & Capabilities Grid -->

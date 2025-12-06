@@ -42,14 +42,14 @@ export function Footer() {
 
         <!-- Back to Top Breakout (Top Right) -->
         <div class="footer-backtop-breakout">
-            <svg class="corner-smooth-left" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M32 0v32H0C17.7 32 32 17.7 32 0z" fill="#000000" />
+            <svg class="corner-smooth-left" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow: visible;">
+                <path d="M32 0 L32 33 L0 33 L0 32 C17.7 32 32 17.7 32 0 z" fill="#000000" />
             </svg>
             <a href="#" class="back-top-link" id="backToTop">
                 Sh*t I've gone too far, send me back up <span class="finger-bounce">👆</span>
             </a>
-            <svg class="corner-smooth-bottom-right" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M32 0v32H0C17.7 32 32 17.7 32 0z" fill="#000000" />
+            <svg class="corner-smooth-bottom-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="overflow: visible;">
+                <path d="M20 0 L20 21 L0 21 L0 20 C11.05 20 20 11.05 20 0 z" fill="#000000" />
             </svg>
         </div>
 
