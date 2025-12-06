@@ -1,9 +1,11 @@
+import { Button } from './button.js';
+
 export function ProjectSlider() {
     const projects = [
         {
             id: 1,
             category: "Branding",
-            categoryColor: "#FE8A8A",
+            categoryColor: "#E8FF00",
             textColor: "#000",
             name: "Restaurant Identity",
             subtitle: "explore",
@@ -13,7 +15,7 @@ export function ProjectSlider() {
         {
             id: 2,
             category: "Web Design",
-            categoryColor: "#FF4D00",
+            categoryColor: "#0047FF",
             textColor: "#fff",
             name: "Portfolio Website",
             subtitle: "explore",
@@ -23,8 +25,8 @@ export function ProjectSlider() {
         {
             id: 3,
             category: "Mobile App",
-            categoryColor: "#000000",
-            textColor: "#fff",
+            categoryColor: "#FF6B00",
+            textColor: "#000",
             name: "Travel Companion",
             subtitle: "explore",
             image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400",
@@ -33,8 +35,8 @@ export function ProjectSlider() {
         {
             id: 4,
             category: "UI/UX",
-            categoryColor: "#FE8A8A",
-            textColor: "#000",
+            categoryColor: "#9B59B6",
+            textColor: "#fff",
             name: "SaaS Dashboard",
             subtitle: "explore",
             image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400",
@@ -43,8 +45,8 @@ export function ProjectSlider() {
         {
             id: 5,
             category: "Motion",
-            categoryColor: "#FE8A8A",
-            textColor: "#000",
+            categoryColor: "#E74C3C",
+            textColor: "#fff",
             name: "Product Animation",
             subtitle: "explore",
             image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400",
@@ -53,7 +55,7 @@ export function ProjectSlider() {
         {
             id: 6,
             category: "Print",
-            categoryColor: "#FF4D00",
+            categoryColor: "#27AE60",
             textColor: "#fff",
             name: "Magazine Layout",
             subtitle: "explore",
@@ -63,8 +65,8 @@ export function ProjectSlider() {
         {
             id: 7,
             category: "Packaging",
-            categoryColor: "#000000",
-            textColor: "#fff",
+            categoryColor: "#F39C12",
+            textColor: "#000",
             name: "Product Packaging",
             subtitle: "explore",
             image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400",
@@ -73,8 +75,8 @@ export function ProjectSlider() {
         {
             id: 8,
             category: "Illustration",
-            categoryColor: "#FE8A8A",
-            textColor: "#000",
+            categoryColor: "#E91E63",
+            textColor: "#fff",
             name: "Brand Illustrations",
             subtitle: "explore",
             image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400",
@@ -84,13 +86,17 @@ export function ProjectSlider() {
 
     const cards = projects.map(p => `
         <div class="slider-card" style="background-color: ${p.bg}">
-            <div class="slider-image-container">
+            <div class="slider-image-section">
                  ${p.image ? `<img src="${p.image}" alt="${p.name}" class="slider-img" draggable="false">` : `<div style="width:100%; height:100%; background: linear-gradient(45deg, #ccc, #999);"></div>`}
             </div>
-            <div class="slider-content">
-                <span class="slider-tag" style="background-color: ${p.categoryColor}; color: ${p.textColor}">${p.category}</span>
-                <h4 class="slider-title">${p.name}</h4>
-                <a href="#" class="slider-link">${p.subtitle}</a>
+            <div class="slider-content" style="background-color: ${p.categoryColor}; color: ${p.textColor}">
+                <div class="slider-content-top">
+                    <span class="tag-pill ${p.textColor === '#fff' ? 'light-tag' : 'dark-tag'}">${p.category}</span>
+                </div>
+                <div class="slider-content-bottom">
+                    <h4 class="slider-title">${p.name}</h4>
+                    ${Button({ text: p.subtitle, href: '#', variant: 'outline-dark', className: 'slider-btn' })}
+                </div>
             </div>
         </div>
     `).join('');
@@ -120,7 +126,7 @@ export function getSliderHTML() {
         {
             id: 1,
             category: "Branding",
-            categoryColor: "#FE8A8A",
+            categoryColor: "#E8FF00",
             textColor: "#000",
             name: "Restaurant Identity",
             subtitle: "explore",
@@ -130,7 +136,7 @@ export function getSliderHTML() {
         {
             id: 2,
             category: "Web Design",
-            categoryColor: "#FF4D00",
+            categoryColor: "#0047FF",
             textColor: "#fff",
             name: "Portfolio Website",
             subtitle: "explore",
@@ -140,8 +146,8 @@ export function getSliderHTML() {
         {
             id: 3,
             category: "Mobile App",
-            categoryColor: "#000000",
-            textColor: "#fff",
+            categoryColor: "#FF6B00",
+            textColor: "#000",
             name: "Travel Companion",
             subtitle: "explore",
             image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400",
@@ -150,8 +156,8 @@ export function getSliderHTML() {
         {
             id: 4,
             category: "UI/UX",
-            categoryColor: "#FE8A8A",
-            textColor: "#000",
+            categoryColor: "#9B59B6",
+            textColor: "#fff",
             name: "SaaS Dashboard",
             subtitle: "explore",
             image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400",
@@ -160,8 +166,8 @@ export function getSliderHTML() {
         {
             id: 5,
             category: "Motion",
-            categoryColor: "#FE8A8A",
-            textColor: "#000",
+            categoryColor: "#E74C3C",
+            textColor: "#fff",
             name: "Product Animation",
             subtitle: "explore",
             image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400",
@@ -170,7 +176,7 @@ export function getSliderHTML() {
         {
             id: 6,
             category: "Print",
-            categoryColor: "#FF4D00",
+            categoryColor: "#27AE60",
             textColor: "#fff",
             name: "Magazine Layout",
             subtitle: "explore",
@@ -180,8 +186,8 @@ export function getSliderHTML() {
         {
             id: 7,
             category: "Packaging",
-            categoryColor: "#000000",
-            textColor: "#fff",
+            categoryColor: "#F39C12",
+            textColor: "#000",
             name: "Product Packaging",
             subtitle: "explore",
             image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400",
@@ -190,8 +196,8 @@ export function getSliderHTML() {
         {
             id: 8,
             category: "Illustration",
-            categoryColor: "#FE8A8A",
-            textColor: "#000",
+            categoryColor: "#E91E63",
+            textColor: "#fff",
             name: "Brand Illustrations",
             subtitle: "explore",
             image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400",
@@ -201,13 +207,17 @@ export function getSliderHTML() {
 
     const cards = projects.map(p => `
         <div class="slider-card" style="background-color: ${p.bg}">
-            <div class="slider-image-container">
+            <div class="slider-image-section">
                  ${p.image ? `<img src="${p.image}" alt="${p.name}" class="slider-img" draggable="false">` : `<div style="width:100%; height:100%; background: linear-gradient(45deg, #ccc, #999);"></div>`}
             </div>
-            <div class="slider-content">
-                <span class="slider-tag" style="background-color: ${p.categoryColor}; color: ${p.textColor}">${p.category}</span>
-                <h4 class="slider-title">${p.name}</h4>
-                <a href="#" class="slider-link">${p.subtitle}</a>
+            <div class="slider-content" style="background-color: ${p.categoryColor}; color: ${p.textColor}">
+                <div class="slider-content-top">
+                    <span class="tag-pill ${p.textColor === '#fff' ? 'light-tag' : 'dark-tag'}">${p.category}</span>
+                </div>
+                <div class="slider-content-bottom">
+                    <h4 class="slider-title">${p.name}</h4>
+                    ${Button({ text: p.subtitle, href: '#', variant: 'outline-dark', className: 'slider-btn' })}
+                </div>
             </div>
         </div>
     `).join('');

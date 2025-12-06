@@ -1,4 +1,4 @@
-# MadeByVibe - Industrial Zen Design
+# MadeByVibe - Digital Agency
 
 This project contains the Hero section and Navbar for the MadeByVibe branding studio.
 
@@ -10,7 +10,6 @@ This project contains the Hero section and Navbar for the MadeByVibe branding st
 
 ## Design System
 
-- **Theme**: Industrial Zen
 - **Primary Color**: #FE8A8A (Vibe Pink/Coral)
 - **Font**: Inter
 - **Layout**: Floating Canvas (100% height with viewport padding)
