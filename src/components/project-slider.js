@@ -324,6 +324,20 @@ export function initProjectSlider() {
     slider.addEventListener('mousemove', (e) => {
         moveCursor(e);
 
+        // Check if hovering over a button
+        const isButton = e.target.closest('.slider-btn') || e.target.closest('.btn');
+        if (isButton) {
+            if (cursor) cursor.style.opacity = '0';
+            slider.style.cursor = 'auto'; // Or 'default'
+            return;
+        } else {
+            if (cursor) {
+                cursor.style.opacity = '1';
+                // Reset scale if needed, but main logic handles it
+            }
+            slider.style.cursor = 'none';
+        }
+
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - slider.offsetLeft;

@@ -63,7 +63,8 @@ function attachListeners() {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
             const isScrollingDown = currentScrollY > lastScrollY;
-            const scrollDiff = Math.abs(currentScrollY - lastScrollY);
+            // Unused variable scrollDiff
+            // const scrollDiff = Math.abs(currentScrollY - lastScrollY);
 
             // 1. Morph Logic (Glass -> Dark Pill)
             // Trigger earlier for smoother feel
@@ -89,6 +90,26 @@ function attachListeners() {
         window.addEventListener('scroll', handleScroll, { passive: true });
         // Check initial state
         handleScroll();
+    }
+
+    // Theme Toggle Logic
+    const themeBtn = document.querySelector('.theme-toggle');
+    const htmlEl = document.documentElement;
+    
+    // 1. Check Saved Preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        htmlEl.setAttribute('data-theme', savedTheme);
+    }
+
+    if (themeBtn) {
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = htmlEl.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            htmlEl.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
     }
 }
 

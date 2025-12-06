@@ -8,6 +8,10 @@
     --text-primary: #1A1A1A;
     --text-secondary: #666666;
     --text-on-dark: #FFFFFF;
+    --text-label: rgba(255, 255, 255, 0.6);
+    
+    /* Section Backgrounds */
+    --bg-section: #000000;
 
     /* Brand Color */
     --accent-brand: #FE8A8A;
@@ -19,7 +23,7 @@
     --toast-bg: #000000;
 
     /* Spacing */
-    --padding-viewport: clamp(10px, 2vw, 20px);
+    --padding-viewport: clamp(60px, 8vw, 120px);
     --padding-internal: clamp(2rem, 5vw, 4rem);
     --radius-main: 24px;
     --radius-pill: 999px;
@@ -27,6 +31,22 @@
     /* Typography */
     --font-main: 'Inter', 'Helvetica Neue', sans-serif;
     --font-display: 'Space Grotesk', sans-serif;
+}
+
+[data-theme="light"] {
+    --bg-outer: #F2F2F2;
+    --bg-gradient-start: #FFFFFF;
+    --bg-gradient-end: #E0E0E0;
+    --surface-main: radial-gradient(circle at center, #FFFFFF 0%, #E0E0E0 100%);
+    
+    --text-primary: #1A1A1A;
+    --text-secondary: #666666;
+    --text-on-dark: #1A1A1A; /* Inverted for light theme */
+    --text-label: rgba(0, 0, 0, 0.6); /* High contrast for light mode */
+    
+    --bg-section: #F2F2F2; /* Matches bg-outer */
+    
+    --toast-bg: #F2F2F2; /* Matches bg-outer for light theme */
 }
 
 * {
@@ -58,7 +78,7 @@ body {
     height: calc(100vh - var(--padding-viewport) * 2);
     background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
     border-radius: var(--radius-main);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    box-shadow: none; /* Shadow removed */
     position: relative;
     overflow: hidden;
 }
@@ -133,7 +153,7 @@ body {
 .nav-logo {
     font-weight: 700;
     font-size: 1.5rem;
-    color: var(--text-primary);
+    color: var(--text-on-dark);
     text-decoration: none;
     letter-spacing: -0.03em;
     transition: color 0.3s ease;
@@ -141,7 +161,7 @@ body {
 }
 
 .floating-nav.scrolled .nav-logo {
-    color: #FFFFFF;
+    color: #FFFFFF; /* Always white when scrolled (dark pill) */
 }
 
 
@@ -170,7 +190,8 @@ body {
 
 .nav-item {
     text-decoration: none;
-    color: var(--text-primary);
+    color: var(--text-on-dark);
+    opacity: 0.8;
     font-size: 0.95rem;
     font-weight: 500;
     padding: 8px 16px;
@@ -183,10 +204,13 @@ body {
 
 .floating-nav.scrolled .nav-item {
     color: rgba(255, 255, 255, 0.8);
+    opacity: 1;
 }
 
 .nav-item:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(125, 125, 125, 0.2);
+    opacity: 1;
+    color: var(--text-on-dark);
 }
 
 .floating-nav.scrolled .nav-item:hover {
@@ -197,6 +221,7 @@ body {
 .nav-item.active {
     background: var(--accent-brand);
     color: #000000;
+    opacity: 1;
 }
 
 .nav-actions {
@@ -215,13 +240,27 @@ body {
     justify-content: center;
     border-radius: 50%;
     cursor: pointer;
-    color: var(--text-primary);
+    color: var(--text-on-dark);
     transition: all 0.3s ease;
     /* Default: visual separation if desired, or plain */
 }
 
 .theme-toggle:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(125, 125, 125, 0.2);
+}
+
+.theme-toggle svg {
+    display: none;
+}
+
+/* Default (Dark Mode): Show Sun, Hide Moon */
+:root:not([data-theme="light"]) .icon-sun {
+    display: block;
+}
+
+/* Light Mode: Show Moon, Hide Sun */
+[data-theme="light"] .icon-moon {
+    display: block;
 }
 
 .floating-nav.scrolled .theme-toggle {
@@ -287,6 +326,35 @@ body {
     grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 4rem;
+    position: relative;
+}
+
+/* Hero Video Background */
+.hero-video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    border-radius: var(--radius-main);
+}
+
+.hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%);
+    z-index: 1;
 }
 
 .hero-content {
@@ -297,7 +365,7 @@ body {
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.8);
     margin-bottom: 1.5rem;
     font-weight: 500;
 }
@@ -307,7 +375,7 @@ body {
     font-weight: 700;
     line-height: 1.05;
     letter-spacing: -0.03em;
-    color: var(--text-primary);
+    color: #FFFFFF;
     margin-bottom: 2.5rem;
 }
 
@@ -357,7 +425,7 @@ body {
 
 .scroll-indicator {
     font-size: 0.9rem;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.7);
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -367,7 +435,7 @@ body {
     content: '';
     width: 40px;
     height: 1px;
-    background: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.5);
 }
 
 /* Hero Visual */
@@ -377,6 +445,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 2;
 }
 
 .gradient-orb {
@@ -437,7 +506,7 @@ body {
     position: absolute;
     bottom: var(--padding-viewport);
     left: var(--padding-viewport);
-    background: #000000;
+    background: var(--toast-bg);
     color: var(--text-on-dark);
     padding: 3rem 4rem 3rem 3rem;
     border-top-right-radius: 40px;
@@ -460,6 +529,18 @@ body {
     z-index: 51;
 }
 
+/* Ensure ALL smoothing SVGs use the dynamic background color */
+.corner-smooth-top path,
+.corner-smooth-right path,
+.footer-social .corner-smooth-top path,
+.footer-social .corner-smooth-bottom path,
+.footer-backtop-breakout .corner-smooth-left path,
+.footer-backtop-breakout .corner-smooth-bottom-right path,
+/* Generic selector for safety if classes vary */
+svg[class*="corner-smooth"] path {
+    fill: var(--bg-outer);
+}
+
 .corner-smooth-right {
     position: absolute;
     bottom: 0;
@@ -473,7 +554,7 @@ body {
     font-size: 1.5rem;
     font-weight: 500;
     line-height: 1.3;
-    color: #FFFFFF;
+    color: var(--text-on-dark);
 }
 
 .toast-icon {
@@ -491,10 +572,20 @@ body {
     cursor: pointer;
     transition: transform 0.2s ease;
     color: #000;
+    animation: spin 8s linear infinite;
 }
 
 .toast-icon:hover {
-    transform: rotate(90deg);
+    animation-play-state: paused;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* ============================================
@@ -502,7 +593,7 @@ body {
    ============================================ */
 .marquee-section {
     width: 100%;
-    background: #000000;
+    background: var(--bg-section);
     padding: 1.5rem var(--padding-viewport);
     overflow: hidden;
 }
@@ -525,7 +616,7 @@ body {
     font-family: var(--font-display);
     font-size: 60px;
     font-weight: 500;
-    color: #FFFFFF;
+    color: var(--text-on-dark);
     letter-spacing: -0.02em;
 }
 
@@ -700,7 +791,7 @@ body {
    ============================================ */
 .work-section {
     width: 100%;
-    background: #000000;
+    background: var(--bg-section);
     padding: clamp(4rem, 8vw, 6rem) var(--padding-viewport) 0 var(--padding-viewport);
 }
 
@@ -711,7 +802,7 @@ body {
 
 .work-label {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-label);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: 0.5rem;
@@ -720,7 +811,7 @@ body {
 
 .work-title {
     font-size: clamp(2rem, 4vw, 3rem);
-    color: #FFFFFF;
+    color: var(--text-on-dark);
     font-weight: 600;
 }
 
@@ -1182,7 +1273,7 @@ body {
    ============================================ */
 .explore-section {
     width: 100%;
-    background: #000000;
+    background: var(--bg-section);
     padding: 1rem 0 clamp(4rem, 8vw, 6rem) 0;
     overflow: hidden;
 }
@@ -1196,7 +1287,7 @@ body {
 
 .explore-label {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-label);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     display: block;
@@ -1205,7 +1296,7 @@ body {
 
 .explore-title {
     font-size: clamp(2rem, 4vw, 3rem);
-    color: #FFFFFF;
+    color: var(--text-on-dark);
     font-weight: 600;
 }
 
@@ -1332,7 +1423,7 @@ body {
    ============================================ */
 .slider-section {
     width: 100%;
-    background: #000000;
+    background: var(--bg-section);
     padding: 1rem 0 clamp(4rem, 8vw, 6rem) 0;
     overflow: hidden;
 }
@@ -1372,7 +1463,7 @@ body {
 
 .slider-label {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-label);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     display: block;
@@ -1382,7 +1473,7 @@ body {
 .slider-heading {
     font-size: 1.75rem;
     line-height: 1.1;
-    color: #ffffff;
+    color: var(--text-on-dark);
     font-weight: 600;
 }
 
@@ -1522,9 +1613,9 @@ body {
    EXPERTISE SECTION
    ============================================ */
 .expertise-section {
-    background-color: #0d0d0d;
-    background: #000000;
-    color: #FFFFFF;
+    background-color: var(--bg-section);
+    background: var(--bg-section);
+    color: var(--text-on-dark);
     padding: clamp(4rem, 8vw, 8rem) 0;
     position: relative;
 }
@@ -1561,7 +1652,7 @@ body {
 
 .expertise-label {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-label);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     display: flex;
@@ -1581,7 +1672,7 @@ body {
     flex-direction: column;
     gap: 1.5rem;
     font-size: 1rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-label);
     line-height: 1.5;
 }
 
@@ -1609,6 +1700,7 @@ body {
     flex-direction: column;
     margin-top: 2rem;
     /* Add spacing if header border is gone */
+    pointer-events: none;
 }
 
 
@@ -1730,7 +1822,7 @@ body {
 .expertise-name {
     font-size: clamp(3.5rem, 7vw, 6rem);
     font-weight: 400;
-    color: #FFFFFF;
+    color: var(--text-on-dark);
     margin: 0;
     white-space: nowrap;
 }
@@ -1770,7 +1862,7 @@ body {
    ============================================ */
 .blog-section {
     width: 100%;
-    background: #000000;
+    background: var(--bg-section);
     padding: clamp(4rem, 8vw, 6rem) 0;
 }
 
@@ -1802,7 +1894,7 @@ body {
 
 .blog-label {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-label);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     display: block;
@@ -1812,7 +1904,7 @@ body {
 .blog-heading {
     font-size: clamp(2rem, 3.5vw, 3rem);
     line-height: 1.1;
-    color: #FFFFFF;
+    color: var(--text-on-dark);
     font-weight: 500;
     margin-bottom: 1.5rem;
 }
@@ -1838,26 +1930,54 @@ body {
 
 .blog-nav {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem; /* Increased gap */
+    align-items: center; /* Ensure vertical alignment */
+    margin-top: auto; /* Push to bottom if needed or just adjust placement */
+    /* Ensure it aligns with content above if it's a flex column item */
+    align-self: flex-start; 
 }
 
+/* Icon Only Button Variant overrides for blog nav specific context if needed */
 .blog-nav-btn {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Ensure fully rounded */
+    border: none;
     background: transparent;
-    color: #FFFFFF;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Ensure .btn-icon-only .btn-content from previous step is also rounded */
+.btn-icon-only .btn-content {
+    border-radius: 50%;
+    width: 48px; /* Slightly larger touch target */
+    height: 48px;
+    padding: 0; /* Remove padding to center icon perfectly via flex */
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.1); /* Subtle background, no border */
+    border: none; 
+    color: var(--text-on-dark);
+    transition: opacity 0.3s ease, background-color 0.3s ease;
 }
 
-.blog-nav-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.4);
+[data-theme="light"] .btn-icon-only .btn-content {
+    background: rgba(0, 0, 0, 0.1); /* Darker subtle bg for light theme */
+}
+
+/* Disabled/Dimmed State */
+.blog-nav-btn[disabled] {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.blog-nav-btn[disabled] .btn-content {
+    opacity: 0.3;
+    background: rgba(255, 255, 255, 0.05); /* Fainter bg */
+}
+
+[data-theme="light"] .blog-nav-btn[disabled] .btn-content {
+    background: rgba(0, 0, 0, 0.05);
 }
 
 .blog-slider-container {
@@ -1876,6 +1996,9 @@ body {
     scrollbar-width: none;
     -ms-overflow-style: none;
     padding-bottom: 1rem;
+    /* Increase top padding to accommodate hover translateY(-8px) without clipping */
+    padding-top: 1rem; 
+    margin-top: -1rem; /* Pull back margin to maintain layout position */
     padding-right: var(--padding-viewport);
     will-change: transform;
 }
@@ -1934,20 +2057,20 @@ body {
 
 .blog-read-time {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-label);
 }
 
 .blog-card-title {
     font-size: 1.75rem;
     font-weight: 600;
-    color: #FFFFFF;
+    color: var(--text-on-dark);
     line-height: 1.2;
     margin: 0;
 }
 
 .blog-card-excerpt {
     font-size: 1rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-label);
     line-height: 1.6;
     margin: 0;
     display: -webkit-box;
@@ -1978,9 +2101,9 @@ body {
    ============================================ */
 .footer-section {
     width: 100%;
-    background: #000000;
+    background: var(--bg-section);
     position: relative;
-    padding: var(--padding-viewport);
+    padding: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .footer-container {
@@ -2003,13 +2126,13 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    background: #000000;
+    background: var(--bg-section);
     padding: 0rem 1.25rem calc(1.25rem + 20px) 0.75rem;
     border-radius: 0 0 32px 0;
     min-width: 56px;
     position: relative;
-    margin-left: var(--padding-viewport);
-    margin-top: var(--padding-viewport);
+    margin-left: clamp(1.5rem, 3vw, 2.5rem);
+    margin-top: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .footer-social .corner-smooth-top {
@@ -2035,13 +2158,22 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #FFFFFF;
+    color: var(--text-on-dark);
     transition: all 0.2s ease;
+}
+
+/* Darken background for visibility in light mode */
+[data-theme="light"] .social-icon {
+    background: rgba(0, 0, 0, 0.05);
 }
 
 .social-icon:hover {
     background: var(--accent-brand);
     color: #000000;
+}
+
+[data-theme="light"] .social-icon:hover {
+    color: #FFFFFF;
 }
 
 /* Back to Top Breakout (Top Right) */
@@ -2052,8 +2184,8 @@ body {
     display: flex;
     align-items: flex-start;
     z-index: 10;
-    margin-top: var(--padding-viewport);
-    margin-right: var(--padding-viewport);
+    margin-top: clamp(1.5rem, 3vw, 2.5rem);
+    margin-right: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .footer-backtop-breakout .corner-smooth-left {
@@ -2061,11 +2193,11 @@ body {
 }
 
 .footer-backtop-breakout .back-top-link {
-    background: #000000;
+    background: var(--bg-section);
     padding: 1rem 1.5rem;
     border-radius: 0 0 0 32px;
     font-size: 1rem;
-    color: rgb(255, 255, 255);
+    color: var(--text-on-dark);
     text-decoration: none;
     transition: color 0.2s;
     white-space: nowrap;
@@ -2075,7 +2207,8 @@ body {
 }
 
 .footer-backtop-breakout .back-top-link:hover {
-    color: #FFFFFF;
+    color: var(--text-on-dark);
+    opacity: 1;
 }
 
 .finger-bounce {
@@ -2132,7 +2265,7 @@ body {
 .footer-cta-title {
     font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 400;
-    color: #FFFFFF;
+    color: #FFFFFF; /* Footer container is dark in both themes probably? */
     line-height: 1.2;
     margin-bottom: 1.5rem;
 }
@@ -2490,10 +2623,10 @@ body {
    ============================================ */
 .about-section {
     width: 100%;
-    background: #000000;
+    background: var(--bg-section);
     padding: clamp(6rem, 10vw, 8rem) 0;
     /* Added more padding for importance */
-    color: #FFFFFF;
+    color: var(--text-on-dark);
     position: relative;
     /* overflow: hidden; Removed to allow sticky positioning to work */
 }
@@ -2510,7 +2643,7 @@ body {
 
 .about-label {
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-label);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-weight: 500;
@@ -2521,7 +2654,7 @@ body {
     /* Massive, statement text */
     line-height: 1.1;
     font-weight: 400;
-    color: #FFFFFF;
+    color: var(--text-on-dark);
     max-width: 1200px;
     /* Readable statement width */
     letter-spacing: -0.02em;
@@ -2596,7 +2729,7 @@ body {
    BIG FOOTER MARQUEE
    ============================================ */
 .big-marquee-section {
-    background: #000000;
+    background: var(--bg-section);
     padding: 0 0 4rem 0;
     overflow: hidden;
     display: flex;

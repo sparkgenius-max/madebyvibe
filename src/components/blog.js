@@ -62,15 +62,37 @@ export function Blog() {
                     ${Button({ text: 'View the blog', variant: 'outline-dark', href: '#' })}
                 </div>
                 <div class="blog-nav">
-                    <button class="blog-nav-btn prev" id="blogPrev">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                    <button class="blog-nav-btn prev btn-icon-only" id="blogPrev" aria-label="Previous">
+                        <div class="btn-content">
+                            <div class="btn-icon-group left">
+                                <span class="btn-icon-primary">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="btn-icon-svg">
+                                        <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <span class="btn-icon-secondary">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="btn-icon-svg">
+                                        <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
                     </button>
-                    <button class="blog-nav-btn next" id="blogNext">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                    <button class="blog-nav-btn next btn-icon-only" id="blogNext" aria-label="Next">
+                        <div class="btn-content">
+                            <div class="btn-icon-group right">
+                                <span class="btn-icon-primary">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="btn-icon-svg">
+                                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                                <span class="btn-icon-secondary">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="btn-icon-svg">
+                                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
                     </button>
                 </div>
             </div>
@@ -114,18 +136,55 @@ export function initBlog() {
         bounce = 0;
     };
 
+    // Check Scroll State for Buttons
+    const updateNavButtons = () => {
+        if (!prevBtn || !nextBtn) return;
+        
+        // Disable prev if at start (with small tolerance)
+        if (slider.scrollLeft <= 10) {
+            prevBtn.setAttribute('disabled', '');
+        } else {
+            prevBtn.removeAttribute('disabled');
+        }
+
+        // Disable next if at end (with small tolerance)
+        const maxScroll = slider.scrollWidth - slider.clientWidth;
+        if (slider.scrollLeft >= maxScroll - 10) {
+            nextBtn.setAttribute('disabled', '');
+        } else {
+            nextBtn.removeAttribute('disabled');
+        }
+    };
+
+    // Calculate scroll amount dynamically based on card width + gap
+    const getScrollAmount = () => {
+        // Card width (520px) + gap (32px/2rem) = 552px
+        return 520 + 32; 
+    };
+
     // Navigation buttons
     if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            // console.log('Prev clicked'); 
+            slider.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
         });
     }
 
     if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            // console.log('Next clicked'); 
+            slider.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
         });
     }
+
+    // Listen for scroll to update buttons
+    slider.addEventListener('scroll', updateNavButtons);
+    // Initial check
+    updateNavButtons();
 
     // Drag to scroll
     slider.addEventListener('mousedown', (e) => {

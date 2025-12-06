@@ -3,6 +3,14 @@ import { Button } from './button.js';
 export function Hero() {
     return `
     <section class="hero-section">
+        <!-- Video Background -->
+        <div class="hero-video-container">
+            <video class="hero-video" autoplay muted loop playsinline>
+                <source src="https://res.cloudinary.com/dg2cqc3e9/video/upload/v1764998015/6561920-uhd_3840_2160_25fps_fjc9a6.mp4" type="video/mp4">
+            </video>
+            <div class="hero-video-overlay"></div>
+        </div>
+
         <div class="hero-content">
             <h2 class="sub-heading">Digital Branding Studio</h2>
             <h1 class="display-heading">
