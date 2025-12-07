@@ -3,6 +3,7 @@ import { Navbar } from '../components/navbar.js';
 import { Footer, initFooter } from '../components/footer.js';
 import { BigFooterMarquee } from '../components/big-marquee.js';
 import { Button } from '../components/button.js';
+import { SectionLabel } from '../components/section-label.js';
 
 export function ContactPage() {
     return `
@@ -11,9 +12,7 @@ export function ContactPage() {
     <!-- Hero Section -->
     <div class="contact-hero">
         <div class="contact-hero-content">
-            <div class="contact-label">
-                <span class="dot">●</span> Contact
-            </div>
+            ${SectionLabel('Contact', 'contact-label')}
             <h1 class="contact-heading">
                 It's nice to<br>meet ya
                 <span class="contact-heading-icon">
@@ -149,9 +148,7 @@ ${Button({ text: 'Send Message', variant: 'dark', icon: true, className: 'form-s
     <section class="faq-section">
         <div class="faq-layout">
             <div class="faq-header">
-                <div class="faq-label">
-                    <span class="dot">●</span> Anything else?
-                </div>
+                ${SectionLabel('Anything else?', 'faq-label')}
                 <h2 class="faq-heading">The answers to<br>your questions.</h2>
                 <div class="faq-action">
                     ${Button({ text: 'View all FAQs', href: '#', variant: 'primary', icon: true })}

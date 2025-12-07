@@ -14,7 +14,7 @@ export function Navbar() {
                 </div>
                 <a href="/works" class="nav-item">Work</a>
                 <div class="nav-item-wrapper group">
-                    <a href="#" class="nav-item">About</a>
+                    <a href="/about" class="nav-item">About</a>
                     ${AboutDropdown()}
                 </div>
                 <a href="/blog" class="nav-item">Blog</a>

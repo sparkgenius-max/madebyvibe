@@ -1,4 +1,5 @@
 import { Button } from './button.js';
+import { SectionLabel } from './section-label.js';
 
 export function Expertise() {
     return `
@@ -11,7 +12,7 @@ export function Expertise() {
         <div class="expertise-container">
             <div class="expertise-header">
                 <div class="expertise-col-1">
-                    <span class="expertise-label">● Our Expertise</span>
+                    ${SectionLabel('Our Expertise')}
                 </div>
                 <div class="expertise-col-2">
                     <h2 class="expertise-title">How we take your<br>business to the next level</h2>

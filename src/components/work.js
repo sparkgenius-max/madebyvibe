@@ -1,5 +1,6 @@
 import { Button } from './button.js';
 import { getSliderHTML } from '../components/project-slider.js';
+import { SectionLabel } from './section-label.js';
 
 export function Work() {
     const projects = [
@@ -43,7 +44,7 @@ export function Work() {
     return `
     <section class="work-section">
         <div class="work-header">
-            <span class="work-label">● Our Work</span>
+            ${SectionLabel('Our Work', 'work-label-custom')}
             <h2 class="work-title">Take a look at our projects</h2>
         </div>
 

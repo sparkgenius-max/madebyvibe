@@ -1,3 +1,5 @@
+import { SectionLabel } from './section-label.js';
+
 export function Explore() {
     const projects = [
         {
@@ -96,7 +98,7 @@ export function Explore() {
     return `
     <section class="explore-section">
         <div class="explore-header">
-            <span class="explore-label">● Explore our</span>
+            ${SectionLabel('Explore our')}
             <h2 class="explore-title">Best Projects</h2>
         </div>
         <div class="explore-slider-container">

@@ -3,6 +3,7 @@ import { Navbar } from '../components/navbar.js';
 import { Footer, initFooter } from '../components/footer.js';
 import { BigFooterMarquee } from '../components/big-marquee.js';
 import { Button } from '../components/button.js';
+import { SectionLabel } from '../components/section-label.js';
 
 // Sample Data
 const blogPosts = [
@@ -125,9 +126,7 @@ export function BlogPage() {
     
     <div class="blog-filter-header">
         <div class="blog-header-top">
-            <div class="section-label">
-                <span class="dot">●</span> The Blog
-            </div>
+            ${SectionLabel('The Blog')}
         </div>
         <div class="blog-filter-list">
             <a href="#" class="blog-filter-item active">explore all<span class="count">437</span></a>

@@ -76,7 +76,7 @@ export function Footer() {
                     <div class="footer-links-column">
                         <h4 class="footer-links-title">Learn</h4>
                         <ul class="footer-links-list">
-                            <li><a href="#">About</a></li>
+                            <li><a href="/about">About</a></li>
                             <li><a href="#">Culture</a></li>
                             <li><a href="#">Testimonials</a></li>
                             <li><a href="#">Processes</a></li>
@@ -88,13 +88,13 @@ export function Footer() {
                     <div class="footer-links-column">
                         <h4 class="footer-links-title">Explore</h4>
                         <ul class="footer-links-list">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Work <span class="new-badge">NEW</span></a></li>
-                            <li><a href="#">Services</a></li>
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/works">Work <span class="new-badge">NEW</span></a></li>
+                            <li><a href="/services">Services</a></li>
                             <li><a href="#">Careers</a></li>
                             <li><a href="#">Sectors</a></li>
                             <li><a href="#">Hex Test</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="/contact">Contact</a></li>
                         </ul>
                     </div>
                     <div class="footer-links-column contact-column">

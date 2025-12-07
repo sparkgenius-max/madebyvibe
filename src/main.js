@@ -1,4 +1,5 @@
 import './styles/main.css';
+import './styles/about-carousel.css';
 import { initHome } from './pages/home.js';
 import { Home } from './pages/home.js';
 import { Services } from './pages/services.js';
@@ -7,6 +8,7 @@ import { Works, initWorks } from './pages/works.js';
 import { BlogPage, initBlogPage } from './pages/blog.js';
 import { BlogDetailPage, initBlogDetailPage } from './pages/blog-detail.js';
 import { ContactPage, initContactPage } from './pages/contact.js';
+import { AboutPage, initAboutPage } from './pages/about.js';
 import { initDropdownBlur } from './components/dropdown-interactions.js';
 import { initBlog } from './components/blog.js';
 import { initFooter } from './components/footer.js';
@@ -42,6 +44,9 @@ function render() {
     } else if (path === '/contact') {
         app.innerHTML = ContactPage();
         initContactPage();
+    } else if (path === '/about') {
+        app.innerHTML = AboutPage();
+        initAboutPage();
     } else {
         app.innerHTML = Home();
         initHome();

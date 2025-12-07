@@ -2,6 +2,7 @@ import { Navbar } from '../components/navbar.js';
 import { Blog } from '../components/blog.js';
 import { Footer } from '../components/footer.js';
 import { BigFooterMarquee } from '../components/big-marquee.js';
+import { SectionLabel } from '../components/section-label.js';
 
 export function Services() {
     const servicesData = [
@@ -83,10 +84,7 @@ export function Services() {
         <div class="service-detail-hero">
             <div class="sd-hero-grid">
                 <div class="sd-hero-left">
-                    <div class="section-label">
-                        <span class="dot">●</span>
-                        Services
-                    </div>
+                    ${SectionLabel('Services')}
                     <h1 class="sd-title-large">
                         We are a creative <br>
                         digital agency <br>

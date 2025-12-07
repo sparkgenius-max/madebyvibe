@@ -2,6 +2,7 @@
 import { Navbar } from '../components/navbar.js';
 import { Footer } from '../components/footer.js';
 import { BigFooterMarquee } from '../components/big-marquee.js';
+import { SectionLabel } from '../components/section-label.js';
 
 export function BlogDetailPage() {
     // dummy data
@@ -26,9 +27,7 @@ export function BlogDetailPage() {
             <div class="blog-hero-left">
                 <div class="blog-hero-content">
                     <div class="blog-hero-meta-top">
-                         <div class="section-label">
-                             <span class="dot">●</span> ${post.readTime}
-                         </div>
+                         ${SectionLabel(post.readTime)}
                     </div>
                     
                     <div class="blog-title-container">

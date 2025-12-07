@@ -1,0 +1,70 @@
+/* Service Detail Hero Container - Reusable Component */
+.sd-hero-container {
+    width: 100%;
+    position: relative;
+    height: auto;
+    border-radius: var(--radius-main);
+    overflow: hidden; /* Important to clip the image */
+    margin-bottom: 4rem; /* Spacing below the component */
+}
+
+.sd-hero-image-wrapper {
+    width: 100%;
+    height: 60vh; /* Fixed height for consistency */
+    min-height: 400px;
+    position: relative;
+    background-color: var(--bg-section); /* Placeholder background */
+}
+
+.sd-hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Breakout Button (Top Left) */
+.sd-image-breakout {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    /* The breakout container itself doesn't have background */
+}
+
+.sd-breakout-inner {
+    background-color: var(--bg-outer); /* Matches page background */
+    padding: 0 2rem 1.5rem 0; /* Padding to push content away from corner */
+    border-bottom-right-radius: 32px; /* Sharp corner for SVG connection */
+}
+
+/* SVG Smoothers */
+.breakout-corner-right {
+    position: absolute;
+    top: 0;
+    right: -20px; /* Width of SVG */
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+.breakout-corner-bottom {
+    position: absolute;
+    bottom: -20px; /* Height of SVG */
+    left: 0;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+/* Ensure SVG fill matches background */
+.breakout-corner-right path,
+.breakout-corner-bottom path {
+    fill: var(--bg-outer);
+}
+
+/* Button Styles inside Breakout */
+.sd-btn {
+    /* Ensure button fits nicely */
+    white-space: nowrap;
+}

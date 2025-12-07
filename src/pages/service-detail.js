@@ -4,6 +4,8 @@ import { Footer } from '../components/footer.js';
 import { BigFooterMarquee } from '../components/big-marquee.js';
 import { Marquee } from '../components/marquee.js';
 import { Button } from '../components/button.js';
+import { SectionLabel } from '../components/section-label.js';
+import { LargeImageCTA } from '../components/large-image-cta.js';
 
 export function ServiceDetail() {
     return `
@@ -13,10 +15,7 @@ export function ServiceDetail() {
         <div class="service-detail-hero">
             <div class="sd-hero-grid">
                 <div class="sd-hero-left">
-                    <div class="section-label">
-                        <span class="dot">●</span>
-                        Digital Experience
-                    </div>
+                    ${SectionLabel('Digital Experience')}
                     <h1 class="sd-title-large">
                         A Web Design Studio <br /> creating Digital Vibes.
                     </h1>
@@ -35,36 +34,16 @@ export function ServiceDetail() {
 
         <div class="service-detail-container">
             <!-- Hero Image Section -->
-            <div class="sd-hero-container" style="position: relative;">
-            <!-- Top Left Breakout Button -->
-            <div class="sd-image-breakout">
-                 <div class="sd-breakout-inner">
-                    ${Button({ text: 'See our work', href: '/works', variant: 'primary', className: 'sd-btn' })}
-                 </div>
-                
-                <!-- Smooth Corners to blend with image -->
-                <svg class="breakout-corner-right" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                     <path d="M20 0v20H0C11.05 20 20 11.05 20 0z" class="corner-svg-path" fill="#000000" />
-                </svg>
-                <svg class="breakout-corner-bottom" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                     <path d="M20 0v20H0C11.05 20 20 11.05 20 0z" class="corner-svg-path" fill="#000000" />
-                </svg>
-            </div>
-
-            <div class="sd-hero-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop" 
-                     alt="Service Detail Hero" 
-                     class="sd-hero-image">
-            </div>
-        </div>
+            ${LargeImageCTA({
+                buttonText: 'See our work',
+                buttonLink: '/works',
+                imageUrl: 'https://res.cloudinary.com/dg2cqc3e9/video/upload/v1765123431/3249454-uhd_3840_2160_25fps_gurww6.mp4'
+            })}
 
         <!-- Approach & Capabilities Grid -->
         <div class="sd-content-grid">
             <div class="sd-approach">
-                <div class="section-label">
-                    <span class="dot">●</span>
-                    Our Approach
-                </div>
+                ${SectionLabel('Our Approach')}
                 <h2 class="sd-subtitle">
                     Are you a challenger brand, a market leader, or somewhere in between? It doesn't matter. We amplify your voice.
                 </h2>

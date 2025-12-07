@@ -1,4 +1,5 @@
 import { Button } from './button.js';
+import { SectionLabel } from './section-label.js';
 
 export function Blog() {
     const posts = [
@@ -56,7 +57,7 @@ export function Blog() {
     <section class="blog-section">
         <div class="blog-layout">
             <div class="blog-intro">
-                <span class="blog-label">● Blog</span>
+                ${SectionLabel('Blog', 'blog-label')}
                 <h2 class="blog-heading">The latest from<br>our design studio</h2>
                 <div class="blog-cta-wrapper" style="margin-bottom: 2rem;">
                     ${Button({ text: 'View the blog', variant: 'outline-dark', href: '#' })}

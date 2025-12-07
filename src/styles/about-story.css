@@ -1,0 +1,71 @@
+/* ============================================
+   ABOUT STORY SECTION (New Layout)
+   ============================================ */
+
+.about-story-section {
+    width: 100%;
+    background-color: var(--bg-outer); /* Match page background */
+    padding: clamp(4rem, 8vw, 8rem) 0; /* Vertical padding */
+    /* Remove any border-top if inherited from old styles */
+    border-top: none; 
+}
+
+.story-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--padding-viewport);
+    
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+}
+
+@media (min-width: 992px) {
+    .story-container {
+        grid-template-columns: 1fr 1fr; /* 2 Columns: Heading | Text */
+        gap: clamp(4rem, 6vw, 8rem);
+        align-items: start;
+    }
+}
+
+/* Left Column: Label + Heading */
+.story-header-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.story-heading {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.1;
+    font-weight: 500; /* Slightly lighter than bold for "Expert" feel */
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+/* Right Column: Text Content */
+.story-content-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-top: 0.5rem; /* Slight alignment adjustment */
+}
+
+.story-text {
+    font-family: var(--font-main);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+/* Highlight specific phrases if needed */
+.highlight-story {
+    color: var(--text-primary);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: var(--border-subtle);
+    text-underline-offset: 4px;
+}

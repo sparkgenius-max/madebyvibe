@@ -1,10 +1,11 @@
 import { Button } from './button.js';
+import { SectionLabel } from './section-label.js';
 
 export function About() {
     return `
     <section class="about-section">
         <div class="about-container">
-            <span class="about-label">• Who are we?</span>
+            ${SectionLabel('Who are we?', 'about-label-custom')}
             <p class="about-text" id="aboutText">
                 A global-minded design studio based in Malang ID, specializing in Web Development, Ecommerce, and
                 Branding that elevates your digital presence.
@@ -47,25 +48,23 @@ export function initAbout() {
         spans.forEach((span, index) => {
             const i = index / spans.length;
 
-            // Overlap settings
-            const renderStart = i * 0.6;
-            const renderEnd = renderStart + 0.4;
+            // Overlap settings - "Heavy" feel
+            // Spread start times more (0.7) and shorter duration (0.3) for distinct steps
+            const renderStart = i * 0.7;
+            const renderEnd = renderStart + 0.3;
 
             let spanProgress = (progress - renderStart) / (renderEnd - renderStart);
             spanProgress = Math.max(0, Math.min(1, spanProgress));
 
-            // 1. Opacity: 0.1 -> 1.0 (More dramatic range)
-            const opacity = 0.1 + (spanProgress * 0.9);
+            // Easing: Cubic In (starts slow, finishes fast) - feels "heavy"
+            const easedProgress = Math.pow(spanProgress, 3);
 
-            // 2. Blur: 8px -> 0px (Focus effect)
-            const blur = 8 * (1 - spanProgress);
-
-            // 3. TranslateY: 15px -> 0px (Slide up)
-            const y = 15 * (1 - spanProgress);
+            // Opacity: 0.15 -> 1.0
+            const opacity = 0.15 + (easedProgress * 0.85);
 
             span.style.opacity = opacity.toFixed(2);
-            span.style.filter = `blur(${blur.toFixed(1)}px)`;
-            span.style.transform = `translateY(${y.toFixed(1)}px)`;
+            span.style.filter = 'none';
+            span.style.transform = 'none';
         });
     };
 
