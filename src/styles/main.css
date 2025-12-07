@@ -5507,6 +5507,7 @@ svg[class*="corner-smooth"] path {
     font-size: 1.75rem;
     line-height: 1.3;
 }
+
 /* Global Section Label Component */
 .section-label {
     display: flex;
@@ -5524,24 +5525,34 @@ svg[class*="corner-smooth"] path {
     width: 120px;
     height: 120px;
     color: #fff;
-    flex-shrink: 0; 
+    flex-shrink: 0;
 }
 
 
 /* Contact Hero - Icon Animation */
 @keyframes icon-wobble {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
 }
 
 .contact-heading-icon {
-    background-color: var(--accent-brand); /* Pink */
-    animation: icon-wobble 2s ease-in-out infinite; /* Subtle animation */
+    background-color: var(--accent-brand);
+    /* Pink */
+    animation: icon-wobble 2s ease-in-out infinite;
+    /* Subtle animation */
 }
 
 /* Studio Section - Light Theme Contrast */
 [data-theme='light'] .studio-card {
-    background: #E5E5E5; /* Darker grey for better contrast against white page */
+    background: #E5E5E5;
+    /* Darker grey for better contrast against white page */
     /* Or keep it white but add border or shadow? request was 'color is poor contrast' 
        User likely means the container bg (#f0f0f0) vs page bg (#F2F2F2/white) is too similar?
        Let's make it #fff to stand out against greyish page or vice versa.
@@ -5549,13 +5560,15 @@ svg[class*="corner-smooth"] path {
        Let's make studio card WHITE for contrast.
     */
     background: #FFFFFF;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 /* Fix Send Message Button - Refine Size/Look */
 .form-submit-btn {
-    padding: 10px 20px; /* Smaller, cleaner padding */
-    font-size: 0.9rem; /* Slightly smaller text if 'too big' refers to scale */
+    padding: 10px 20px;
+    /* Smaller, cleaner padding */
+    font-size: 0.9rem;
+    /* Slightly smaller text if 'too big' refers to scale */
 }
 
 /* Ensure no double capsule */
@@ -5567,10 +5580,11 @@ svg[class*="corner-smooth"] path {
 
 /* Specifically for the 'dark' variant use on Contact page */
 .btn-dark {
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     /* Ensure solid bg if desired, or transparent with border */
-    background: #222; 
+    background: #222;
 }
+
 [data-theme='light'] .btn-dark {
     background: #000;
     color: #fff;
@@ -5594,16 +5608,19 @@ svg[class*="corner-smooth"] path {
 
 /* Fix Send Message Button Hover Scale */
 .form-submit-btn:hover {
-    transform: none !important; /* Prevent size/scale change */
+    transform: none !important;
+    /* Prevent size/scale change */
     /* Add subtle lift if matched others, or just none */
-    transform: translateY(-2px) !important; /* Keep lift but no scale */
+    transform: translateY(-2px) !important;
+    /* Keep lift but no scale */
 }
 
 /* Ensure border width doesn't change causing layout shift */
-.form-submit-btn, 
+.form-submit-btn,
 .form-submit-btn.btn-dark:hover {
     border-width: 1px;
-    margin: 0; /* consistent margin */
+    margin: 0;
+    /* consistent margin */
 }
 
 /* Override previous wobble if it was applied to this button (unlikely but safe) */
@@ -5611,7 +5628,8 @@ svg[class*="corner-smooth"] path {
 
 /* Contact Hero - Adjust Icon Font Size for Emoji */
 .contact-heading-icon {
-    font-size: 2.5rem; /* Ensure emoji is large enough */
+    font-size: 2.5rem;
+    /* Ensure emoji is large enough */
 }
 
 
@@ -5619,7 +5637,8 @@ svg[class*="corner-smooth"] path {
 .form-submit-btn:hover {
     transform: none !important;
     margin: 0 !important;
-    padding: 10px 20px !important; /* Force stability */
+    padding: 10px 20px !important;
+    /* Force stability */
     border-width: 1px !important;
 }
 
@@ -5627,4 +5646,1712 @@ svg[class*="corner-smooth"] path {
 /* Standard .btn-primary usually has translateY(-2px). */
 /* If that's causing bounce on this specific element due to box-sizing or margin shifts, 
    we'll just stick to color change which is 'steady'. */
+
+
+/* --- Blog Detail Page --- */
+
+.blog-detail-container {
+    padding-top: 100px;
+    background: var(--bg-outer);
+    min-height: 100vh;
+}
+
+/* Hero Section */
+.blog-hero-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: 80vh;
+    position: relative;
+    overflow: visible;
+    margin-bottom: var(--padding-internal);
+    align-items: center;
+}
+
+.blog-hero-left {
+    padding-left: var(--padding-viewport);
+    padding-right: 2rem;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.blog-hero-right {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.blog-hero-image-wrapper {
+    width: 100%;
+    height: 90vh;
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+    overflow: hidden;
+    position: relative;
+}
+
+.blog-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Overlapping Title */
+.blog-title-container {
+    background: var(--bg-outer);
+    padding: 3rem 4rem 3rem 0;
+    width: 120%;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    position: relative;
+}
+
+/* Pseudo-element for the invert/melt effect could go here if refined, 
+   but simplistic rounded overlap is safer for now. */
+
+.blog-hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4vw, 4.5rem);
+    line-height: 1.1;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.blog-hero-meta-top {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.read-time-label {
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-subtle);
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+}
+
+.blog-hero-author {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.author-avatar-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--accent-brand);
+    padding: 2px;
+}
+
+.author-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--bg-outer);
+}
+
+.author-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.author-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.author-role {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* Layout Grid */
+.blog-layout-wrapper {
+    display: grid;
+    grid-template-columns: 250px 1fr 80px;
+    gap: 4rem;
+    padding: 0 var(--padding-viewport) 6rem;
+    max-width: 1800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Sticky Helpers */
+.sticky-sidebar-content {
+    position: sticky;
+    top: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.blog-sidebar-left {
+    padding-top: 2rem;
+}
+
+.blog-sidebar-right {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* TOC Widget */
+.widget-title {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.toc-link {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    transition: color 0.2s;
+    display: block;
+    line-height: 1.4;
+}
+
+.toc-link:hover,
+.toc-link.active {
+    color: var(--text-primary);
+    font-weight: 500;
+    color: var(--accent-brand);
+}
+
+/* Reading Progress */
+.reading-progress-widget {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    max-width: 4px;
+    /* Thin line */
+    height: 150px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+[data-theme='dark'] .progress-bar-bg {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar-fill {
+    width: 100%;
+    height: 0%;
+    background: var(--accent-brand);
+    border-radius: 4px;
+    transition: height 0.1s linear;
+}
+
+.progress-text {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Social Share */
+.social-share-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem 0.75rem;
+    border-radius: 100px;
+    border: 1px solid var(--border-subtle);
+}
+
+[data-theme='light'] .social-share-group {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.share-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--text-primary);
+    background: transparent;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.share-btn:hover {
+    background: var(--accent-brand);
+    color: #000;
+    transform: translateY(-2px);
+}
+
+/* Article Content - Rich Text */
+.blog-article-content {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+.lead-paragraph {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: var(--text-primary);
+    margin-bottom: 3rem;
+    font-weight: 500;
+}
+
+.blog-article-content h2 {
+    font-size: 2rem;
+    color: var(--text-primary);
+    margin: 3.5rem 0 1.5rem;
+    letter-spacing: -0.02em;
+    font-family: var(--font-display);
+}
+
+.blog-article-content h3 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin: 2.5rem 0 1rem;
+    font-family: var(--font-display);
+}
+
+.blog-article-content p {
+    margin-bottom: 1.5rem;
+}
+
+.blog-article-content a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--accent-brand);
+    text-underline-offset: 4px;
+    transition: color 0.2s;
+}
+
+.blog-article-content a:hover {
+    color: var(--accent-brand);
+}
+
+.blog-article-content blockquote {
+    border-left: 4px solid var(--accent-brand);
+    padding-left: 2rem;
+    margin: 2.5rem 0;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+
+.blog-article-content ul,
+.blog-article-content ol {
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+}
+
+.blog-article-content li {
+    margin-bottom: 0.75rem;
+    padding-left: 0.5rem;
+}
+
+/* Images in content */
+.blog-article-image {
+    margin: 3rem 0;
+}
+
+.blog-article-image img {
+    width: 100%;
+    border-radius: 20px;
+    display: block;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.image-caption {
+    display: block;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 1rem;
+}
+
+/* Table */
+.table-wrapper {
+    overflow-x: auto;
+    margin: 2.5rem 0;
+    border-radius: 16px;
+    border: 1px solid var(--border-subtle);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+[data-theme='light'] .table-wrapper {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+}
+
+th,
+td {
+    padding: 1.25rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+th {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+[data-theme='light'] th {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .blog-layout-wrapper {
+        grid-template-columns: 220px 1fr;
+    }
+
+    .blog-sidebar-right {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    .blog-hero-section {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: auto;
+        padding-top: 80px;
+    }
+
+    .blog-hero-left {
+        padding: 0 var(--padding-internal);
+        margin-bottom: 2rem;
+    }
+
+    .blog-title-container {
+        width: 100%;
+        padding: 0;
+        background: transparent;
+        border-radius: 0;
+    }
+
+    .blog-hero-image-wrapper {
+        height: 50vh;
+        border-radius: 0;
+    }
+
+    .blog-layout-wrapper {
+        grid-template-columns: 1fr;
+        padding: 0 var(--padding-internal) 4rem;
+        gap: 2rem;
+    }
+
+    .blog-sidebar-left {
+        display: none;
+    }
+
+    .blog-hero-title {
+        font-size: 2.5rem;
+    }
+}
+
+
+/* --- Blog Detail Refinements --- */
+
+/* Hero Grid Adjustment (30% Left, 70% Right) */
+.blog-hero-section {
+    grid-template-columns: 0.55fr 1fr;
+    /* Adjusted ratio approx */
+    gap: 0;
+    min-height: 50vh;
+    /* Reduced height */
+    align-items: center;
+}
+
+.blog-hero-image-wrapper {
+    width: 100%;
+    height: 60vh;
+    /* Reduced height */
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+    overflow: hidden;
+    position: relative;
+    margin-right: -2px;
+    /* Ensure flush right */
+}
+
+/* Overlap Title Container Adjustment */
+.blog-title-container {
+    padding: 3rem 4rem 3rem 0;
+    width: 130%;
+    /* Ensure it overlaps enough */
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Author Avatar Square */
+.author-avatar-wrapper {
+    border-radius: 12px;
+    /* Square with slight radius */
+}
+
+.author-avatar {
+    border-radius: 10px;
+}
+
+/* Horizontal Progress Bar */
+.progress-bar-bg {
+    width: 100%;
+    height: 4px;
+    /* Thin horizontal line */
+    min-width: 100px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+[data-theme='dark'] .progress-bar-bg {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar-fill {
+    width: 0%;
+    /* Starts at 0 width */
+    height: 100%;
+    /* Full height of the thin line */
+    background: var(--accent-brand);
+    border-radius: 4px;
+    transition: width 0.1s linear;
+}
+
+/* Ensure Sidebars are Sticky */
+.sticky-sidebar-content {
+    position: sticky;
+    top: 140px;
+    /* Adjust top offset */
+    align-self: start;
+    height: auto;
+}
+
+/* Adjust Section Label in Hero to align left */
+.blog-hero-meta-top {
+    justify-content: flex-start;
+}
+
+.blog-hero-meta-top .section-label {
+    margin: 0;
+    /* Ensure it matches standard section label style if not global */
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.blog-hero-meta-top .section-label .dot {
+    color: var(--accent-brand);
+}
+
+
+/* =====================================================
+   BLOG DETAIL - REFINEMENTS V2
+   ===================================================== */
+
+/* Inverted Corner SVGs for Title Container */
+.blog-title-container {
+    position: relative;
+    z-index: 10;
+}
+
+.blog-title-container .corner-svg {
+    position: absolute;
+    pointer-events: none;
+}
+
+.blog-title-container .corner-svg.top-right {
+    top: -1px;
+    right: -20px;
+    transform: rotate(180deg);
+}
+
+.blog-title-container .corner-svg.bottom-right {
+    bottom: -20px;
+    right: 0;
+    transform: rotate(180deg);
+}
+
+/* Sidebar Sticky Fix - force proper height context */
+.blog-sidebar-left,
+.blog-sidebar-right {
+    align-self: start;
+    /* Key for sticky to work in grid */
+}
+
+.blog-sidebar-left .sticky-sidebar-content,
+.blog-sidebar-right .sticky-sidebar-content {
+    position: sticky;
+    top: 120px;
+}
+
+/* Progress Bar Horizontal - Redefine */
+.reading-progress-widget {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 6px;
+    max-width: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+[data-theme='light'] .progress-bar-bg {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--accent-brand);
+    border-radius: 6px;
+    transition: width 0.15s ease-out;
+}
+
+/* TOC Active State Improvement */
+.toc-link.active {
+    color: var(--accent-brand);
+    font-weight: 600;
+    position: relative;
+}
+
+.toc-link.active::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--accent-brand);
+    border-radius: 50%;
+}
+
+
+/* =====================================================
+   BLOG DETAIL - STICKY FIX V3
+   ===================================================== */
+
+/* Force proper sticky behavior */
+.blog-layout-wrapper {
+    display: grid;
+    grid-template-columns: 250px 1fr 80px;
+    gap: 4rem;
+    align-items: start !important;
+    /* Critical for sticky in grid */
+}
+
+.blog-sidebar-left {
+    position: relative;
+    height: fit-content;
+}
+
+.blog-sidebar-right {
+    position: relative;
+    height: fit-content;
+}
+
+/* The actual sticky element */
+.blog-sidebar-left>.sticky-sidebar-content {
+    position: sticky !important;
+    position: -webkit-sticky !important;
+    top: 120px !important;
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+}
+
+.blog-sidebar-right>.sticky-sidebar-content {
+    position: sticky !important;
+    position: -webkit-sticky !important;
+    top: 120px !important;
+}
+
+/* Ensure no parent has overflow hidden */
+.blog-detail-container {
+    overflow: visible;
+}
+
+.blog-detail-container main,
+.blog-detail-container .blog-layout-wrapper {
+    overflow: visible;
+}
+
+
+/* =====================================================
+   BLOG DETAIL - STICKY FIX FINAL
+   ===================================================== */
+
+/* Override body overflow for blog detail page */
+body:has(.blog-detail-container) {
+    overflow-x: clip;
+    /* clip allows sticky, hidden breaks it */
+}
+
+/* Reset all overflow on ancestors */
+.blog-detail-container,
+.blog-detail-container>main,
+main.blog-detail-container {
+    overflow: visible !important;
+}
+
+/* The layout wrapper must use align-items: start */
+.blog-layout-wrapper {
+    display: grid !important;
+    grid-template-columns: 250px 1fr 80px !important;
+    gap: 4rem !important;
+    align-items: start !important;
+    overflow: visible !important;
+}
+
+/* Sidebar containers - make THESE the sticky element */
+.blog-sidebar-left {
+    position: sticky !important;
+    position: -webkit-sticky !important;
+    top: 120px !important;
+    height: auto !important;
+    align-self: start !important;
+    overflow: visible !important;
+}
+
+.blog-sidebar-right {
+    position: sticky !important;
+    position: -webkit-sticky !important;
+    top: 120px !important;
+    height: auto !important;
+    align-self: start !important;
+    overflow: visible !important;
+}
+
+/* Remove sticky from inner content since parent is now sticky */
+.blog-sidebar-left .sticky-sidebar-content,
+.blog-sidebar-right .sticky-sidebar-content {
+    position: static !important;
+}
+
+
+/* =====================================================
+   BLOG DETAIL - INVERTED CORNER SVGs
+   ===================================================== */
+
+/* Base styles for blog corner SVGs */
+.blog-corner {
+    position: absolute;
+    pointer-events: none;
+    z-index: 15;
+}
+
+/* Top corner - positioned at top-right of title container */
+.blog-corner-top {
+    /* Adjust these values manually */
+    top: -40px;
+    right: 72.5px;
+    transform: rotate(90deg);
+}
+
+/* Bottom corner - positioned at bottom-right of title container */
+.blog-corner-bottom {
+    /* Adjust these values manually */
+    bottom: -40px;
+    right: 72.5px;
+    transform: rotate(180deg);
+}
+
+/* Ensure title container has proper positioning context */
+.blog-title-container {
+    position: relative;
+    z-index: 10;
+}
+
+/* =====================================================
+   BLOG HERO - ALIGN IMAGE LEFT WITH CONTENT START
+   ===================================================== */
+
+/* Calculate offset: sidebar (250px) + gap (4rem = 64px) = ~314px from padding edge */
+.blog-hero-section {
+    /* Remove the previous grid ratio, use a different approach */
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 0;
+}
+
+.blog-hero-left {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    padding-left: var(--padding-viewport);
+    padding-right: 2rem;
+    z-index: 10;
+    max-width: calc(var(--padding-viewport) + 250px + 4rem + 100px);
+}
+
+.blog-hero-right {
+    /* Offset the image left edge to align with content column start */
+    margin-left: calc(var(--padding-viewport) + 250px + 4rem);
+    width: calc(100% - var(--padding-viewport) - 250px - 4rem);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.blog-hero-image-wrapper {
+    width: 100%;
+    height: 60vh;
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+}
+
+
+/* =====================================================
+   BLOG HERO - REFINED LAYOUT V2
+   ===================================================== */
+
+/* Reset previous hero styles and use better approach */
+.blog-hero-section {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    min-height: 60vh !important;
+    position: relative !important;
+    padding: 0 !important;
+    gap: 0 !important;
+}
+
+.blog-hero-left {
+    position: relative !important;
+    flex: 0 0 auto !important;
+    width: calc(var(--padding-viewport) + 250px + 4rem) !important;
+    padding-left: var(--padding-viewport) !important;
+    padding-right: 0 !important;
+    z-index: 10 !important;
+    transform: none !important;
+    top: auto !important;
+}
+
+.blog-hero-right {
+    flex: 1 !important;
+    position: relative !important;
+    margin-left: 0 !important;
+    width: auto !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+}
+
+.blog-hero-image-wrapper {
+    width: 100% !important;
+    height: 60vh !important;
+    border-top-left-radius: 40px !important;
+    border-bottom-left-radius: 40px !important;
+    overflow: hidden !important;
+}
+
+/* SVG Corners - Position at image left edge */
+.blog-hero-right .blog-corner {
+    position: absolute !important;
+    left: 0 !important;
+    z-index: 15 !important;
+    pointer-events: none !important;
+}
+
+.blog-hero-right .blog-corner-top {
+    top: calc(50% - 30vh) !important;
+    /* Align with image top */
+    transform: rotate(90deg) translateX(-100%) !important;
+    transform-origin: bottom left !important;
+}
+
+.blog-hero-right .blog-corner-bottom {
+    bottom: calc(50% - 30vh) !important;
+    /* Align with image bottom */
+    transform: rotate(180deg) translateY(-100%) !important;
+    transform-origin: top left !important;
+}
+
+/* Title container extends into image area */
+.blog-title-container {
+    position: relative !important;
+    background: var(--bg-outer) !important;
+    padding: 2rem 3rem 2rem 0 !important;
+    margin-right: -80px !important;
+    /* Overlap into the image */
+    border-top-right-radius: 30px !important;
+    border-bottom-right-radius: 30px !important;
+    z-index: 5 !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .blog-hero-left {
+        width: calc(var(--padding-viewport) + 200px) !important;
+    }
+}
+
+@media (max-width: 900px) {
+    .blog-hero-section {
+        flex-direction: column !important;
+        min-height: auto !important;
+    }
+
+    .blog-hero-left {
+        width: 100% !important;
+        padding: var(--padding-internal) !important;
+        order: 1 !important;
+    }
+
+    .blog-hero-right {
+        width: 100% !important;
+        order: 2 !important;
+    }
+
+    .blog-hero-image-wrapper {
+        border-radius: 0 !important;
+        height: 40vh !important;
+    }
+
+    .blog-title-container {
+        margin-right: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    .blog-hero-right .blog-corner {
+        display: none !important;
+    }
+}
+
+
+/* =====================================================
+   BLOG HERO - ROBUST ALIGNMENT SOLUTION V3
+   Uses same max-width and grid as content below
+   ===================================================== */
+
+/* Wrapper to contain hero within max-width */
+.blog-hero-section {
+    display: block !important;
+    width: 100% !important;
+    min-height: auto !important;
+    padding: 0 !important;
+    position: relative !important;
+}
+
+/* Inner container matches blog-layout-wrapper constraints */
+.blog-hero-section::before {
+    display: none !important;
+}
+
+/* Create inner layout that matches content grid */
+.blog-hero-left {
+    position: absolute !important;
+    left: 0 !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 10 !important;
+    /* Match the content column start position */
+    /* On centered container: (100vw - min(1800px, 100vw - 2*padding)) / 2 + padding + 250px + 4rem */
+    width: max(calc(var(--padding-viewport) + 250px + 4rem + 50px),
+            calc((100vw - min(1800px, 100vw)) / 2 + var(--padding-viewport) + 250px + 4rem + 50px)) !important;
+    max-width: 600px !important;
+    padding-left: max(var(--padding-viewport),
+            calc((100vw - 1800px) / 2 + var(--padding-viewport))) !important;
+    padding-right: 0 !important;
+}
+
+/* Image section - aligns with content column start */
+.blog-hero-right {
+    margin-left: max(calc(var(--padding-viewport) + 250px + 4rem),
+            calc((100vw - 1800px) / 2 + var(--padding-viewport) + 250px + 4rem)) !important;
+    width: auto !important;
+    flex: none !important;
+    display: block !important;
+}
+
+.blog-hero-image-wrapper {
+    width: 100% !important;
+    height: 55vh !important;
+    min-height: 400px !important;
+    border-top-left-radius: 40px !important;
+    border-bottom-left-radius: 40px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+/* SVG corners at image left edge */
+.blog-hero-right .blog-corner {
+    position: absolute !important;
+    left: 0 !important;
+    z-index: 20 !important;
+}
+
+.blog-hero-right .blog-corner-top {
+    top: 0 !important;
+    transform: rotate(90deg) !important;
+    transform-origin: top left !important;
+    margin-top: 0 !important;
+    margin-left: -1px !important;
+}
+
+.blog-hero-right .blog-corner-bottom {
+    bottom: 0 !important;
+    transform: rotate(180deg) !important;
+    transform-origin: bottom left !important;
+    margin-bottom: 0 !important;
+    margin-left: -1px !important;
+}
+
+/* Title overlap with proper z-index */
+.blog-title-container {
+    background: var(--bg-outer) !important;
+    padding: 2rem 0 2rem 0 !important;
+    margin-right: -60px !important;
+    border-top-right-radius: 40px !important;
+    border-bottom-right-radius: 40px !important;
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+/* Responsive: when viewport is smaller than max-width threshold */
+@media (max-width: 1800px) {
+    .blog-hero-left {
+        padding-left: var(--padding-viewport) !important;
+        width: calc(var(--padding-viewport) + 250px + 4rem + 80px) !important;
+    }
+
+    .blog-hero-right {
+        margin-left: calc(var(--padding-viewport) + 250px + 4rem) !important;
+    }
+}
+
+@media (max-width: 1400px) {
+    .blog-hero-left {
+        width: calc(var(--padding-viewport) + 220px + 3rem + 60px) !important;
+    }
+
+    .blog-hero-right {
+        margin-left: calc(var(--padding-viewport) + 220px + 3rem) !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    .blog-hero-left {
+        width: calc(var(--padding-viewport) + 180px + 2rem + 40px) !important;
+    }
+
+    .blog-hero-right {
+        margin-left: calc(var(--padding-viewport) + 180px + 2rem) !important;
+    }
+
+    .blog-title-container {
+        margin-right: -40px !important;
+    }
+}
+
+
+/* =====================================================
+   BLOG HERO - UNIFIED GRID SYSTEM (FINAL)
+   Same structure as blog-layout-wrapper for perfect alignment
+   ===================================================== */
+
+/* Reset all previous hero styles */
+.blog-hero-section {
+    all: unset !important;
+    display: block !important;
+    width: 100% !important;
+    position: relative !important;
+    overflow: visible !important;
+}
+
+/* Inner container - matches blog-layout-wrapper max-width + padding */
+.blog-hero-inner {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 var(--padding-viewport);
+    position: relative;
+}
+
+/* Grid - EXACT same columns as blog-layout-wrapper */
+.blog-hero-grid {
+    display: grid;
+    grid-template-columns: calc(250px + 4rem) 1fr;
+    gap: 0;
+    align-items: center;
+    min-height: 55vh;
+}
+
+/* Left column - contains title and overlaps into image */
+.blog-hero-left-col {
+    position: relative;
+    z-index: 10;
+    padding-right: 0;
+}
+
+/* Title container with overlap */
+.blog-hero-left-col .blog-title-container {
+    background: var(--bg-outer) !important;
+    padding: 2rem 2.5rem 2rem 0 !important;
+    margin-right: -80px !important;
+    border-top-right-radius: 40px !important;
+    border-bottom-right-radius: 40px !important;
+    position: relative !important;
+    z-index: 5 !important;
+}
+
+/* Image column */
+.blog-hero-image-col {
+    position: relative;
+    height: 55vh;
+    min-height: 400px;
+}
+
+.blog-hero-image-col .blog-hero-image-wrapper {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: calc(-1 * var(--padding-viewport)) !important;
+    bottom: 0 !important;
+    width: auto !important;
+    height: 100% !important;
+    border-top-left-radius: 40px !important;
+    border-bottom-left-radius: 40px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    overflow: hidden !important;
+}
+
+.blog-hero-image-col .blog-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* SVG corners at left edge of image column */
+.blog-hero-image-col .blog-corner {
+    position: absolute !important;
+    left: -1px !important;
+    z-index: 20 !important;
+    pointer-events: none !important;
+}
+
+.blog-hero-image-col .blog-corner-top {
+    top: 0 !important;
+    transform: rotate(90deg) !important;
+    transform-origin: top left !important;
+}
+
+.blog-hero-image-col .blog-corner-bottom {
+    bottom: 0 !important;
+    transform: rotate(180deg) !important;
+    transform-origin: bottom left !important;
+}
+
+/* Meta and author styles */
+.blog-hero-left-col .blog-hero-meta-top {
+    margin-bottom: 2rem;
+}
+
+.blog-hero-left-col .blog-hero-author {
+    margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .blog-hero-grid {
+        grid-template-columns: calc(200px + 3rem) 1fr;
+    }
+
+    .blog-hero-left-col .blog-title-container {
+        margin-right: -60px !important;
+    }
+}
+
+@media (max-width: 900px) {
+    .blog-hero-grid {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .blog-hero-left-col {
+        padding: 2rem 0;
+    }
+
+    .blog-hero-left-col .blog-title-container {
+        margin-right: 0 !important;
+        padding: 1rem 0 !important;
+        background: transparent !important;
+        border-radius: 0 !important;
+    }
+
+    .blog-hero-image-col {
+        height: 40vh;
+        min-height: 280px;
+    }
+
+    .blog-hero-image-col .blog-hero-image-wrapper {
+        right: calc(-1 * var(--padding-viewport)) !important;
+        left: calc(-1 * var(--padding-viewport)) !important;
+        border-radius: 0 !important;
+    }
+
+    .blog-hero-image-col .blog-corner {
+        display: none !important;
+    }
+}
+
+
+/* =====================================================
+   BLOG DETAIL - ALIGNMENT FIXES
+   ===================================================== */
+
+/* Hero Image Left Edge Alignment with Content */
+.blog-hero-section {
+    display: grid;
+    /* Left side takes the same space as TOC (250px) + gap, Right side is the rest */
+    grid-template-columns: 1fr 1fr;
+    padding-left: var(--padding-viewport);
+    padding-right: 0;
+    /* Image goes to edge */
+}
+
+.blog-hero-right {
+    /* Calculate left edge to align with content start */
+    /* Content starts after: padding-viewport + 250px (toc) + 4rem (gap) */
+    padding-left: calc(250px + 4rem - 50%);
+}
+
+/* Alternative: Use same padding structure as blog-layout-wrapper */
+.blog-hero-image-wrapper {
+    /* Left edge should align with where article content starts */
+    margin-left: auto;
+    /* Push image right so its left edge aligns with content */
+}
+
+/* SVG Corners - Position at Image Left Edge */
+.blog-corner {
+    position: absolute;
+    pointer-events: none;
+    z-index: 15;
+}
+
+.blog-corner-top {
+    /* At the top-left corner of where image meets title */
+    top: -40px;
+    /* Align with right edge of title container (which overlaps image) */
+    right: calc(100% - 130%);
+    /* Based on title width being 130% */
+}
+
+.blog-corner-bottom {
+    bottom: -40px;
+    right: calc(100% - 130%);
+}
+
+/* Remove margin/padding top from article to align with sidebars */
+.blog-article-content {
+    margin: 0;
+    padding-top: 0;
+}
+
+/* Ensure sidebars start at same level as content */
+.blog-sidebar-left {
+    padding-top: 0;
+}
+
+.blog-sidebar-right {
+    padding-top: 0;
+}
+
+/* Fix lead paragraph to align at top */
+.lead-paragraph {
+    margin-top: 0;
+}
+
+
+/* =====================================================
+   BLOG DETAIL - PRECISE ALIGNMENT V2
+   ===================================================== */
+
+/* Define consistent spacing variables */
+:root {
+    --blog-toc-width: 250px;
+    --blog-share-width: 80px;
+    --blog-gap: 4rem;
+}
+
+/* Hero Section - Align image left edge with article content */
+.blog-hero-section {
+    display: grid;
+    /* Match the content layout: toc-width + gap | content | share-width */
+    grid-template-columns: calc(var(--blog-toc-width) + var(--blog-gap)) 1fr;
+    padding: 0;
+    padding-left: var(--padding-viewport);
+    gap: 0;
+    align-items: center;
+}
+
+.blog-hero-left {
+    padding-left: 0;
+    padding-right: var(--blog-gap);
+}
+
+.blog-hero-right {
+    /* Image wrapper extends to right edge */
+    width: calc(100% + var(--padding-viewport) + var(--blog-share-width) + var(--blog-gap));
+}
+
+/* SVG Corners - Stick to left edge of image */
+.blog-title-container {
+    position: relative;
+}
+
+.blog-corner-top {
+    position: absolute;
+    top: -40px;
+    /* Right edge of title container */
+    right: -40px;
+    transform: rotate(90deg);
+}
+
+.blog-corner-bottom {
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    transform: rotate(180deg);
+}
+
+/* Blog Layout Wrapper - Ensure alignment */
+.blog-layout-wrapper {
+    display: grid;
+    grid-template-columns: var(--blog-toc-width) 1fr var(--blog-share-width);
+    gap: var(--blog-gap);
+    padding: 0 var(--padding-viewport);
+    align-items: start;
+}
+
+/* Remove auto margin from article content */
+.blog-article-content {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* All three columns start at same vertical position */
+.blog-sidebar-left,
+.blog-article-content,
+.blog-sidebar-right {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .blog-hero-section {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .blog-hero-right {
+        width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .blog-hero-section {
+        grid-template-columns: 1fr;
+        padding: 0;
+    }
+
+    .blog-hero-left {
+        padding: 0 var(--padding-internal);
+    }
+}
+
+
+/* Gap between Hero and Blog Content */
+.blog-hero-section {
+    margin-bottom: 6rem;
+}
+
+.blog-layout-wrapper {
+    padding-top: 2rem;
+}
+
+
+/* Increase gap between Hero and Blog Content - 2x */
+.blog-hero-section {
+    margin-bottom: 12rem !important;
+}
+
+.blog-layout-wrapper {
+    padding-top: 4rem !important;
+}
+/* Reduce gap between Hero and Blog Content - half */
+.blog-hero-section {
+    margin-bottom: 6rem !important;
+}
+
+.blog-layout-wrapper {
+    padding-top: 2rem !important;
+}
+
+
+/* Gap between Navbar and Hero Section */
+.blog-hero-section {
+    margin-top: 6rem !important;
+}
+
+.blog-detail-container {
+    padding-top: 120px !important;
+}
+
+
+/* Increase title container overlap into image */
+.blog-title-container {
+    margin-right: -120px !important;
+    width: 150% !important;
+}
+
+
+/* Decrease hero section gaps */
+.blog-hero-section {
+    margin-top: 4rem !important;
+    margin-bottom: 4rem !important;
+}
+
+.blog-detail-container {
+    padding-top: 100px !important;
+}
+
+.blog-layout-wrapper {
+    padding-top: 1.5rem !important;
+}
+
+/* Increase title overlap even more */
+.blog-title-container {
+    margin-right: -180px !important;
+    width: 170% !important;
+}
+
+
+/* =====================================================
+   SVG CORNERS - DYNAMIC POSITIONING
+   Positioned relative to title container edges
+   ===================================================== */
+
+.blog-title-container {
+    position: relative !important;
+}
+
+/* Base corner styling */
+.blog-corner {
+    position: absolute !important;
+    pointer-events: none !important;
+    z-index: 20 !important;
+}
+
+/* Top corner - sticks to top-right of title container */
+.blog-corner-top {
+    top: 0 !important;
+    /* Position at right edge of title container (where it meets image) */
+    right: 0 !important;
+    /* Move outside the container to sit on image edge */
+    transform: translateX(100%) rotate(90deg) !important;
+    transform-origin: top left !important;
+}
+
+/* Bottom corner - sticks to bottom-right of title container */
+.blog-corner-bottom {
+    bottom: 0 !important;
+    right: 0 !important;
+    transform: translateX(100%) rotate(180deg) !important;
+    transform-origin: bottom left !important;
+}
+
+
+/* =====================================================
+   SVG CORNERS - FIXED POSITIONING V2
+   Outside the title container, at image left edge
+   ===================================================== */
+
+/* Top corner - outside above title container, at right edge */
+.blog-corner-top {
+    top: 0 !important;
+    right: 0 !important;
+    /* Move up (outside container) and right (to image edge) */
+    transform: translateY(-100%) translateX(100%) rotate(90deg) !important;
+    transform-origin: bottom left !important;
+}
+
+/* Bottom corner - outside below title container, at right edge */
+.blog-corner-bottom {
+    bottom: 0 !important;
+    right: 0 !important;
+    /* Move down (outside container) and right (to image edge) */
+    transform: translateY(100%) translateX(100%) rotate(180deg) !important;
+    transform-origin: top left !important;
+}
+
+
+/* =====================================================
+   SVG CORNERS - ROBUST POSITIONING
+   Always at right edge of title container (where it meets image)
+   ===================================================== */
+
+.blog-title-container {
+    position: relative !important;
+}
+
+/* Top SVG - anchored to top-right corner of title container */
+.blog-corner-top {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    /* Move SVG outside to the right edge */
+    transform: translateX(100%) rotate(90deg) !important;
+    transform-origin: top left !important;
+}
+
+/* Bottom SVG - anchored to bottom-right corner of title container */
+.blog-corner-bottom {
+    position: absolute !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    /* Move SVG outside to the right edge */
+    transform: translateX(100%) rotate(180deg) !important;
+    transform-origin: bottom left !important;
+}
+
+
+/* Top SVG adjustment */
+.blog-corner-top {
+    top: -40px !important;
+}
+
+
+/* =====================================================
+   SVG CORNERS - POSITIONED RELATIVE TO IMAGE
+   Now inside blog-hero-right, at left edge of image wrapper
+   ===================================================== */
+
+.blog-hero-right {
+    position: relative !important;
+}
+
+/* Both SVGs at left edge of the image container */
+.blog-hero-right .blog-corner {
+    position: absolute !important;
+    left: 0 !important;
+    z-index: 20 !important;
+    pointer-events: none !important;
+}
+
+/* Top SVG - at top-left of image, rotated to create inverse corner */
+.blog-hero-right .blog-corner-top {
+    top: 0 !important;
+    right: auto !important;
+    transform: rotate(90deg) !important;
+    transform-origin: top left !important;
+}
+
+/* Bottom SVG - at bottom-left of image, rotated to create inverse corner */
+.blog-hero-right .blog-corner-bottom {
+    bottom: 0 !important;
+    top: auto !important;
+    right: auto !important;
+    transform: rotate(180deg) !important;
+    transform-origin: bottom left !important;
+}
+
+/* Responsive - hide on mobile */
+@media (max-width: 900px) {
+    .blog-hero-right .blog-corner {
+        display: none !important;
+    }
+}
+
+
+/* =====================================================
+   SVG CORNERS - DYNAMIC POSITIONING (JS CONTROLLED)
+   Horizontal: left edge of image (CSS)
+   Vertical: aligned with title container (JS)
+   ===================================================== */
+
+.blog-hero-right .blog-corner-top {
+    top: 0; /* Will be overridden by JS */
+    bottom: auto !important;
+    left: 0 !important;
+    right: auto !important;
+    transform: rotate(90deg) !important;
+    transform-origin: top left !important;
+}
+
+.blog-hero-right .blog-corner-bottom {
+    bottom: 0; /* Will be overridden by JS */
+    top: auto !important;
+    left: 0 !important;
+    right: auto !important;
+    transform: rotate(180deg) !important;
+    transform-origin: bottom left !important;
+}
+
+
+/* =====================================================
+   SVG CORNERS - FLIPPED FOR INSIDE EDGE
+   ===================================================== */
+
+.blog-hero-right .blog-corner-top {
+    transform: rotate(90deg) scaleX(-1) !important;
+    transform-origin: top left !important;
+}
+
+.blog-hero-right .blog-corner-bottom {
+    transform: rotate(180deg) scaleX(-1) !important;
+    transform-origin: bottom left !important;
+}
+
+
+/* Fix top SVG flip direction */
+.blog-hero-right .blog-corner-top {
+    transform: rotate(-90deg) scaleX(-1) !important;
+    transform-origin: top left !important;
+}
+
+
+/* Final SVG rotation values */
+.blog-hero-right .blog-corner-top {
+    transform: rotate(-90deg) scaleX(-1) !important;
+}
+
+.blog-hero-right .blog-corner-bottom {
+    transform: rotate(90deg) scaleX(-1) !important;
+}
+
+
+/* SVG rotation - no scale */
+.blog-hero-right .blog-corner-top {
+    transform: rotate(-90deg) !important;
+}
+
+.blog-hero-right .blog-corner-bottom {
+    transform: rotate(90deg) !important;
+}
+
+
+/* =====================================================
+   SVG CORNERS - FINAL CLEAN OVERRIDE
+   Position controlled by JS, transform here
+   ===================================================== */
+
+.blog-hero-right .blog-corner {
+    position: absolute !important;
+    left: 0 !important;
+    z-index: 20 !important;
+    pointer-events: none !important;
+}
+
+/* Top corner - curve goes DOWN-RIGHT (filling top-left of image) */
+.blog-hero-right .blog-corner-top {
+    transform: rotate(0deg) !important;
+    transform-origin: top left !important;
+}
+
+/* Bottom corner - curve goes UP-RIGHT (filling bottom-left of image) */
+.blog-hero-right .blog-corner-bottom {
+    transform: rotate(270deg) !important;
+    transform-origin: bottom left !important;
+}
+
+
+/* Bottom SVG - flip on Y axis */
+.blog-hero-right .blog-corner-bottom {
+    transform: rotate(270deg) scaleX(-1) !important;
+    transform-origin: bottom left !important;
+}
+
+
+/* Bottom SVG - flip on X axis (to the right) */
+.blog-hero-right .blog-corner-bottom {
+    transform: rotate(270deg) scaleY(-1) !important;
+    transform-origin: bottom left !important;
+}
+
+
+/* Top SVG - rotate -90deg only */
+.blog-hero-right .blog-corner-top {
+    transform: rotate(-90deg) !important;
+}
+
+
+/* Top SVG - rotate around its own center */
+.blog-hero-right .blog-corner-top {
+    transform: rotate(-90deg) !important;
+    transform-origin: center center !important;
+}
+
+
+/* Top SVG - rotate 180deg */
+.blog-hero-right .blog-corner-top {
+    transform: rotate(180deg) !important;
+    transform-origin: center center !important;
+}
+
+
+/* Top SVG - rotate 90deg (180 - 90 counter clockwise) */
+.blog-hero-right .blog-corner-top {
+    transform: rotate(90deg) !important;
+    transform-origin: center center !important;
+}
 

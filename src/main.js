@@ -5,6 +5,7 @@ import { Services } from './pages/services.js';
 import { ServiceDetail } from './pages/service-detail.js';
 import { Works, initWorks } from './pages/works.js';
 import { BlogPage, initBlogPage } from './pages/blog.js';
+import { BlogDetailPage, initBlogDetailPage } from './pages/blog-detail.js';
 import { ContactPage, initContactPage } from './pages/contact.js';
 import { initDropdownBlur } from './components/dropdown-interactions.js';
 import { initBlog } from './components/blog.js';
@@ -31,9 +32,13 @@ function render() {
         app.innerHTML = Works();
         initWorks();
         initFooter();
-    } else if (path === '/blog' || path.startsWith('/blog/')) {
+    } else if (path === '/blog') {
         app.innerHTML = BlogPage();
         initBlogPage();
+    } else if (path.startsWith('/blog/')) {
+        app.innerHTML = BlogDetailPage();
+        initBlogDetailPage();
+        initFooter();
     } else if (path === '/contact') {
         app.innerHTML = ContactPage();
         initContactPage();
