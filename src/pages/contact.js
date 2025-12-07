@@ -1,6 +1,6 @@
 
 import { Navbar } from '../components/navbar.js';
-import { Footer } from '../components/footer.js';
+import { Footer, initFooter } from '../components/footer.js';
 import { BigFooterMarquee } from '../components/big-marquee.js';
 import { Button } from '../components/button.js';
 
@@ -240,15 +240,17 @@ ${Button({ text: 'Send Message', variant: 'dark', icon: true, className: 'form-s
             </div>
     </section>
 
-    ${BigFooterMarquee()}
     ${Footer()}
     `;
 }
 
 export function initContactPage() {
-    if (typeof window.initFooter === 'function') {
-        window.initFooter();
-    }
+    initFooter();
+    
+    // Initialize custom cursor for big marquee/footer text
+    import('../components/expertise.js').then(module => {
+        if (module.initCustomCursor) module.initCustomCursor();
+    }).catch(e => {});
 
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(item => {

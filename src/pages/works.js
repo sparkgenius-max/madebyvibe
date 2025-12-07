@@ -132,11 +132,11 @@ export function Works() {
             <div class="works-column">
                 <!-- Testimonial Block -->
                 <div class="works-testimonial">
-                    <svg class="quote-icon-large" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M30 60C30 75 20 85 5 85V75C15 75 20 65 20 50H5V15H45V60H30ZM85 60C85 75 75 85 60 85V75C70 75 75 65 75 50H60V15H100V60H85Z"/>
-                    </svg>
                     <div class="works-testimonial-content">
                         <h3 class="testimonial-text">
+                            <svg class="quote-icon-large" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M30 60C30 75 20 85 5 85V75C15 75 20 65 20 50H5V15H45V60H30ZM85 60C85 75 75 85 60 85V75C70 75 75 65 75 50H60V15H100V60H85Z"/>
+                            </svg>
                             Vibe understands the client's concept & turns ideas into a reality
                         </h3>
                         <div class="testimonial-author">

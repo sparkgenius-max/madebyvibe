@@ -7,48 +7,35 @@ import { Button } from '../components/button.js';
 
 export function ServiceDetail() {
     return `
-    <div class="viewport-wrapper">
-        <main class="main-container scrollable">
-            ${Navbar()}
-            <div class="sd-hero">
-                <!-- Video Background -->
-                <div class="hero-video-container">
-                    <video class="hero-video" autoplay muted loop playsinline>
-                        <source src="https://res.cloudinary.com/dg2cqc3e9/video/upload/v1764998015/6561920-uhd_3840_2160_25fps_fjc9a6.mp4" type="video/mp4">
-                    </video>
-                    <div class="hero-video-overlay"></div>
-                </div>
-                
-                <div class="sd-hero-content">
-                    <div class="sd-label">
+    ${Navbar()}
+    
+    <div class="service-detail-wrapper">
+        <div class="service-detail-hero">
+            <div class="sd-hero-grid">
+                <div class="sd-hero-left">
+                    <div class="section-label">
                         <span class="dot">●</span>
-                        <span>Digital Experience</span>
+                        Digital Experience
                     </div>
-                    <h1 class="sd-title">
+                    <h1 class="sd-title-large">
                         A Web Design Studio <br /> creating Digital Vibes.
                     </h1>
                 </div>
-            </div>
-        </main>
-    </div>
-
-    <div class="service-detail-container">
-        <!-- Header Text Section -->
-        <div class="sd-header">
-            <div class="sd-header-left">
-                <p class="sd-description-lead">
-                    Here at MadeByVibe, we combine creative intuition with technical expertise to build digital experiences that matter.
-                </p>
-            </div>
-            <div class="sd-header-right">
-                <p class="sd-description">
-                    UI/UX, rapid prototyping, research, and motion — we master every pixel of the digital landscape. We take businesses from "just another website" to a fully realized brand ecosystem. Whether you are launching a new venture or reimagining a legacy enterprise, our <a href="#" class="sd-link">creative team at Vibe</a> works as an extension of your own.
-                </p>
+                
+                <div class="sd-hero-right">
+                    <p class="sd-description-lead">
+                        Here at MadeByVibe, we combine creative intuition with technical expertise to build digital experiences that matter.
+                    </p>
+                    <p class="sd-description">
+                        UI/UX, rapid prototyping, research, and motion — we master every pixel of the digital landscape. We take businesses from "just another website" to a fully realized brand ecosystem. Whether you are launching a new venture or reimagining a legacy enterprise, our <a href="#" class="sd-link">creative team at Vibe</a> works as an extension of your own.
+                    </p>
+                </div>
             </div>
         </div>
 
-        <!-- Hero Image Section -->
-        <div class="sd-hero-container" style="position: relative;">
+        <div class="service-detail-container">
+            <!-- Hero Image Section -->
+            <div class="sd-hero-container" style="position: relative;">
             <!-- Top Left Breakout Button -->
             <div class="sd-image-breakout">
                  <div class="sd-breakout-inner">
@@ -74,9 +61,9 @@ export function ServiceDetail() {
         <!-- Approach & Capabilities Grid -->
         <div class="sd-content-grid">
             <div class="sd-approach">
-                <div class="sd-label">
+                <div class="section-label">
                     <span class="dot">●</span>
-                    <span>Our Approach</span>
+                    Our Approach
                 </div>
                 <h2 class="sd-subtitle">
                     Are you a challenger brand, a market leader, or somewhere in between? It doesn't matter. We amplify your voice.

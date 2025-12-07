@@ -1,7 +1,7 @@
 
 export function BigFooterMarquee() {
     return `
-    <section class="big-marquee-section">
+    <a href="/contact" class="big-marquee-section" style="text-decoration: none; display: block; color: inherit;">
         <div class="big-marquee-track left">
             <div class="big-marquee-content">
                 <span>Validate our existence.</span>
@@ -26,6 +26,6 @@ export function BigFooterMarquee() {
                 <span>Validate our existence.</span>
             </div>
         </div>
-    </section>
+    </a>
   `;
 }

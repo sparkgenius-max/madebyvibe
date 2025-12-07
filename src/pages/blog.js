@@ -1,6 +1,6 @@
 
 import { Navbar } from '../components/navbar.js';
-import { Footer } from '../components/footer.js';
+import { Footer, initFooter } from '../components/footer.js';
 import { BigFooterMarquee } from '../components/big-marquee.js';
 import { Button } from '../components/button.js';
 
@@ -92,6 +92,7 @@ const BlogCard = (post) => `
                     <span class="read-time">${post.readTime}</span>
                 </div>
                 <h3 class="blog-title">${post.title}</h3>
+                <p class="blog-excerpt">${post.excerpt}</p>
             </div>
         </div>
     </a>
@@ -153,14 +154,21 @@ export function BlogPage() {
         </div>
     </section>
 
-    ${BigFooterMarquee()}
     ${Footer()}
     `;
 }
 
 export function initBlogPage() {
-    // Initialize footer JS
-    if (typeof window.initFooter === 'function') {
-        window.initFooter();
+    // Initialize footer JS and other components
+    initFooter();
+    
+    // Initialize custom cursor if used in footer/marquee
+    if (typeof window.initCustomCursor === 'function') {
+        window.initCustomCursor();
+    } else {
+        // Try importing dynamically if not global (though initFooter usually handles this)
+        import('../components/expertise.js').then(module => {
+            if (module.initCustomCursor) module.initCustomCursor();
+        }).catch(e => console.log('Custom cursor init skipped for blog page'));
     }
 }

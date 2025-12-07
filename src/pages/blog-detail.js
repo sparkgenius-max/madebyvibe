@@ -24,14 +24,16 @@ export function BlogDetailPage() {
         <section class="blog-hero-section">
              <!-- Left: Info & Title -->
             <div class="blog-hero-left">
-                <div class="blog-hero-meta-top">
-                     <div class="section-label">
-                         <span class="dot">●</span> ${post.readTime}
-                     </div>
-                </div>
-                
-                <div class="blog-title-container">
-                    <h1 class="blog-hero-title">${post.title}</h1>
+                <div class="blog-hero-content">
+                    <div class="blog-hero-meta-top">
+                         <div class="section-label">
+                             <span class="dot">●</span> ${post.readTime}
+                         </div>
+                    </div>
+                    
+                    <div class="blog-title-container">
+                        <h1 class="blog-hero-title">${post.title}</h1>
+                    </div>
                 </div>
 
                 <div class="blog-hero-author">
@@ -48,10 +50,10 @@ export function BlogDetailPage() {
             <!-- Right: Image -->
             <div class="blog-hero-right">
                 <!-- Inverted Corners - positioned at image left edge -->
-                <svg class="blog-corner blog-corner-top" width="40" height="40" viewBox="0 0 20 20" fill="none">
+                <svg class="blog-corner blog-corner-top" width="32" height="32" viewBox="0 0 20 20" fill="none">
                     <path d="M20 0v20H0C11.05 20 20 11.05 20 0z" fill="var(--bg-outer)" />
                 </svg>
-                <svg class="blog-corner blog-corner-bottom" width="40" height="40" viewBox="0 0 20 20" fill="none">
+                <svg class="blog-corner blog-corner-bottom" width="32" height="32" viewBox="0 0 20 20" fill="none">
                     <path d="M20 0v20H0C11.05 20 20 11.05 20 0z" fill="var(--bg-outer)" />
                 </svg>
                 
@@ -351,7 +353,7 @@ export function initBlogDetailPage() {
         const imageRect = imageWrapper.getBoundingClientRect();
 
         // Get SVG dimensions
-        const svgHeight = 40; // Fixed 40px as set in HTML
+        const svgHeight = 32; // Fixed 32px as set in HTML
 
         // Calculate VERTICAL positions relative to hero-right container
         // For top SVG: position so visual bottom aligns with title top edge

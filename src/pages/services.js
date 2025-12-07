@@ -77,39 +77,35 @@ export function Services() {
     `).join('');
 
     return `
-    <div class="viewport-wrapper">
-        <main class="main-container">
-            ${Navbar()}
-            <div class="services-hero">
-                <!-- Video Background -->
-                <div class="hero-video-container">
-                    <video class="hero-video" autoplay muted loop playsinline>
-                        <source src="https://res.cloudinary.com/dg2cqc3e9/video/upload/v1764998015/6561920-uhd_3840_2160_25fps_fjc9a6.mp4" type="video/mp4">
-                    </video>
-                    <div class="hero-video-overlay"></div>
+    ${Navbar()}
+    
+    <div class="service-detail-wrapper">
+        <div class="service-detail-hero">
+            <div class="sd-hero-grid">
+                <div class="sd-hero-left">
+                    <div class="section-label">
+                        <span class="dot">●</span>
+                        Services
+                    </div>
+                    <h1 class="sd-title-large">
+                        We are a creative <br>
+                        digital agency <br>
+                        with deep expertise.
+                    </h1>
                 </div>
                 
-                <div class="services-hero-content">
-                    <div class="services-label">
-                        <span class="dot">●</span> Services
-                    </div>
-                    <div class="services-hero-grid">
-                        <h1 class="services-heading">
-                            We are a creative <br>
-                            digital agency <br>
-                            with deep expertise
-                        </h1>
-                        <div class="services-intro-text">
-                            <p>We channel our obsession for exceptional design into bold brands that demand attention and deliver results.</p>
-                        </div>
-                    </div>
+                <div class="sd-hero-right">
+                    <p class="sd-description-lead">
+                        We channel our obsession for exceptional design into bold brands that demand attention and deliver results.
+                    </p>
                 </div>
             </div>
-        </main>
-    </div>
-
-    <div class="services-main-content">
-        ${servicesHTML}
+        </div>
+        
+        <!-- Services List Content -->
+        <div class="services-main-content">
+            ${servicesHTML}
+        </div>
     </div>
 
     ${Blog()}

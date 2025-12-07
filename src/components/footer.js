@@ -1,4 +1,5 @@
 import { Button } from './button.js';
+import { initCustomCursor } from './expertise.js';
 
 export function Footer() {
     return `
@@ -122,9 +123,11 @@ export function Footer() {
 
             <!-- Big Text SVG -->
             <div class="footer-big-text">
-                <svg id="footerBigSvg" viewBox="0 0 1400 130" preserveAspectRatio="xMidYMid meet" class="footer-big-svg">
-                    <text id="footerBigText" x="0" y="105" fill="#FFFFFF" font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="110" font-weight="500">Let's work together.</text>
-                </svg>
+                <a href="/contact" style="text-decoration: none; display: block;">
+                    <svg id="footerBigSvg" viewBox="0 0 1400 130" preserveAspectRatio="xMidYMid meet" class="footer-big-svg">
+                        <text id="footerBigText" x="0" y="105" fill="#FFFFFF" font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="110" font-weight="500">Let's work together.</text>
+                    </svg>
+                </a>
             </div>
 
             <!-- Bottom Bar -->
@@ -163,15 +166,30 @@ export function initFooter() {
 
     if (svg && text) {
         const adjustText = () => {
-            const bbox = text.getBBox();
-            // Set viewBox to exactly match the text width (plus small buffer if needed, but strict is requested)
-            // We keep y and height constant (0 0 width 130)
-            svg.setAttribute('viewBox', `${bbox.x} 0 ${bbox.width} 130`);
+            // Force a small delay to ensure font rendering or layout stabilization on all pages
+            const runAdjustment = () => {
+                const bbox = text.getBBox();
+                if (bbox.width > 0) {
+                    // Set viewBox to exactly match the text width
+                    svg.setAttribute('viewBox', `${bbox.x} 0 ${bbox.width} 130`);
+                }
+            };
+            
+            runAdjustment();
+            requestAnimationFrame(runAdjustment);
         };
 
         // Run immediately and after fonts load
         adjustText();
         document.fonts.ready.then(adjustText);
-        window.addEventListener('resize', adjustText); // In case of fluid font resizing (though here it's fixed SVG)
+        window.addEventListener('resize', adjustText); 
+        
+        // Additional check for pages where layout might shift (like contact/blog)
+        setTimeout(adjustText, 100);
+        setTimeout(adjustText, 500);
+        setTimeout(adjustText, 1000); // Extra safety for heavier pages
     }
+
+    // Initialize custom cursor for footer elements
+    initCustomCursor();
 }
