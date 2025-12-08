@@ -7,7 +7,10 @@
 }
 
 .team-header-wrapper {
-    padding: 0 var(--padding-viewport);
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 var(--layout-padding);
     margin-bottom: 4rem;
     text-align: center;
 }
@@ -25,7 +28,7 @@
     width: 100%;
     overflow-x: auto;
     cursor: grab;
-    padding: 5rem var(--padding-viewport) 8rem var(--padding-viewport); /* Increased padding for stagger */
+    padding: 5rem var(--layout-padding) 8rem var(--layout-padding); /* Increased padding for stagger */
     display: flex;
     gap: 2rem;
     align-items: center; /* Center items vertically */
@@ -51,7 +54,7 @@
        Dynamic width for 4 cards + gaps (3 * 2rem = 6rem) + padding 
        We calculate width but we also need to enforce aspect ratio.
     */
-    width: calc((100vw - (var(--padding-viewport) * 2) - 6rem) / 4);
+    width: calc((100vw - (var(--layout-padding) * 2) - 6rem) / 4);
     /* height: 420px; Removed fixed height */
     aspect-ratio: 587 / 784; /* Enforce specific aspect ratio ~0.748 */
     border-radius: 24px;

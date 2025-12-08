@@ -11,11 +11,9 @@ export function Services() {
             title: 'Design',
             description: 'Our in-house artisans craft visual identities that perfectly resonate with your core values.',
             items: [
-                'Brand Identity',
-                'Web Design',
-                'eCommerce',
-                'Shopify',
-                'Graphic Design'
+                'Logo Design',
+                'Branding',
+                'Illustration'
             ]
         },
         {
@@ -23,12 +21,7 @@ export function Services() {
             title: 'Develop',
             description: 'Engineering robust digital platforms that meet the highest industry standards and performance metrics.',
             items: [
-                'Web Development',
-                'Craft CMS',
-                'Shopify',
-                'Craft Commerce',
-                'eCommerce',
-                'Technical SEO'
+                'Website Creation (Design & Development)'
             ]
         },
         {
@@ -36,12 +29,8 @@ export function Services() {
             title: 'Support',
             description: 'Reliable ongoing partnership for your design, technical, and growth marketing requirements.',
             items: [
-                'SEO',
-                'Web Hosting',
-                'Shape Support',
-                'PPC',
-                'Content Writing',
-                'Craft CMS'
+                'Instagram Posts',
+                'LinkedIn Posts'
             ]
         }
     ];

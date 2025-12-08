@@ -21,7 +21,7 @@ export function AboutPage() {
         ${AboutStory()}
 
         <!-- 3. Large Image CTA -->
-        <div style="padding: 0 var(--padding-viewport);">
+        <div style="width: 100%; max-width: 1800px; margin: 0 auto; padding: 0 var(--layout-padding);">
             ${LargeImageCTA()}
         </div>
 

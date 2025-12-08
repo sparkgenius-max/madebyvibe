@@ -5,16 +5,16 @@
 .about-story-section {
     width: 100%;
     background-color: var(--bg-outer); /* Match page background */
-    padding: clamp(4rem, 8vw, 8rem) 0; /* Vertical padding */
+    padding: clamp(4rem, 10vw, 8rem) 0; /* Vertical padding */
     /* Remove any border-top if inherited from old styles */
     border-top: none; 
 }
 
 .story-container {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1800px;
     margin: 0 auto;
-    padding: 0 var(--padding-viewport);
+    padding: 0 var(--layout-padding);
     
     display: grid;
     grid-template-columns: 1fr;

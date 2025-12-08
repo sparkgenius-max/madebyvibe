@@ -5,17 +5,16 @@
 .testimonial-section {
     width: 100%;
     background: var(--bg-outer); /* Match page background */
-    padding: clamp(4rem, 8vw, 6rem) 0;
+    padding: clamp(4rem, 10vw, 8rem) 0;
 }
 
 .testimonial-layout {
     display: flex;
     flex-direction: column;
     gap: 3rem;
-    /* Breakout logic */
-    padding-left: max(var(--padding-viewport), calc(50% - 900px));
-    padding-right: 0;
-    max-width: none;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
     margin: 0;
 }
 
@@ -29,16 +28,26 @@
 
 /* Intro Column */
 .testimonial-intro {
-    flex: 0 0 100%;
-    max-width: 100%;
-    padding-right: var(--padding-viewport);
+    width: 100%;
+    max-width: 1800px;
+    padding: 0 var(--layout-padding);
+    margin: 0 auto;
+    flex-shrink: 0;
 }
 
 @media (min-width: 900px) {
     .testimonial-intro {
-        flex: 0 0 360px;
-        max-width: 360px;
+        /* Desktop: Align left to grid (Calc for max-1800px centered equivalent) */
+        padding-left: max(
+            var(--layout-padding),
+            calc(50vw - 900px + var(--layout-padding))
+        );
         padding-right: 0;
+        margin: 0;
+        width: auto; /* Reset width/margin from mobile */
+        max-width: none;
+        min-width: 400px; /* Ensure reasonable width */
+        
         position: sticky;
         top: 120px;
     }
@@ -87,17 +96,22 @@
 
 /* Slider Container */
 .testimonial-slider-container {
-    flex: 1;
     width: 100%;
-    min-width: 0; /* Prevent flex child overflow issues */
+    overflow: visible; /* Ensure cards bleed */
+    flex: 1;
     position: relative;
+    min-width: 0;
 }
 
 .testimonial-slider {
     display: flex;
     gap: 2rem;
     overflow-x: auto;
-    padding-right: var(--padding-viewport);
+    
+    /* Mobile: Align with content but allow scroll bleed */
+    padding-left: var(--layout-padding);
+    padding-right: var(--layout-padding);
+
     padding-top: 2rem; /* Add top padding to prevent hover cutoff */
     padding-bottom: 2rem; /* Space for shadow/hover */
     
@@ -116,6 +130,14 @@
 .testimonial-slider.active {
     cursor: grabbing;
     scroll-behavior: auto; /* Disable smooth scroll while dragging */
+}
+
+@media (min-width: 900px) {
+    .testimonial-slider {
+        /* Desktop: Slider starts after intro (gap handles spacing), bleeds to right edge */
+        padding-left: 0;
+        padding-right: var(--layout-padding); /* Keep end buffer */
+    }
 }
 
 /* Testimonial Card */

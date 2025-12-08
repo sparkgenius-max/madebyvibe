@@ -41,7 +41,7 @@
 
 .carousel-main-container {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1800px;
     position: relative;
     flex: 1; /* Allow container to take remaining space */
     display: flex;

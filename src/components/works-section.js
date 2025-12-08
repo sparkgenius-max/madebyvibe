@@ -5,89 +5,89 @@ import { Button } from './button.js';
 const worksData = {
     left: [
         {
-            image: 'https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?q=80&w=2500&auto=format&fit=crop',
+            image: '/images/project-1.png',
             year: '2024',
-            client: 'Marcus Stone',
-            title: 'Forging a bold personal identity for a fintech visionary.',
+            client: 'TechNova Solutions',
+            title: 'Designing a memorable logo and comprehensive branding for a tech startup.',
             height: '500px',
             grayscale: true,
-            categories: ['Branding', 'Identity', 'Strategy']
+            categories: ['Logo Design', 'Branding']
         },
         {
-            image: 'https://images.unsplash.com/photo-1606836591695-4d58a73eba1e?q=80&w=2671&auto=format&fit=crop',
+            image: '/images/project-2.png',
             year: '2023',
-            client: 'Nexus Logistics',
-            title: 'Modernizing a legacy brand through strategic visual storytelling.',
+            client: 'Urban Retail Co.',
+            title: 'Creating a fully designed and developed website for a retail business.',
             height: '500px',
-            categories: ['Strategy', 'Visuals']
+            categories: ['Website Creation (Design & Development)']
         },
         {
-            image: 'https://images.unsplash.com/photo-1555680202-c86f0e12f086?q=80&w=2670&auto=format&fit=crop',
-            year: '2025',
-            client: 'Neon Core',
-            title: 'Immersive UI/UX design for a next-gen gaming platform.',
-            height: '500px',
-            categories: ['UI/UX', 'Gaming', 'Web']
-        },
-        {
-            image: 'https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?q=80&w=2670&auto=format&fit=crop',
+            image: '/images/project-3.png',
             year: '2024',
-            client: 'Aura Spaces',
-            title: 'Translating physical luxury into a seamless digital brand.',
+            client: 'Creative Studios',
+            title: 'Building a custom website with complete design and development.',
             height: '500px',
-            categories: ['Marketing', 'Luxury']
+            categories: ['Website Creation (Design & Development)']
         },
         {
-            image: 'https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?q=80&w=2670&auto=format&fit=crop',
+            image: '/images/project-1.png',
             year: '2024',
-            client: 'Global Talent',
-            title: 'Dominating search rankings with a high-performance web revamp.',
+            client: 'Global Marketing Agency',
+            title: 'Creating engaging Instagram posts for brand awareness.',
+            height: '500px',
+            categories: ['Instagram Posts']
+        },
+        {
+            image: '/images/project-2.png',
+            year: '2024',
+            client: 'Fashion Forward',
+            title: 'Crafting custom illustrations for marketing materials.',
             height: '500px',
             lightBg: true,
-            categories: ['Web Design', 'SEO', 'Performance']
+            categories: ['Illustration']
         }
     ],
     right: [
         {
-            image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop',
-            year: '2025',
-            client: 'Flux Analytics',
-            title: 'Simplifying complex data through intuitive product design.',
+            image: '/images/project-3.png',
+            year: '2024',
+            client: 'DataFlow Inc.',
+            title: 'Developing an eCommerce website with design and functionality.',
             height: '500px',
-            categories: ['App Design', 'Data', 'SaaS']
+            categories: ['Website Creation (Design & Development)']
         },
         {
-            image: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=2670&auto=format&fit=crop',
+            image: '/images/project-1.png',
             year: '2024',
-            client: 'Pulse Events',
-            title: 'Capturing the energy of nightlife in a vibrant brand system.',
+            client: 'Content Creators Hub',
+            title: 'Designing professional LinkedIn posts for business networking.',
             height: '500px',
-            categories: ['Branding', 'Events']
+            categories: ['LinkedIn Posts']
         },
         {
-            image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2670&auto=format&fit=crop',
+            image: '/images/project-2.png',
             year: '2024',
-            client: 'Apex Structures',
-            title: 'Structuring a digital presence as solid as their skyscrapers.',
+            client: 'AdVantage Media',
+            title: 'Creating eye-catching Instagram content for social media growth.',
             height: '500px',
-            categories: ['Development', 'Corporate']
+            categories: ['Instagram Posts']
         },
         {
-            image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=2000&auto=format&fit=crop',
+            image: '/images/project-3.png',
             year: '2024',
-            client: 'Lumina Lens',
-            title: 'A cinematic showcase for award-winning visual artists.',
+            client: 'Innovate Corp',
+            title: 'Building a Shopify website with custom design and development.',
+            height: '500px',
+            categories: ['Website Creation (Design & Development)']
+        },
+        {
+            image: '/images/project-1.png',
+            year: '2024',
+            client: 'Shape Dynamics',
+            title: 'Crafting strategic LinkedIn posts for thought leadership.',
             height: '500px',
             darkBg: true,
-            categories: ['Photography', 'Portfolio']
-        },
-        {
-            image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2574&auto=format&fit=crop',
-            year: '2024',
-            client: 'Haven Home',
-            title: 'Scaling DTC sales with a conversion-led Shopify store.',
-            height: '500px',
-            categories: ['E-Commerce', 'Shopify', 'Conversion']
+            categories: ['LinkedIn Posts']
         }
     ]
 };

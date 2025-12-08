@@ -4568,7 +4568,7 @@ svg[class*="corner-smooth"] path {
 
   /* Match body bg */
 
-  padding: 0 var(--padding-viewport);
+  padding: 0 var(--layout-padding);
 
   display: flex;
 
@@ -4581,7 +4581,6 @@ svg[class*="corner-smooth"] path {
   padding-top: 4rem;
 
   max-width: 1800px;
-  padding: 0 var(--padding-internal);
 
   margin: 0 auto;
 }
@@ -4948,6 +4947,13 @@ svg[class*="corner-smooth"] path {
 }
 
 /* Approach & Capabilities Grid */
+
+.service-detail-container {
+  width: 100%;
+  max-width: 1800px;
+  padding: 0 var(--layout-padding);
+  margin: 0 auto;
+}
 
 .sd-content-grid {
   display: grid;
@@ -6781,15 +6787,14 @@ svg[class*="corner-smooth"] path {
 /* Hero */
 
 .contact-hero {
-  padding: 8rem var(--layout-padding) 0;
-
-  /* Reduced bottom padding */
-
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+  min-height: 65vh;
+  padding: 0 var(--layout-padding);
   display: flex;
-
   justify-content: space-between;
-
-  align-items: flex-start;
+  align-items: center;
 
   gap: 2rem;
 
@@ -6911,6 +6916,9 @@ svg[class*="corner-smooth"] path {
 /* Contact Form Section */
 
 .contact-form-section {
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
   padding: 2rem var(--layout-padding) 8rem;
 }
 
@@ -7223,7 +7231,10 @@ svg[class*="corner-smooth"] path {
 /* Studio Section */
 
 .studio-section {
-  padding: 0 var(--padding-viewport) 8rem;
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 var(--layout-padding) 8rem;
 }
 
 .studio-card {
@@ -7400,7 +7411,10 @@ svg[class*="corner-smooth"] path {
 /* FAQ Section */
 
 .faq-section {
-  padding: 0 var(--padding-viewport) 8rem;
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 var(--layout-padding) 8rem;
 }
 
 .faq-layout {
@@ -7663,9 +7677,15 @@ svg[class*="corner-smooth"] path {
 /* Blog Filter Header Styles */
 
 .blog-filter-header {
-  padding: calc(var(--padding-viewport) + 120px) var(--padding-viewport) 4rem;
+  padding: calc(var(--padding-viewport) + 120px) var(--layout-padding) 4rem;
 
   background-color: var(--bg-outer);
+
+  max-width: 1800px;
+
+  margin: 0 auto;
+
+  width: 100%;
 }
 
 .blog-header-top {
@@ -7800,9 +7820,11 @@ svg[class*="corner-smooth"] path {
 /* Ensure Blog List aligns with site grid */
 
 .blog-list-section {
-  padding: 0 var(--padding-viewport) 8rem;
+  padding: 0 var(--layout-padding) 8rem;
 
   width: 100%;
+
+  max-width: 1800px;
 
   margin: 0 auto;
 
@@ -10515,7 +10537,7 @@ main.blog-detail-container {
    ===================================================== */
 
 .service-detail-hero {
-  padding: var(--padding-viewport);
+  padding: clamp(4rem, 8vw, 6rem) var(--layout-padding);
 
   padding-bottom: 4rem;
 
@@ -10729,13 +10751,15 @@ main.blog-detail-container {
 /* 1. About Hero */
 .about-hero {
   min-height: 100vh;
-  padding: var(--padding-viewport);
+  padding: 0 var(--layout-padding);
   padding-top: 140px;
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: clamp(3rem, 6vw, 6rem);
   align-items: center;
   position: relative;
+  max-width: 1800px;
+  margin: 0 auto;
 }
 
 .about-hero-content {
@@ -10796,18 +10820,19 @@ main.blog-detail-container {
 
 /* 2. Story Section */
 .about-story-section {
-  padding: clamp(6rem, 10vw, 10rem) var(--padding-viewport);
+  padding: clamp(6rem, 10vw, 10rem) 0;
   background: var(--bg-section);
   border-top: 1px solid var(--border-subtle);
 }
 
 .story-container {
   max-width: 1800px;
-  padding: 0 var(--padding-internal);
+  padding: 0 var(--layout-padding);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 0.5fr 1.5fr;
-  gap: 4rem;
+  grid-template-columns: max-content 0.6fr;
+  justify-content: space-between;
+  gap: 0;
 }
 
 .story-content {
@@ -10834,7 +10859,7 @@ main.blog-detail-container {
 
 /* 3. Values Section */
 .about-values-section {
-  padding: clamp(6rem, 10vw, 10rem) var(--padding-viewport);
+  padding: clamp(6rem, 10vw, 10rem) 0;
   background: var(--bg-outer); /* Alternating background */
 }
 
@@ -10844,6 +10869,7 @@ main.blog-detail-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 var(--layout-padding);
 }
 
 .values-title {
@@ -10857,7 +10883,7 @@ main.blog-detail-container {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   max-width: 1800px;
-  padding: 0 var(--padding-internal);
+  padding: 0 var(--layout-padding);
   margin: 0 auto;
 }
 
@@ -10899,7 +10925,7 @@ main.blog-detail-container {
 
 /* 4. Team Section */
 .about-team-section {
-  padding: clamp(6rem, 10vw, 10rem) var(--padding-viewport);
+  padding: clamp(6rem, 10vw, 10rem) 0;
   background: var(--bg-section);
   overflow: hidden;
 }
@@ -10907,7 +10933,7 @@ main.blog-detail-container {
 .team-header {
   margin-bottom: 4rem;
   max-width: 1800px;
-  padding: 0 var(--padding-internal);
+  padding: 0 var(--layout-padding);
   margin-left: auto;
   margin-right: auto;
 }
@@ -10920,9 +10946,12 @@ main.blog-detail-container {
 .team-grid {
   display: flex;
   gap: 2rem;
-  overflow-x: auto;
-  padding-bottom: 2rem; /* For scrollbar or hover space */
-  scrollbar-width: none; /* Hide scrollbar Firefox */
+  overflow-x: auto; /* Restore scrolling behavior */
+  padding-bottom: 2rem;
+  scrollbar-width: none;
+  /* Bleed logic for horizontal scroll */
+  padding-left: var(--layout-padding);
+  padding-right: var(--layout-padding);
 }
 
 .team-grid::-webkit-scrollbar {
@@ -10994,7 +11023,7 @@ main.blog-detail-container {
 
 /* 5. Studio Section */
 .about-studio-section {
-  padding: clamp(6rem, 10vw, 10rem) var(--padding-viewport);
+  padding: clamp(6rem, 10vw, 10rem) 0;
   background: var(--bg-outer);
 }
 
@@ -11004,6 +11033,7 @@ main.blog-detail-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0 var(--layout-padding);
 }
 
 .studio-title {
@@ -11017,7 +11047,7 @@ main.blog-detail-container {
   grid-template-rows: repeat(2, 400px);
   gap: 1.5rem;
   max-width: 1800px;
-  padding: 0 var(--padding-internal);
+  padding: 0 var(--layout-padding);
   margin: 0 auto;
 }
 
@@ -11055,7 +11085,7 @@ main.blog-detail-container {
 
 /* 6. CTA Section */
 .about-cta-section {
-  padding: 8rem var(--padding-viewport);
+  padding: clamp(4rem, 10vw, 8rem) var(--layout-padding);
   background: var(--bg-section);
   display: flex;
   justify-content: center;
@@ -11100,12 +11130,14 @@ main.blog-detail-container {
   .story-container {
     grid-template-columns: 1fr;
     gap: 2rem;
+    padding: 0 var(--layout-padding); /* Maintain consistent padding on mobile */
   }
 
   .studio-masonry {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    padding: 0 var(--layout-padding); /* Maintain consistent padding on mobile */
   }
 
   .masonry-item {
