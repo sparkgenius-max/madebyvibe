@@ -7000,11 +7000,12 @@ svg[class*="corner-smooth"] path {
   max-width: 1800px;
   margin: 0 auto;
   min-height: 65vh;
-  /* Proper navbar clearance - use padding-top separately for better control */
-  padding: calc(var(--padding-viewport) + 80px) var(--layout-padding) 4rem;
+  /* Match blog page navbar gap - 120px accounts for fixed navbar height + spacing */
+  padding: calc(var(--padding-viewport) + 120px) var(--layout-padding) 4rem;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  /* Align to top, not centered */
 
   gap: 2rem;
 
