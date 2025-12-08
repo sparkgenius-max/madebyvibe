@@ -3197,11 +3197,9 @@ svg[class*="corner-smooth"] path {
 
 .expertise-container {
   max-width: 1800px;
-  padding: 0 var(--padding-internal);
+  padding: 0 var(--layout-padding);
 
   margin: 0 auto;
-
-  padding: 0 var(--padding-viewport);
 
   display: flex;
 
@@ -3601,6 +3599,7 @@ svg[class*="corner-smooth"] path {
 
 .blog-slider-container {
   width: 100%;
+  overflow: visible; /* Ensure cards bleed */
 }
 
 .blog-slider {
