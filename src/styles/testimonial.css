@@ -46,7 +46,7 @@
         margin: 0;
         width: auto; /* Reset width/margin from mobile */
         max-width: none;
-        min-width: 400px; /* Ensure reasonable width */
+        min-width: 400px; /* Ensure reasonable width matching blog */
         
         position: sticky;
         top: 120px;
@@ -59,6 +59,7 @@
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 2rem;
+    max-width: 10ch; /* Force break after ~2 words */
 }
 
 /* Navigation Buttons */

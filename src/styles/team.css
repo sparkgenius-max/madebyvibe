@@ -58,7 +58,7 @@
     /* height: 420px; Removed fixed height */
     aspect-ratio: 587 / 784; /* Enforce specific aspect ratio ~0.748 */
     border-radius: 24px;
-    overflow: hidden; 
+    overflow: visible; /* Allow breakout to extend */
     background-color: var(--bg-outer); /* Fallback */
     box-shadow: none;
     transition: transform 0.3s ease;
@@ -110,10 +110,10 @@
 /* Breakout Label (Bottom-Left) */
 .team-info-breakout {
     position: absolute;
-    bottom: -1px; /* Overlap bottom edge to prevent hairline gaps */
-    left: -1px;   /* Overlap left edge to prevent hairline gaps */
+    bottom: -2px; /* Increased overlap */
+    left: -2px;   /* Increased overlap */
     background-color: var(--bg-outer); /* Must match page background */
-    padding: 2rem 3rem 1.5rem 1px; /* Increased padding + 1px compensation */
+    padding: 2rem 3rem 1.5rem 2px; /* Adjusted padding */
     z-index: 10;
     border-top-right-radius: 32px; /* Add border radius to wrapper */
     min-width: 200px; /* Slightly wider */
@@ -128,7 +128,7 @@
 .corner-smooth-top {
     position: absolute;
     top: -31px; /* Overlap slightly (-1px) to prevent white line */
-    left: 0; /* Align to left edge */
+    left: 1px; /* Align to left edge */
     right: auto;
     width: 32px;
     height: 32px;
@@ -139,7 +139,7 @@
 
 .corner-smooth-right {
     position: absolute;
-    bottom: 0;
+    bottom: 1px;
     right: -31px; /* Overlap slightly (-1px) to prevent white line */
     width: 32px;
     height: 32px;
