@@ -9,6 +9,7 @@ import { BlogPage, initBlogPage } from './pages/blog.js';
 import { BlogDetailPage, initBlogDetailPage } from './pages/blog-detail.js';
 import { ContactPage, initContactPage } from './pages/contact.js';
 import { AboutPage, initAboutPage } from './pages/about.js';
+import { TeamPage, initTeamPage } from './pages/team.js';
 import { initDropdownBlur } from './components/dropdown-interactions.js';
 import { initBlog } from './components/blog.js';
 import { initFooter } from './components/footer.js';
@@ -47,6 +48,9 @@ function render() {
     } else if (path === '/about') {
         app.innerHTML = AboutPage();
         initAboutPage();
+    } else if (path === '/team') {
+        app.innerHTML = TeamPage();
+        initTeamPage();
     } else {
         app.innerHTML = Home();
         initHome();
@@ -74,9 +78,6 @@ function setupNavigation() {
 }
 
 function initThemeToggle() {
-    const toggleBtn = document.querySelector('.theme-toggle');
-    if (!toggleBtn) return;
-
     const html = document.documentElement;
 
     // Check saved theme
@@ -85,17 +86,22 @@ function initThemeToggle() {
         html.setAttribute('data-theme', savedTheme);
     }
 
-    // Remove existing listeners to avoid duplicates (cloning approach)
-    const newBtn = toggleBtn.cloneNode(true);
-    toggleBtn.parentNode.replaceChild(newBtn, toggleBtn);
-
-    newBtn.addEventListener('click', () => {
+    // Helper function to toggle theme
+    function toggleTheme() {
         const currentTheme = html.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-
         html.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
-    });
+    }
+
+    // Desktop theme toggle
+    const toggleBtn = document.querySelector('.theme-toggle');
+    if (toggleBtn) {
+        // Remove existing listeners to avoid duplicates (cloning approach)
+        const newBtn = toggleBtn.cloneNode(true);
+        toggleBtn.parentNode.replaceChild(newBtn, toggleBtn);
+        newBtn.addEventListener('click', toggleTheme);
+    }
 }
 
 let scrollHandler = null;

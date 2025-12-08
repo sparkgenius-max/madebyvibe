@@ -32,7 +32,34 @@ export function Navbar() {
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </button>
-                ${Button({ text: 'Start a project', href: '#', variant: 'primary' })}
+                ${Button({ text: 'Start a project', href: '#', variant: 'primary', className: 'desktop-cta' })}
+                
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                    <div class="hamburger-line top"></div>
+                    <div class="hamburger-line bottom"></div>
+                    <!-- Close Icon (Visible when menu is open) -->
+                    <svg class="close-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay">
+            <div class="mobile-menu-content">
+                <div class="mobile-nav-links">
+                    <a href="/services" class="mobile-nav-item">Services</a>
+                    <a href="/works" class="mobile-nav-item">Work</a>
+                    <a href="/about" class="mobile-nav-item">About</a>
+                    <a href="/team" class="mobile-nav-item">Team</a>
+                    <a href="/blog" class="mobile-nav-item">Blog</a>
+                    <a href="/contact" class="mobile-nav-item">Contact</a>
+                </div>
+                <div class="mobile-menu-footer">
+                    ${Button({ text: 'Start a project', href: '#', variant: 'primary', className: 'mobile-cta-btn' })}
+                </div>
             </div>
         </div>
     </nav>

@@ -1,47 +1,47 @@
 import '../styles/team.css';
 import { SectionLabel } from './section-label.js';
 
-export function TeamSection() {
-    const members = [
-        {
-            name: "Joe",
-            role: "Web Developer",
-            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
-            social: "#"
-        },
-        {
-            name: "Chris",
-            role: "Accounts & Finance",
-            image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80",
-            social: "#"
-        },
-        {
-            name: "Ruby",
-            role: "Design Intern",
-            image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=800&q=80",
-            social: "#"
-        },
-        {
-            name: "Dipper",
-            role: "Chief Barker",
-            image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=80",
-            social: "#"
-        },
-        {
-            name: "Alex",
-            role: "Founder",
-            image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=800&q=80",
-            social: "#"
-        },
-        {
-            name: "Sarah",
-            role: "Lead Designer",
-            image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80",
-            social: "#"
-        }
-    ];
+export const teamMembers = [
+    {
+        name: "Joe",
+        role: "Web Developer",
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
+        social: "#"
+    },
+    {
+        name: "Chris",
+        role: "Accounts & Finance",
+        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80",
+        social: "#"
+    },
+    {
+        name: "Ruby",
+        role: "Design Intern",
+        image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=800&q=80",
+        social: "#"
+    },
+    {
+        name: "Dipper",
+        role: "Chief Barker",
+        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=80",
+        social: "#"
+    },
+    {
+        name: "Alex",
+        role: "Founder",
+        image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=800&q=80",
+        social: "#"
+    },
+    {
+        name: "Sarah",
+        role: "Lead Designer",
+        image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80",
+        social: "#"
+    }
+];
 
-    const cards = members.map(member => `
+export function createTeamCard(member) {
+    return `
         <div class="team-card">
             <div class="team-image-wrapper">
                 <img src="${member.image}" alt="${member.name}" class="team-img">
@@ -69,7 +69,11 @@ export function TeamSection() {
                 </svg>
             </button>
         </div>
-    `).join('');
+    `;
+}
+
+export function TeamSection() {
+    const cards = teamMembers.map(createTeamCard).join('');
 
     return `
     <section class="team-slider-section">

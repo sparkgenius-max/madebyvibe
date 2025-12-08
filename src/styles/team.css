@@ -67,23 +67,23 @@
     flex-shrink: 0; /* Prevent shrinking */
 }
 
-/* Staggered Alignment */
+/* Staggered Alignment for Slider only */
 /* Even children (2, 4, 6...) shifted down */
-.team-card:nth-child(even) {
+.team-slider-container .team-card:nth-child(even) {
     transform: translateY(3rem);
 }
 
 /* Odd children (1, 3, 5...) shifted up */
-.team-card:nth-child(odd) {
+.team-slider-container .team-card:nth-child(odd) {
     transform: translateY(-3rem);
 }
 
 /* Hover effect needs to account for the base transform */
-.team-card:nth-child(even):hover {
+.team-slider-container .team-card:nth-child(even):hover {
     transform: translateY(calc(3rem - 10px));
 }
 
-.team-card:nth-child(odd):hover {
+.team-slider-container .team-card:nth-child(odd):hover {
     transform: translateY(calc(-3rem - 10px));
 }
 
@@ -124,29 +124,79 @@
     transform: translateZ(0);
 }
 
-/* SVG Smoothers - Scaled to 32px */
-.corner-smooth-top {
-    position: absolute;
-    top: -31px; /* Overlap slightly (-1px) to prevent white line */
-    left: 1px; /* Align to left edge */
-    right: auto;
-    width: 32px;
-    height: 32px;
-    z-index: 11;
-    pointer-events: none;
-    shape-rendering: geometricPrecision;
+/* --- Team Page Specifics --- */
+
+.team-page-container {
+    width: 100%;
+    background-color: var(--bg-outer);
+    min-height: 100vh;
 }
 
-.corner-smooth-right {
-    position: absolute;
-    bottom: 1px;
-    right: -31px; /* Overlap slightly (-1px) to prevent white line */
-    width: 32px;
-    height: 32px;
-    z-index: 11;
-    pointer-events: none;
-    shape-rendering: geometricPrecision;
+.team-page-header {
+    padding: clamp(8rem, 12vw, 12rem) var(--layout-padding) 4rem;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    text-align: center;
 }
+
+.team-page-title {
+    font-family: var(--font-display), sans-serif;
+    font-size: clamp(3rem, 6vw, 5rem); /* Match About Hero sizing */
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.1;
+    margin-top: 2rem;
+    letter-spacing: -0.025em;
+}
+
+.team-header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.team-grid-section {
+    padding: 0 var(--layout-padding) 8rem;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+.team-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 3rem 2rem;
+    width: 100%;
+}
+
+@media (min-width: 1200px) {
+    .team-grid-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Reset card transform for grid */
+.team-grid-container .team-card {
+    width: 100%;
+    transform: none !important; /* Override nth-child transforms */
+    margin: 0; /* Reset any margins */
+}
+
+.team-grid-container .team-card:hover {
+    transform: translateY(-10px) !important; /* Simple hover lift */
+}
+
+/* Staggered Grid Effect Removed as requested */
+/* @media (min-width: 768px) {
+    .team-grid-container .team-card:nth-child(even) {
+        transform: translateY(3rem) !important;
+    }
+    
+    .team-grid-container .team-card:nth-child(even):hover {
+        transform: translateY(calc(3rem - 10px)) !important;
+    }
+} */
 
 /* Ensure SVG fills match background */
 .corner-smooth-top path,
