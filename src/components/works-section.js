@@ -18,7 +18,7 @@ const worksData = {
             year: '2023',
             client: 'Nexus Logistics',
             title: 'Modernizing a legacy brand through strategic visual storytelling.',
-            height: '600px',
+            height: '500px',
             categories: ['Strategy', 'Visuals']
         },
         {
@@ -26,7 +26,7 @@ const worksData = {
             year: '2025',
             client: 'Neon Core',
             title: 'Immersive UI/UX design for a next-gen gaming platform.',
-            height: '450px',
+            height: '500px',
             categories: ['UI/UX', 'Gaming', 'Web']
         },
         {
@@ -53,7 +53,7 @@ const worksData = {
             year: '2025',
             client: 'Flux Analytics',
             title: 'Simplifying complex data through intuitive product design.',
-            height: '450px',
+            height: '500px',
             categories: ['App Design', 'Data', 'SaaS']
         },
         {
@@ -61,7 +61,7 @@ const worksData = {
             year: '2024',
             client: 'Pulse Events',
             title: 'Capturing the energy of nightlife in a vibrant brand system.',
-            height: '400px',
+            height: '500px',
             categories: ['Branding', 'Events']
         },
         {
@@ -69,7 +69,7 @@ const worksData = {
             year: '2024',
             client: 'Apex Structures',
             title: 'Structuring a digital presence as solid as their skyscrapers.',
-            height: '550px',
+            height: '500px',
             categories: ['Development', 'Corporate']
         },
         {
@@ -77,7 +77,7 @@ const worksData = {
             year: '2024',
             client: 'Lumina Lens',
             title: 'A cinematic showcase for award-winning visual artists.',
-            height: '350px',
+            height: '500px',
             darkBg: true,
             categories: ['Photography', 'Portfolio']
         },

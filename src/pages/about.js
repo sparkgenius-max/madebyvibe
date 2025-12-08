@@ -31,28 +31,6 @@ export function AboutPage() {
         <!-- 5. Testimonial Section -->
         ${TestimonialSlider()}
 
-        <!-- 6. Studio Gallery (Masonry) -->
-        <section class="about-studio-section">
-            <div class="studio-header">
-                ${SectionLabel('The Space', 'studio-label')}
-                <h2 class="studio-title">Where the magic happens.</h2>
-            </div>
-            <div class="studio-masonry">
-                <div class="masonry-item large">
-                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80" alt="Studio 1" class="masonry-img">
-                </div>
-                <div class="masonry-item small">
-                    <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=800&q=80" alt="Studio 2" class="masonry-img">
-                </div>
-                <div class="masonry-item medium">
-                    <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=800&q=80" alt="Studio 3" class="masonry-img">
-                </div>
-                <div class="masonry-item small">
-                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80" alt="Studio 4" class="masonry-img">
-                </div>
-            </div>
-        </section>
-
         <!-- 6. CTA -->
         <section class="about-cta-section">
             <div class="about-cta-content">
