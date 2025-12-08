@@ -7000,7 +7000,8 @@ svg[class*="corner-smooth"] path {
   max-width: 1800px;
   margin: 0 auto;
   min-height: 65vh;
-  padding: 0 var(--layout-padding);
+  /* Proper navbar clearance - use padding-top separately for better control */
+  padding: calc(var(--padding-viewport) + 80px) var(--layout-padding) 4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -7886,6 +7887,7 @@ svg[class*="corner-smooth"] path {
 /* Blog Filter Header Styles */
 
 .blog-filter-header {
+  /* 120px accounts for fixed navbar height + spacing */
   padding: calc(var(--padding-viewport) + 120px) var(--layout-padding) 4rem;
 
   background-color: var(--bg-outer);
