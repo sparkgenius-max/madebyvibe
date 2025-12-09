@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   /* Colors */
 
   --bg-outer: #000000;
@@ -8470,6 +8470,17 @@ svg[class*="corner-smooth"] path {
   position: relative;
 }
 
+.work-hero {
+  padding: 0 var(--layout-padding);
+  margin-bottom: 6rem;
+  position: relative;
+  z-index: 10;
+  max-width: 1800px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .blog-hero-right {
   position: relative;
 
@@ -8673,6 +8684,13 @@ svg[class*="corner-smooth"] path {
   display: flex;
 
   justify-content: flex-end;
+}
+
+.work-info-section {
+  padding: 0 var(--layout-padding);
+  max-width: 1800px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 /* TOC Widget */
@@ -11422,5 +11440,369 @@ main.blog-detail-container {
 
   .masonry-item {
     height: 300px;
+  }
+}
+
+/* =====================================================
+   WORK DETAIL PAGE
+   ===================================================== */
+
+.work-detail-container {
+  padding-top: 120px;
+  padding-bottom: 8rem;
+  min-height: 100vh;
+  background: var(--bg-outer);
+}
+
+.work-hero {
+  padding: 0 var(--layout-padding);
+  margin-bottom: 6rem;
+  position: relative;
+  z-index: 10;
+  max-width: 1800px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.work-hero-wrapper {
+  position: relative;
+  width: 100%;
+  height: 85vh;
+  min-height: 600px;
+  border-radius: 32px;
+  overflow: visible;
+  /* Must be visible for breakout */
+}
+
+/* Image Wrapper acts as the base content */
+.work-hero-image-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 32px;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+}
+
+.work-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 
+   THE TOAST: Top Right Breakout 
+   This sits ON TOP of the image wrapper. 
+   It has a solid background (matches page bg) to "mask" the image corner.
+*/
+.work-hero-toast {
+  position: absolute;
+  top: -1px;
+  /* Align flush with top */
+  right: -1px;
+  /* Align flush with right */
+  width: auto;
+  max-width: 975px;
+  min-width: 675px;
+
+  background: var(--bg-outer);
+  /* Same as page background */
+
+  /* Padding to breathe - Left padding accommodates the 'visual' space */
+  padding: 0 0 3rem 4rem;
+
+  /* High Z-Index to sit above image */
+  z-index: 20;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  /* REQUESTED: Bottom Left Radius */
+  border-bottom-left-radius: 32px;
+}
+
+/* 
+   SVGs - Creating the inverted corner effect 
+   If the toast has a ROUNDED corner (bottom-left), using inverted SVGs might be tricky 
+   or create a "double curve" look. 
+   
+   However, typically "Breakout" means the junction is sharp on the container, smooth on the external.
+   If the container (Toast) is rounded, it implies it's detached or floating?
+   
+   If the goal is "Toast Container has radius", we apply border-radius.
+   If we keep the SVGs:
+   - Left SVG: Smooths the vertical line (Top-Left of toast connecting to Top Edge of Image).
+   - Bottom SVG: Smooths the horizontal line (Bottom-Right of toast connecting to Right Edge of Image).
+   
+   BUT if `border-bottom-left-radius` is set, the corner is physically rounded.
+   Let's keep the SVGs visible to maintain the "melt" effect where possible, 
+   but ensure they are positioned correctly.
+*/
+
+/* Left Side Curve: Connects Top Edge of Container to Left Edge of Toast */
+.work-hero-toast .corner-smooth-left {
+  position: absolute;
+  top: 0;
+  left: -39px;
+  /* 40px width - 1px overlap */
+  width: 40px;
+  height: 40px;
+  transform: rotate(-90deg);
+  pointer-events: none;
+  fill: var(--bg-outer);
+}
+
+/* Bottom Side Curve: Connects Right Edge of Container to Bottom Edge of Toast */
+.work-hero-toast .corner-smooth-bottom {
+  position: absolute;
+  bottom: -39px;
+  /* 40px height - 1px overlap */
+  right: 0;
+  width: 40px;
+  height: 40px;
+  transform: rotate(-90deg);
+  pointer-events: none;
+  fill: var(--bg-outer);
+}
+
+/* Content Styling */
+.work-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-right: 2rem;
+  padding-left: 1rem;
+}
+
+/* Meta Line */
+.work-hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.work-meta-tag {
+  font-size: 1rem;
+  color: var(--text-on-dark);
+  font-weight: 500;
+}
+
+[data-theme="light"] .work-meta-tag {
+  color: var(--text-primary);
+}
+
+/* Categories */
+.work-categories {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.category-pill {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 99px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+}
+
+.category-pill:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+/* Title */
+.work-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text-on-dark);
+  margin: 0;
+}
+
+[data-theme="light"] .work-hero-title {
+  color: var(--text-primary);
+}
+
+
+/* Info Section */
+.work-info-section {
+  padding: 0 var(--layout-padding);
+  max-width: 1800px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.work-info-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: clamp(4rem, 8vw, 8rem);
+  align-items: start;
+}
+
+.work-statement {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.work-statement-text {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 1.15;
+  font-weight: 500;
+  color: var(--text-on-dark);
+}
+
+[data-theme="light"] .work-statement-text {
+  color: var(--text-primary);
+}
+
+.project-team {
+  display: flex;
+  align-items: center;
+}
+
+.team-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid var(--bg-outer);
+  background-size: cover;
+  background-position: center;
+  margin-left: -15px;
+  background-color: #333;
+}
+
+.team-avatar:first-child {
+  margin-left: 0;
+}
+
+.work-details-col {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding-top: 1rem;
+}
+
+.work-description {
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.work-specs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 2rem;
+}
+
+.spec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.spec-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.spec-value {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-on-dark);
+}
+
+[data-theme="light"] .spec-value {
+  color: var(--text-primary);
+}
+
+.visit-site-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: var(--text-on-dark);
+  color: var(--bg-outer);
+  border-radius: 99px;
+  text-decoration: none;
+  font-weight: 600;
+  width: fit-content;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+[data-theme="light"] .visit-site-btn {
+  background: var(--text-primary);
+  color: #fff;
+}
+
+.visit-site-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .work-hero-wrapper {
+    height: auto;
+    min-height: auto;
+    aspect-ratio: auto;
+    display: flex;
+    flex-direction: column-reverse;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .work-hero-image-wrapper {
+    height: 50vh;
+    border-radius: 24px;
+  }
+
+  .work-hero-toast {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    padding: 0 0 2rem 0;
+    background: transparent;
+    display: block;
+    transform: none;
+    border-bottom-left-radius: 0;
+  }
+
+  .work-hero-toast .corner-smooth-left,
+  .work-hero-toast .corner-smooth-bottom {
+    display: none;
+  }
+
+  .work-hero-content {
+    padding-right: 0;
+    padding-left: 0;
+    gap: 1rem;
+  }
+
+  .work-hero-title {
+    font-size: 2.5rem;
+  }
+
+  .work-info-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .work-specs {
+    grid-template-columns: 1fr 1fr;
   }
 }

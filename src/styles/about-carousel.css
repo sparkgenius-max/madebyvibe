@@ -17,7 +17,8 @@
 .carousel-header {
     text-align: center;
     margin-bottom: 2rem;
-    padding-top: 8rem; /* Increased padding to clear navbar comfortably */
+    padding-top: 12rem;
+    /* Increased padding to add more gap between navbar and hero heading */
     padding-left: 1rem;
     padding-right: 1rem;
     z-index: 10;
@@ -43,30 +44,33 @@
     width: 100%;
     max-width: 1800px;
     position: relative;
-    flex: 1; /* Allow container to take remaining space */
+    flex: 1;
+    /* Allow container to take remaining space */
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: -15vh; /* Move it up more to overlap the center line */
+    margin-top: -15vh;
+    /* Move it up more to overlap the center line */
 }
 
 .carousel-container {
     perspective: 1000px;
     overflow: hidden;
     touch-action: none;
-    height: 600px; /* Fixed height for the arc calculation */
+    height: 600px;
+    /* Fixed height for the arc calculation */
     position: relative;
     cursor: grab;
-    
+
     /* Combined Horizontal and Vertical Fade Mask */
     mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent),
-                linear-gradient(to bottom, black 75%, transparent);
+        linear-gradient(to bottom, black 75%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent),
-                        linear-gradient(to bottom, black 75%, transparent);
-    
+        linear-gradient(to bottom, black 75%, transparent);
+
     mask-composite: intersect;
     -webkit-mask-composite: source-in;
-    
+
     width: 100%;
 }
 
@@ -79,21 +83,25 @@
     left: 50%;
     top: 50%;
     /* Increased size (approx 1.15x) */
-    width: 320px; 
+    width: 320px;
     height: 410px;
     /* Updated margins to center the larger card */
-    margin-left: -160px; 
+    margin-left: -160px;
     margin-top: -205px;
     border-radius: 24px;
     /* background-size: cover; Removed as we use img tag now */
     /* background-position: center; */
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); /* Stronger shadow for drama */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    /* Stronger shadow for drama */
     will-change: transform, opacity;
     user-select: none;
     -webkit-user-drag: none;
-    border: 1px solid var(--border-subtle); /* subtle border matching theme */
-    overflow: hidden; /* Ensure image stays inside */
-    background-color: #000; /* Fallback */
+    border: 1px solid var(--border-subtle);
+    /* subtle border matching theme */
+    overflow: hidden;
+    /* Ensure image stays inside */
+    background-color: #000;
+    /* Fallback */
 }
 
 .card-image-component {
@@ -110,7 +118,7 @@
     position: absolute;
     inset: 0;
     border-radius: 24px;
-    background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.4));
+    background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.4));
     pointer-events: none;
 }
 
@@ -141,7 +149,7 @@
 
 .nav-btn-custom:hover {
     transform: scale(1.05) translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(254, 138, 138, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Glow using accent color approximate */
+    box-shadow: 0 10px 15px -3px rgba(254, 138, 138, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    /* Glow using accent color approximate */
     background-color: var(--accent-brand-hover);
 }
-
