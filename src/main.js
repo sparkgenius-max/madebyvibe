@@ -1,6 +1,7 @@
 import './styles/main.css';
 import './styles/about-carousel.css';
 import './styles/work-gallery.css';
+import './styles/more-work.css';
 import { initHome } from './pages/home.js';
 import { Home } from './pages/home.js';
 import { Services } from './pages/services.js';

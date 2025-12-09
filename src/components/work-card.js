@@ -21,6 +21,7 @@ export function WorkCard(work) {
         <div class="work-card-image-wrapper ${work.lightBg ? 'light-bg' : ''} ${work.darkBg ? 'dark-bg' : ''}" style="${heightStyle}">
              <img src="${work.image}" 
                   alt="${work.client}" 
+                  draggable="false"
                   class="work-card-img ${work.grayscale ? 'grayscale-img' : ''}">
         </div>
 
@@ -84,6 +85,11 @@ export function initWorkCards() {
             });
 
             imageWrapper.addEventListener('mousemove', moveCursor);
+
+            // Hide cursor on click before navigation
+            card.addEventListener('click', () => {
+                cursor.classList.remove('active');
+            });
         }
     });
 }

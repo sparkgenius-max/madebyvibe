@@ -3,6 +3,7 @@ import { Navbar } from '../components/navbar.js';
 import { Footer } from '../components/footer.js';
 import { BigFooterMarquee } from '../components/big-marquee.js';
 import { SectionLabel } from '../components/section-label.js';
+import { MoreWork, initMoreWork } from '../components/more-work.js';
 
 export function WorkDetailPage() {
     // Dummy Data
@@ -161,13 +162,49 @@ export function WorkDetailPage() {
                     </div>
                 </div>
 
-                <div class="gallery-item-full" style="margin-top: clamp(1.5rem, 3vw, 3rem);">
+                <div class="gallery-item-full">
                     <div class="gallery-inner-image-wrapper">
                         <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Website Design Detail 2">
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Work Segment: Logo -->
+        <section class="work-segment">
+            <div class="work-segment-text-grid">
+                 <div class="segment-left">
+                    ${SectionLabel('Logo')}
+                    <h2 class="work-statement-text">Visual Identity <br>System</h2>
+                 </div>
+                 <div class="segment-right"> 
+                    <p class="segment-desc">
+                        A distinct and memorable logomark that anchors the entire visual identity. It needed to be simple, scalable, and recognizable across all media.
+                    </p>
+                 </div>
+            </div>
+
+            <div class="work-gallery">
+                <div class="gallery-item-full">
+                    <div class="gallery-inner-image-wrapper">
+                        <img src="https://res.cloudinary.com/dg2cqc3e9/image/upload/v1738855252/samples/cup-on-a-table.jpg" alt="Logo Concept 1">
+                    </div>
+                </div>
+
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1634942537034-2531766767d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Logo Sketch">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Logo Application">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        ${MoreWork()}
 
     </main>
     ${BigFooterMarquee()}
@@ -176,5 +213,5 @@ export function WorkDetailPage() {
 }
 
 export function initWorkDetailPage() {
-    // any interactions
+    initMoreWork();
 }

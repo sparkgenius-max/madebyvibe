@@ -11,6 +11,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
+    margin-top: 0;
 }
 
 .gallery-item {
@@ -32,7 +33,7 @@
     overflow: hidden;
     background: #111;
     /* Slightly lighter than pure black for contrast if main bg is black */
-    padding: 5rem;
+    padding: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -58,9 +59,9 @@
    WORK DISPLAY SEGMENT (Text + Large Images)
    ======================================= */
 .work-segment {
-    padding: clamp(6rem, 10vw, 10rem) var(--layout-padding);
+    padding: clamp(6rem, 10vw, 10rem) var(--layout-padding) 0px;
     max-width: 1800px;
-    margin: 0 auto;
+    margin: 0;
 }
 
 .work-segment-text-grid {
