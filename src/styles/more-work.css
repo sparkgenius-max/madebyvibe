@@ -45,7 +45,7 @@
     display: flex;
     gap: 2rem;
     overflow-x: auto;
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth;  REMOVED to prevent drag conflict */
     padding-bottom: 2rem;
     padding-top: 0rem;
 
