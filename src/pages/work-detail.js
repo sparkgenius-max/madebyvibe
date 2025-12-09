@@ -25,6 +25,13 @@ export function WorkDetailPage() {
             <!-- Hero Wrapper for relative positioning -->
             <div class="work-hero-wrapper">
                 
+                <!-- Floating Categories (Top Left) -->
+                <div class="work-categories hero-categories-floating">
+                    <span class="category-pill">${work.category}</span>
+                    <span class="category-pill">Website</span>
+                    <span class="category-pill">SEO</span>
+                </div>
+
                 <!-- The Toast Breakout (Top Right) -->
                 <div class="work-hero-toast">
                     <!-- 1. Left Curve: Rotated -90deg to smooth the vertical edge -->
@@ -40,11 +47,7 @@ export function WorkDetailPage() {
                             <span class="work-meta-tag">${work.client}</span>
                         </div>
 
-                        <div class="work-categories">
-                            <span class="category-pill">${work.category}</span>
-                            <span class="category-pill">Website</span>
-                            <span class="category-pill">SEO</span>
-                        </div>
+
                         
                         <h1 class="work-hero-title">${work.title.replace(/\n/g, '<br>')}</h1>
                     </div>
