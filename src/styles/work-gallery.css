@@ -1,0 +1,183 @@
+/* Work Gallery Section */
+.work-gallery {
+    margin-top: 8rem;
+    padding: 0 var(--layout-padding);
+    max-width: 1800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.gallery-item {
+    border-radius: 24px;
+    overflow: hidden;
+    height: 60vh;
+    min-height: 400px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-item-full {
+    border-radius: 24px;
+    overflow: hidden;
+    background: #111;
+    /* Slightly lighter than pure black for contrast if main bg is black */
+    padding: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-inner-image-wrapper {
+    width: 100%;
+    /* Enforce landscape ratio */
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-inner-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* =======================================
+   WORK DISPLAY SEGMENT (Text + Large Images)
+   ======================================= */
+.work-segment {
+    padding: clamp(6rem, 10vw, 10rem) var(--layout-padding);
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+.work-segment-text-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+@media (min-width: 992px) {
+    .work-segment-text-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(4rem, 6vw, 8rem);
+        align-items: start;
+    }
+}
+
+.segment-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.segment-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: var(--text-on-dark);
+    font-weight: 500;
+}
+
+.label-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--text-on-dark);
+    /* White dot */
+}
+
+/* If theme is light, adapt */
+[data-theme="light"] .segment-label,
+[data-theme="light"] .label-dot {
+    color: var(--text-primary);
+    background-color: var(--text-primary);
+}
+
+.segment-heading {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    font-weight: 400;
+    color: var(--text-on-dark);
+    letter-spacing: -0.02em;
+}
+
+[data-theme="light"] .segment-heading {
+    color: var(--text-primary);
+}
+
+.segment-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 0;
+}
+
+.segment-desc {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    max-width: 600px;
+}
+
+.work-segment-images {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.segment-image-container {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 24px;
+}
+
+.segment-image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .work-gallery {
+        margin-top: 4rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .gallery-item {
+        height: 40vh;
+    }
+
+    .gallery-item-full {
+        padding: 2rem;
+    }
+
+    .work-segment {
+        padding: 4rem var(--layout-padding);
+    }
+
+    .segment-heading {
+        font-size: 2.5rem;
+    }
+}

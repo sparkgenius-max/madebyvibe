@@ -122,6 +122,53 @@ export function WorkDetailPage() {
             </div>
         </section>
 
+        <!-- Gallery Section -->
+        <section class="work-gallery">
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1616469829581-73993eb86b02?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Gallery 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1628258334105-2a0b3d6efee1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Gallery 2">
+                </div>
+            </div>
+            
+            <div class="gallery-item-full">
+                <div class="gallery-inner-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Gallery Full">
+                </div>
+            </div>
+        </section>
+
+        <!-- Work Segment: Website -->
+        <section class="work-segment">
+            <div class="work-segment-text-grid">
+                 <div class="segment-left">
+                    ${SectionLabel('Website')}
+                    <h2 class="work-statement-text">Exclusive <br>yet progressive</h2>
+                 </div>
+                 <div class="segment-right"> 
+                    <p class="segment-desc">
+                        We created an exclusive yet progressive platform, evoking a sense of sophistication with storytelling at its core. Gary is a very busy man, with involvement in many areas - the new brand and website had to encompass everything Gary is and does.
+                    </p>
+                 </div>
+            </div>
+
+            <div class="work-gallery">
+                <div class="gallery-item-full">
+                    <div class="gallery-inner-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Website Design Detail 1">
+                    </div>
+                </div>
+
+                <div class="gallery-item-full" style="margin-top: clamp(1.5rem, 3vw, 3rem);">
+                    <div class="gallery-inner-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Website Design Detail 2">
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
     ${BigFooterMarquee()}
     ${Footer()}

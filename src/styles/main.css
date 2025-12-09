@@ -11448,7 +11448,7 @@ main.blog-detail-container {
    ===================================================== */
 
 .work-detail-container {
-  padding-top: 120px;
+  padding-top: clamp(140px, 12vw, 220px);
   padding-bottom: 8rem;
   min-height: 100vh;
   background: var(--bg-outer);
@@ -11800,6 +11800,7 @@ main.blog-detail-container {
   }
 
   .work-hero-content {
+    padding-top: 2.5rem;
     padding-right: 0;
     padding-left: 0;
     gap: 1rem;
@@ -11825,3 +11826,251 @@ main.blog-detail-container {
     margin-bottom: 2rem;
   }
 }
+
+/* =====================================================
+   WORK DETAIL: GALLERY
+   ===================================================== */
+.work-gallery {
+  padding: 0 var(--layout-padding);
+  padding-bottom: 0;
+  /* Gap handled by next section padding */
+  max-width: 1800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+/* Remove padding/margin when nested to avoid double spacing */
+.work-segment .work-gallery {
+  padding: 0;
+  margin: 0;
+  max-width: none;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+.gallery-item {
+  width: 100%;
+  border-radius: var(--radius-main);
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.03);
+}
+
+.gallery-item-full {
+  width: 100%;
+}
+
+.gallery-inner-image-wrapper {
+  width: 100%;
+  border-radius: var(--radius-main);
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery-inner-image-wrapper img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.gallery-inner-image-wrapper:hover img {
+  transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =====================================================
+   WORK DETAIL: SEGMENT (Website, etc.)
+   ===================================================== */
+.work-segment {
+  /* Top padding creates the gap from previous section (Gallery) */
+  padding-top: clamp(1.5rem, 3vw, 3rem) !important;
+  padding-bottom: clamp(6rem, 10vw, 10rem);
+  padding-left: var(--layout-padding);
+  padding-right: var(--layout-padding);
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+.work-segment-text-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  margin-bottom: clamp(1.5rem, 3vw, 3rem);
+  /* Match image gap */
+}
+
+.segment-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.segment-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.label-dot {
+  width: 8px;
+  height: 8px;
+  min-width: 8px;
+  background-color: var(--accent-brand);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.segment-heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.1;
+  color: var(--text-on-dark);
+}
+
+[data-theme="light"] .segment-heading {
+  color: var(--text-primary);
+}
+
+.segment-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  /* Align text block to bottom of heading area */
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+  /* Slight optical adjustment */
+}
+
+.segment-desc {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 600px;
+}
+
+.work-segment-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+.segment-image-container {
+  width: 100%;
+  border-radius: var(--radius-main);
+  overflow: hidden;
+  position: relative;
+  /* Keep default aspect ratio of images or enforce one? 
+     Usually enforce to keep grid neat. */
+  aspect-ratio: 4/3;
+  background: var(--bg-section);
+}
+
+.segment-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.segment-image-container:hover img {
+  transform: scale(1.03);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .work-segment {
+    padding-top: 3rem !important;
+    /* Force smaller padding on mobile/tablet too */
+    padding-bottom: 4rem;
+  }
+
+  .work-segment-text-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .segment-heading {
+    font-size: 2.5rem;
+  }
+
+  .segment-right {
+    padding-top: 0;
+  }
+
+  .segment-desc {
+    font-size: 1.125rem;
+  }
+
+}
+
+
+.work-segment-full-image {
+  width: 100%;
+  border-radius: var(--radius-main);
+  overflow: hidden;
+  position: relative;
+  margin-bottom: clamp(3rem, 6vw, 6rem);
+}
+
+.work-segment-full-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.work-segment-full-image:hover img {
+  transform: scale(1.03);
+}
+
+/* Ensure Section Label matches style if not already globally defined */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.section-label .dot {
+  color: var(--accent-brand);
+  font-size: 1rem;
+  /* Adjust if circle character needs sizing */
+  line-height: 1;
+}
+
+```
