@@ -59,9 +59,11 @@
    WORK DISPLAY SEGMENT (Text + Large Images)
    ======================================= */
 .work-segment {
-    padding: clamp(6rem, 10vw, 10rem) var(--layout-padding) 0px;
+    /* Standardized padding for better alignment and flow */
+    padding: clamp(6rem, 10vw, 10rem) var(--layout-padding);
     max-width: 1800px;
-    margin: 0;
+    width: 100%;
+    margin: 0 auto;
 }
 
 .work-segment-text-grid {
@@ -176,6 +178,7 @@
 
     .work-segment {
         padding: 4rem var(--layout-padding);
+        margin: 0 auto;
     }
 
     .segment-heading {

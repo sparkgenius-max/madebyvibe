@@ -11905,20 +11905,19 @@ main.blog-detail-container {
    WORK DETAIL: SEGMENT (Website, etc.)
    ===================================================== */
 .work-segment {
-  /* Top padding creates the gap from previous section (Gallery) */
-  padding-top: clamp(1.5rem, 3vw, 3rem) !important;
-  padding-bottom: clamp(6rem, 10vw, 10rem);
-  padding-left: var(--layout-padding);
-  padding-right: var(--layout-padding);
+  /* Standardized padding for better alignment and flow */
+  padding: clamp(6rem, 10vw, 10rem) var(--layout-padding);
   max-width: 1800px;
+  width: 100%;
   margin: 0 auto;
 }
 
 .work-segment-text-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(3rem, 6vw, 6rem);
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: clamp(4rem, 8vw, 8rem);
   margin-bottom: clamp(1.5rem, 3vw, 3rem);
+  align-items: start;
   /* Match image gap */
 }
 

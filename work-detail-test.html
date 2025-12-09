@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Detail Alignment Test</title>
+    <style>
+        /* Import the CSS files to test */
+        @import url('./src/styles/main.css');
+        @import url('./src/styles/work-gallery.css');
+        @import url('./src/styles/more-work.css');
+
+        /* Test-specific styles to visualize the alignment */
+        .test-border {
+            border: 2px solid red !important;
+            box-sizing: border-box;
+        }
+
+        .test-background {
+            background: rgba(255, 0, 0, 0.1) !important;
+        }
+
+        /* Highlight sections that should be centered */
+        .work-hero {
+            background: rgba(0, 255, 0, 0.1);
+        }
+
+        .work-info-section {
+            background: rgba(0, 0, 255, 0.1);
+        }
+
+        .work-gallery {
+            background: rgba(255, 255, 0, 0.1);
+        }
+
+        .work-segment {
+            background: rgba(255, 0, 255, 0.1);
+        }
+
+        .more-work-section {
+            background: rgba(0, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div style="padding: 2rem; background: #f0f0f0;">
+        <h1>Work Detail Page Alignment Test</h1>
+        <p>This page tests the alignment of all sections on the work detail page. Each section should be centered and
+            aligned with the same max-width (1800px) and consistent padding.</p>
+
+        <div class="work-detail-container">
+            <!-- Test sections with visual indicators -->
+            <section class="work-hero">
+                <h2>Work Hero Section</h2>
+                <p>Should be centered with max-width: 1800px</p>
+            </section>
+
+            <section class="work-info-section">
+                <h2>Work Info Section</h2>
+                <p>Should be centered with max-width: 1800px</p>
+            </section>
+
+            <section class="work-gallery">
+                <h2>Work Gallery Section</h2>
+                <p>Should be centered with max-width: 1800px</p>
+            </section>
+
+            <section class="work-segment">
+                <h2>Work Segment Section</h2>
+                <p>Should be centered with max-width: 1800px (FIXED)</p>
+            </section>
+
+            <section class="more-work-section">
+                <h2>More Work Section</h2>
+                <p>Should be centered with max-width: 1800px</p>
+            </section>
+        </div>
+
+        <div style="margin-top: 2rem; padding: 1rem; background: #fff; border-radius: 8px;">
+            <h3>Alignment Test Results:</h3>
+            <ul>
+                <li>✅ All sections should have the same left and right margins</li>
+                <li>✅ All sections should align vertically with each other</li>
+                <li>✅ All sections should respect the max-width: 1800px constraint</li>
+                <li>✅ All sections should use consistent --layout-padding</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
