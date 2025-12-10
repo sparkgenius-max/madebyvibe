@@ -3,6 +3,7 @@ import { Navbar } from '../components/navbar.js';
 import { Footer } from '../components/footer.js';
 import { BigFooterMarquee } from '../components/big-marquee.js';
 import { SectionLabel } from '../components/section-label.js';
+import { Blog, initBlog } from '../components/blog.js';
 
 export function BlogDetailPage() {
     // dummy data
@@ -206,6 +207,9 @@ export function BlogDetailPage() {
             </aside>
         </div>
     </main>
+
+    ${Blog()}
+
     ${BigFooterMarquee()}
     ${Footer()}
     `;
@@ -384,7 +388,10 @@ export function initBlogDetailPage() {
     // Also run after a short delay to ensure layout is complete
     setTimeout(positionCornerSVGs, 200);
 
-    // 4. Init Footer
+    // 4. Init Blog Slider
+    initBlog();
+
+    // 5. Init Footer
     if (typeof window.initFooter === 'function') {
         window.initFooter();
     }

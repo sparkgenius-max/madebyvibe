@@ -41,16 +41,18 @@ export function Blog() {
     ];
 
     const cards = posts.map(post => `
-        <div class="blog-card">
-            <div class="blog-card-image">
-                <img src="${post.image}" alt="${post.title}" class="blog-img" draggable="false">
+        <a href="/blog/${post.id}" class="blog-card-link">
+            <div class="blog-card">
+                <div class="blog-card-image">
+                    <img src="${post.image}" alt="${post.title}" class="blog-img" draggable="false">
+                </div>
+                <div class="blog-card-content">
+                    <span class="blog-read-time">● ${post.readTime}</span>
+                    <h3 class="blog-card-title">${post.title}</h3>
+                    <p class="blog-card-excerpt">${post.excerpt}</p>
+                </div>
             </div>
-            <div class="blog-card-content">
-                <span class="blog-read-time">● ${post.readTime}</span>
-                <h3 class="blog-card-title">${post.title}</h3>
-                <p class="blog-card-excerpt">${post.excerpt}</p>
-            </div>
-        </div>
+        </a>
     `).join('');
 
     return `
@@ -115,6 +117,59 @@ export function initBlog() {
 
     if (!slider) return;
 
+    const sliderContainer = slider.closest('.blog-slider-container');
+
+    // Custom Cursor Logic
+    let customCursor = document.querySelector('.blog-cursor');
+    if (!customCursor) {
+        customCursor = document.createElement('div');
+        customCursor.className = 'blog-cursor';
+        customCursor.innerHTML = `
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 8L22 12L18 16"></path>
+                <path d="M2 12H22"></path>
+                <path d="M6 16L2 12L6 8"></path>
+            </svg>
+        `;
+        document.body.appendChild(customCursor);
+    }
+
+    const moveCustomCursor = (e) => {
+        customCursor.style.left = `${e.clientX}px`;
+        customCursor.style.top = `${e.clientY}px`;
+    };
+
+    // Track cursor position globally on the container
+    if (sliderContainer) {
+        sliderContainer.addEventListener('mouseenter', () => {
+            document.addEventListener('mousemove', moveCustomCursor);
+        });
+
+        sliderContainer.addEventListener('mouseleave', () => {
+            customCursor.classList.remove('active');
+            sliderContainer.classList.remove('cursor-active');
+            document.removeEventListener('mousemove', moveCustomCursor);
+        });
+    }
+
+    // Only show cursor when hovering on actual blog cards, not gaps
+    const blogCards = slider.querySelectorAll('.blog-card-link, .blog-card');
+    blogCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            customCursor.classList.add('active');
+            if (sliderContainer) sliderContainer.classList.add('cursor-active');
+        });
+        card.addEventListener('mouseleave', () => {
+            customCursor.classList.remove('active');
+            if (sliderContainer) sliderContainer.classList.remove('cursor-active');
+        });
+        // Hide cursor immediately on click before navigation
+        card.addEventListener('click', () => {
+            customCursor.classList.remove('active');
+            if (sliderContainer) sliderContainer.classList.remove('cursor-active');
+        });
+    });
+
     let isDown = false;
     let startX;
     let scrollLeft;
@@ -140,7 +195,7 @@ export function initBlog() {
     // Check Scroll State for Buttons
     const updateNavButtons = () => {
         if (!prevBtn || !nextBtn) return;
-        
+
         // Disable prev if at start (with small tolerance)
         if (slider.scrollLeft <= 10) {
             prevBtn.setAttribute('disabled', '');
@@ -160,7 +215,7 @@ export function initBlog() {
     // Calculate scroll amount dynamically based on card width + gap
     const getScrollAmount = () => {
         // Card width (520px) + gap (32px/2rem) = 552px
-        return 520 + 32; 
+        return 520 + 32;
     };
 
     // Navigation buttons

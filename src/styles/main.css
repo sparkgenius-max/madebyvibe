@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   /* Colors */
 
   --bg-outer: #000000;
@@ -720,11 +720,9 @@ body.dropdown-active .page-blur-overlay {
 
   max-width: 840px;
 
-  padding: 12px 16px 12px 24px;
+  padding: 12px 24px;
 
-  /* Increased padding */
-
-  /* Uniform padding */
+  /* Uniform padding on both sides */
 
   background: rgba(28, 28, 30, 0.7);
 
@@ -740,7 +738,8 @@ body.dropdown-active .page-blur-overlay {
 
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 
-  gap: 0;
+  /* Equal gaps between logo, nav links, and CTA */
+  gap: 1.5rem;
 }
 
 /* Light Mode Scrolled Override */
@@ -3994,6 +3993,46 @@ svg[class*="corner-smooth"] path {
   min-width: 0;
 }
 
+/* Blog Custom Cursor */
+.blog-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 80px;
+  background: var(--accent-brand);
+  color: #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+  opacity: 0;
+}
+
+.blog-cursor svg {
+  width: 32px;
+  height: 32px;
+  color: #000;
+}
+
+.blog-cursor.active {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+/* Hide default cursor when custom cursor is active */
+.blog-slider-container.cursor-active {
+  cursor: none;
+}
+
+.blog-slider-container.cursor-active * {
+  cursor: none;
+}
+
 .blog-slider {
   display: flex;
 
@@ -4001,7 +4040,7 @@ svg[class*="corner-smooth"] path {
 
   overflow-x: auto;
 
-  cursor: grab;
+  cursor: default;
 
   -webkit-overflow-scrolling: touch;
 
@@ -4025,6 +4064,21 @@ svg[class*="corner-smooth"] path {
 }
 
 /* Homepage Blog Card Styles (Matches src/components/blog.js) */
+
+/* Blog Card Link wrapper in slider */
+.blog-slider .blog-card-link {
+  text-decoration: none;
+  display: block;
+  flex-shrink: 0;
+  color: inherit;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* When link is present, card doesn't need flex-shrink */
+.blog-slider .blog-card-link .blog-card {
+  flex-shrink: unset;
+}
 
 .blog-card {
   /* Default mobile width */
@@ -4068,6 +4122,10 @@ svg[class*="corner-smooth"] path {
   transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 
   display: block;
+
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .blog-card:hover .blog-img {
@@ -5400,10 +5458,34 @@ svg[class*="corner-smooth"] path {
   color: var(--text-primary);
 }
 
+
 .btn-outline:hover .btn-content {
   border-color: var(--accent-brand);
 
   background: rgba(255, 255, 255, 0.05);
+}
+
+/* Visit Variant (White Fill in Dark Mode) */
+
+.btn-visit {
+  width: fit-content;
+  margin-top: 2rem;
+}
+
+.btn-visit .btn-content {
+  background: var(--text-on-dark);
+
+  color: var(--bg-outer);
+}
+
+[data-theme="light"] .btn-visit .btn-content {
+  background: var(--text-primary);
+
+  color: #fff;
+}
+
+.btn-visit:hover .btn-content {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Text Animation Group */
@@ -6174,7 +6256,6 @@ svg[class*="corner-smooth"] path {
 
   position: relative;
 
-  margin-bottom: 3rem;
 }
 
 .work-card-image-wrapper {
@@ -8426,12 +8507,15 @@ svg[class*="corner-smooth"] path {
 
 .blog-detail-container {
   padding-top: 100px;
-
-  padding-bottom: 120px;
-
+  padding-bottom: 0;
   background: var(--bg-outer);
-
   min-height: 100vh;
+
+  /* Pattern B: Full width container for hero bleed */
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 /* Hero Section */
@@ -8443,30 +8527,26 @@ svg[class*="corner-smooth"] path {
 
   gap: 0;
 
-  min-height: 80vh;
+  min-height: 70vh;
 
   position: relative;
 
   overflow: visible;
 
-  margin-bottom: var(--padding-internal);
+  margin-bottom: 4rem;
 
   align-items: stretch;
 }
 
 .blog-hero-left {
+  /* Smart padding to align with centered 1800px grid */
+  --padding-viewport: 64px;
   padding-left: var(--padding-viewport);
-
   padding-right: 2rem;
-
   z-index: 5;
-
   display: flex;
-
   flex-direction: column;
-
   justify-content: center;
-
   position: relative;
 }
 
@@ -8643,19 +8723,18 @@ svg[class*="corner-smooth"] path {
 
 /* Layout Grid */
 
-.blog-layout-wrapper {
+.blog-detail-container .blog-layout-wrapper {
   display: grid;
-
   grid-template-columns: 250px 1fr 80px;
-
   gap: 4rem;
+  padding-bottom: 6rem;
 
-  padding: 0 var(--padding-viewport) 6rem;
-
+  /* Constrain content since parent is now full width */
+  width: 100%;
   max-width: 1800px;
-  padding: 0 var(--padding-internal);
-
   margin: 0 auto;
+  padding-left: var(--layout-padding);
+  padding-right: var(--layout-padding);
 
   position: relative;
 }
@@ -10812,6 +10891,98 @@ main.blog-detail-container {
 }
 
 /* =====================================================
+   BLOG HERO - MOBILE RESPONSIVE FIX (FINAL OVERRIDE)
+   ===================================================== */
+@media (max-width: 900px) {
+  .blog-hero-section {
+    display: flex !important;
+    flex-direction: column !important;
+    height: auto !important;
+    min-height: auto !important;
+    padding-top: 120px !important;
+    /* Clear fixed nav */
+    margin-bottom: 4rem !important;
+    gap: 3rem !important;
+    margin-top: 0 !important;
+    padding-left: 0 !important;
+    /* Reset viewport padding */
+  }
+
+  /* Reset Left Content Column */
+  /* Reset Left Content Column */
+  .blog-hero-left {
+    position: relative !important;
+    width: 100% !important;
+    max-width: none !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    padding: 0 var(--layout-padding) !important;
+    order: 2 !important;
+    /* Move Text to Bottom */
+    margin: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  /* Reset Title Container */
+  .blog-title-container {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+  }
+
+  /* Reset Image Column */
+  /* Reset Image Column */
+  .blog-hero-right {
+    position: relative !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 var(--layout-padding) !important;
+    /* Match text padding */
+    height: auto !important;
+    display: block !important;
+    order: 1 !important;
+    /* Move Image to Top */
+  }
+
+  .blog-hero-image-wrapper {
+    width: 100% !important;
+    height: 45vh !important;
+    min-height: 300px !important;
+    margin: 0 !important;
+    /* Special Radius for Toast Effect */
+    border-top-left-radius: 80px !important;
+    border-top-right-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
+    border-bottom-left-radius: 20px !important;
+    position: relative !important;
+    right: auto !important;
+    left: auto !important;
+  }
+
+  /* Hide SVGs on Mobile */
+  .blog-corner,
+  .blog-title-container .corner-svg,
+  .blog-hero-right .blog-corner {
+    display: none !important;
+  }
+
+  /* Ensure author info flows normally */
+  .blog-hero-author {
+    position: relative !important;
+    margin-top: 2rem !important;
+    left: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+  }
+}
+
+/* =====================================================
 
    SERVICE DETAIL HERO - SPLIT LAYOUT
 
@@ -11736,29 +11907,7 @@ main.blog-detail-container {
   color: var(--text-primary);
 }
 
-.visit-site-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 2rem;
-  background: var(--text-on-dark);
-  color: var(--bg-outer);
-  border-radius: 99px;
-  text-decoration: none;
-  font-weight: 600;
-  width: fit-content;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-[data-theme="light"] .visit-site-btn {
-  background: var(--text-primary);
-  color: #fff;
-}
-
-.visit-site-btn:hover {
-  transform: scale(1.02);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
+/* Legacy .visit-site-btn removed */
 
 /* Responsive */
 @media (max-width: 1024px) {
@@ -11906,7 +12055,7 @@ main.blog-detail-container {
    ===================================================== */
 .work-segment {
   /* Standardized padding for better alignment and flow */
-  padding: clamp(6rem, 10vw, 10rem) var(--layout-padding);
+  padding: 32px var(--layout-padding);
   max-width: 1800px;
   width: 100%;
   margin: 0 auto;
@@ -12005,9 +12154,8 @@ main.blog-detail-container {
 /* Responsive */
 @media (max-width: 1024px) {
   .work-segment {
-    padding-top: 3rem !important;
+    padding: 32px var(--layout-padding);
     /* Force smaller padding on mobile/tablet too */
-    padding-bottom: 4rem;
   }
 
   .work-segment-text-grid {

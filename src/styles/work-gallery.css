@@ -2,6 +2,7 @@
 .work-gallery {
     margin-top: 8rem;
     padding: 0 var(--layout-padding);
+    padding-bottom: 32px;
     max-width: 1800px;
     margin-left: auto;
     margin-right: auto;
@@ -60,7 +61,7 @@
    ======================================= */
 .work-segment {
     /* Standardized padding for better alignment and flow */
-    padding: clamp(6rem, 10vw, 10rem) var(--layout-padding);
+    padding: 32px var(--layout-padding);
     max-width: 1800px;
     width: 100%;
     margin: 0 auto;
@@ -177,7 +178,7 @@
     }
 
     .work-segment {
-        padding: 4rem var(--layout-padding);
+        padding: 32px var(--layout-padding);
         margin: 0 auto;
     }
 

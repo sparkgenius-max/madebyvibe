@@ -4,6 +4,7 @@ import { Footer } from '../components/footer.js';
 import { BigFooterMarquee } from '../components/big-marquee.js';
 import { SectionLabel } from '../components/section-label.js';
 import { MoreWork, initMoreWork } from '../components/more-work.js';
+import { Button } from '../components/button.js';
 
 export function WorkDetailPage() {
     // Dummy Data
@@ -113,12 +114,12 @@ export function WorkDetailPage() {
                         </div>
                     </div>
 
-                    <a href="#" class="visit-site-btn">
-                        Visit Website 
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                            <path d="M1 11L11 1M11 1H3M11 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
+                    ${Button({
+        text: 'Visit Website',
+        href: '#',
+        variant: 'visit',
+        direction: 'up-right'
+    })}
                 </div>
             </div>
         </section>

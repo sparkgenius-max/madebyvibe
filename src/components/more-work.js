@@ -140,9 +140,8 @@ export function initMoreWork() {
         customCursor.style.top = `${e.clientY}px`;
     };
 
+    // Track cursor position globally on the wrapper
     sliderWrapper.addEventListener('mouseenter', () => {
-        customCursor.classList.add('active');
-        sliderWrapper.classList.add('cursor-active');
         document.addEventListener('mousemove', moveCustomCursor);
     });
 
@@ -150,6 +149,19 @@ export function initMoreWork() {
         customCursor.classList.remove('active');
         sliderWrapper.classList.remove('cursor-active');
         document.removeEventListener('mousemove', moveCustomCursor);
+    });
+
+    // Only show cursor when hovering on actual work cards, not gaps
+    const workCards = slider.querySelectorAll('.work-card-new');
+    workCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            customCursor.classList.add('active');
+            sliderWrapper.classList.add('cursor-active');
+        });
+        card.addEventListener('mouseleave', () => {
+            customCursor.classList.remove('active');
+            sliderWrapper.classList.remove('cursor-active');
+        });
     });
 
     let isDown = false;

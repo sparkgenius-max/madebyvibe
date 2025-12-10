@@ -1,7 +1,7 @@
 .more-work-section {
     padding: var(--layout-padding);
-    padding-top: clamp(4rem, 8vw, 8rem);
-    padding-bottom: clamp(4rem, 8vw, 8rem);
+    padding-top: 64px;
+    padding-bottom: 64px;
     max-width: 1800px;
     margin: 0 auto;
     overflow: visible;
@@ -34,11 +34,11 @@
     position: relative;
     width: 100vw;
     margin-left: calc(50% - 50vw);
-    cursor: grab;
+    cursor: default;
 }
 
 .more-work-slider-wrapper:active {
-    cursor: grabbing;
+    cursor: default;
 }
 
 .more-work-slider {
@@ -46,8 +46,6 @@
     gap: 2rem;
     overflow-x: auto;
     /* scroll-behavior: smooth;  REMOVED to prevent drag conflict */
-    padding-bottom: 2rem;
-    padding-top: 0rem;
 
     /* Align content with the grid, but allow full bleed scroll */
     padding-left: max(var(--layout-padding), calc((100vw - 1800px) / 2 + var(--layout-padding)));
@@ -137,5 +135,4 @@
     gap: 1rem;
     align-items: center;
     justify-content: center;
-    margin-top: 2rem;
 }
