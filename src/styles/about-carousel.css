@@ -60,7 +60,7 @@
     height: 600px;
     /* Fixed height for the arc calculation */
     position: relative;
-    cursor: grab;
+    cursor: default;
 
     /* Combined Horizontal and Vertical Fade Mask */
     mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent),
@@ -75,7 +75,7 @@
 }
 
 .carousel-container:active {
-    cursor: grabbing;
+    cursor: default;
 }
 
 .card {

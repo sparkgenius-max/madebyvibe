@@ -1,3 +1,5 @@
+import { Button } from './button.js';
+
 export function AboutHeroHTML() {
     return `
     <div class="carousel-wrapper">
@@ -15,10 +17,7 @@ export function AboutHeroHTML() {
         </div>
 
         <div class="carousel-action-wrapper">
-            <button class="nav-btn-custom" onclick="document.getElementById('about-story').scrollIntoView({behavior: 'smooth'})">
-                Learn about us
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="m7 7 10 10"/><path d="M17 7v10H7"/></svg>
-            </button>
+            ${Button({ text: 'Learn about us', variant: 'primary', href: '#about-story', icon: true })}
         </div>
     </div>
     `;
@@ -64,13 +63,13 @@ export function initAboutHeroCarousel() {
     function init() {
         // Clear previous content if any (though usually empty)
         container.innerHTML = '';
-        
+
         items.forEach((item, index) => {
             // Replaced the card div with a custom element structure if needed, 
             // but user asked to "turn the carousel image to component".
             // Since this is raw JS manipulation, we can create a helper function to generate the card HTML.
             // But for now, let's keep the DOM element creation here for performance in the loop.
-            
+
             const card = document.createElement('div');
             card.className = 'card';
             // card.style.backgroundImage = `url(${item.img})`; 
@@ -78,13 +77,13 @@ export function initAboutHeroCarousel() {
             // This implies using an IMG tag or a component structure instead of background image?
             // Or maybe a literal web component? 
             // Let's assume they mean inserting an <img> tag inside the card instead of background-image.
-            
+
             const img = document.createElement('img');
             img.src = item.img;
             img.alt = item.title;
             img.className = 'card-image-component';
             img.draggable = false;
-            
+
             card.appendChild(img);
             container.appendChild(card);
         });

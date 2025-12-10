@@ -3,7 +3,8 @@
     padding: clamp(4rem, 8vw, 8rem) 0;
     overflow: hidden;
     position: relative;
-    background-color: var(--bg-outer); /* Ensure it matches for the cutout trick */
+    background-color: var(--bg-outer);
+    /* Ensure it matches for the cutout trick */
 }
 
 .team-header-wrapper {
@@ -27,12 +28,14 @@
 .team-slider-container {
     width: 100%;
     overflow-x: auto;
-    cursor: grab;
-    padding: 5rem var(--layout-padding) 8rem var(--layout-padding); /* Increased padding for stagger */
+    cursor: default;
+    padding: 5rem var(--layout-padding) 8rem var(--layout-padding);
+    /* Increased padding for stagger */
     display: flex;
     gap: 2rem;
-    align-items: center; /* Center items vertically */
-    
+    align-items: center;
+    /* Center items vertically */
+
     /* Hide scrollbar */
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -43,28 +46,33 @@
 }
 
 .team-slider-container.active {
-    cursor: grabbing;
+    cursor: default;
 }
 
 /* Team Card */
 .team-card {
     position: relative;
-    min-width: 280px; /* Fallback */
+    min-width: 280px;
+    /* Fallback */
     /* 
        Dynamic width for 4 cards + gaps (3 * 2rem = 6rem) + padding 
        We calculate width but we also need to enforce aspect ratio.
     */
     width: calc((100vw - (var(--layout-padding) * 2) - 6rem) / 4);
     /* height: 420px; Removed fixed height */
-    aspect-ratio: 587 / 784; /* Enforce specific aspect ratio ~0.748 */
+    aspect-ratio: 587 / 784;
+    /* Enforce specific aspect ratio ~0.748 */
     border-radius: 24px;
-    overflow: visible; /* Allow breakout to extend */
-    background-color: var(--bg-outer); /* Fallback */
+    overflow: visible;
+    /* Allow breakout to extend */
+    background-color: var(--bg-outer);
+    /* Fallback */
     box-shadow: none;
     transition: transform 0.3s ease;
     user-select: none;
     border-radius: 24px;
-    flex-shrink: 0; /* Prevent shrinking */
+    flex-shrink: 0;
+    /* Prevent shrinking */
 }
 
 /* Staggered Alignment for Slider only */
@@ -99,7 +107,8 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    pointer-events: none; /* Prevent drag ghost */
+    pointer-events: none;
+    /* Prevent drag ghost */
     transition: transform 0.5s ease;
 }
 
@@ -110,14 +119,20 @@
 /* Breakout Label (Bottom-Left) */
 .team-info-breakout {
     position: absolute;
-    bottom: -2px; /* Increased overlap */
-    left: -2px;   /* Increased overlap */
-    background-color: var(--bg-outer); /* Must match page background */
-    padding: 2rem 3rem 1.5rem 2px; /* Adjusted padding */
+    bottom: -2px;
+    /* Increased overlap */
+    left: -2px;
+    /* Increased overlap */
+    background-color: var(--bg-outer);
+    /* Must match page background */
+    padding: 2rem 3rem 1.5rem 2px;
+    /* Adjusted padding */
     z-index: 10;
-    border-top-right-radius: 32px; /* Add border radius to wrapper */
-    min-width: 200px; /* Slightly wider */
-    
+    border-top-right-radius: 32px;
+    /* Add border radius to wrapper */
+    min-width: 200px;
+    /* Slightly wider */
+
     /* Fix for rendering artifacts */
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
@@ -142,7 +157,8 @@
 
 .team-page-title {
     font-family: var(--font-display), sans-serif;
-    font-size: clamp(3rem, 6vw, 5rem); /* Match About Hero sizing */
+    font-size: clamp(3rem, 6vw, 5rem);
+    /* Match About Hero sizing */
     font-weight: 600;
     color: var(--text-primary);
     line-height: 1.1;
@@ -179,12 +195,15 @@
 /* Reset card transform for grid */
 .team-grid-container .team-card {
     width: 100%;
-    transform: none !important; /* Override nth-child transforms */
-    margin: 0; /* Reset any margins */
+    transform: none !important;
+    /* Override nth-child transforms */
+    margin: 0;
+    /* Reset any margins */
 }
 
 .team-grid-container .team-card:hover {
-    transform: translateY(-10px) !important; /* Simple hover lift */
+    transform: translateY(-10px) !important;
+    /* Simple hover lift */
 }
 
 /* Staggered Grid Effect Removed as requested */
@@ -229,7 +248,8 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #ccf381; /* Brand green/yellow */
+    background: #ccf381;
+    /* Brand green/yellow */
     color: #000;
     display: flex;
     align-items: center;

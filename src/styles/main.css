@@ -2948,7 +2948,7 @@ svg[class*="corner-smooth"] path {
 
   overflow-x: auto;
 
-  cursor: grab;
+  cursor: default;
 
   scroll-behavior: smooth;
 
@@ -2970,7 +2970,7 @@ svg[class*="corner-smooth"] path {
 }
 
 .explore-slider.active {
-  cursor: grabbing;
+  cursor: default;
 
   scroll-behavior: auto;
 }
@@ -6390,6 +6390,13 @@ svg[class*="corner-smooth"] path {
   stroke: #15de80;
 }
 
+/* Hide native cursor when custom cursor is used */
+.work-card-image-wrapper,
+.team-card,
+.testimonial-card {
+  cursor: none;
+}
+
 /* ============================================
 
    UPDATED WORK CARD STYLES (Multiple Tags & Hover)
@@ -7769,6 +7776,10 @@ svg[class*="corner-smooth"] path {
   transition: background 0.3s ease;
 
   border: 1px solid transparent;
+
+  /* Prevent text selection when clicking */
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 [data-theme="light"] .faq-item {
