@@ -4,6 +4,7 @@ import { Footer, initFooter } from '../components/footer.js';
 import { BigFooterMarquee } from '../components/big-marquee.js';
 import { Button } from '../components/button.js';
 import { SectionLabel } from '../components/section-label.js';
+import { initWorkCards } from '../components/work-card.js';
 
 // Sample Data
 const blogPosts = [
@@ -82,9 +83,9 @@ const blogPosts = [
 ];
 
 const BlogCard = (post) => `
-    <a href="/blog/${post.id}" class="blog-card-link">
-        <div class="blog-card-new">
-            <div class="blog-card-image-wrapper">
+    <a href="/blog/${post.id}" class="blog-card-link work-card-new">
+        <div>
+            <div class="work-card-image-wrapper">
                 <img src="${post.image}" alt="${post.title}" class="blog-card-img">
             </div>
             <div class="blog-card-content">
@@ -160,14 +161,14 @@ export function BlogPage() {
 export function initBlogPage() {
     // Initialize footer JS and other components
     initFooter();
-    
-    // Initialize custom cursor if used in footer/marquee
-    if (typeof window.initCustomCursor === 'function') {
-        window.initCustomCursor();
+
+    // Initialize custom cursor for blog cards (same as works page)
+    if (typeof initWorkCards === 'function') {
+        initWorkCards();
     } else {
-        // Try importing dynamically if not global (though initFooter usually handles this)
-        import('../components/expertise.js').then(module => {
-            if (module.initCustomCursor) module.initCustomCursor();
-        }).catch(e => console.log('Custom cursor init skipped for blog page'));
+        // Fallback or dynamic import if needed, but direct import is better
+        import('../components/work-card.js').then(module => {
+            if (module.initWorkCards) module.initWorkCards();
+        });
     }
 }
