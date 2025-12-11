@@ -1080,6 +1080,11 @@ body.dropdown-active .page-blur-overlay {
 /* Responsive Visibility */
 @media (max-width: 900px) {
 
+  /* Add padding to the navbar container for edge gaps */
+  .floating-nav {
+    padding: 0 var(--layout-padding);
+  }
+
   /* Switch from 3-column grid to flexbox for proper logo/hamburger alignment */
   .nav-content-wrapper {
     display: flex;
@@ -1087,14 +1092,14 @@ body.dropdown-active .page-blur-overlay {
     /* Reset grid */
     justify-content: space-between;
     align-items: center;
-    padding: 0 var(--layout-padding);
-    /* Use standard layout padding */
+    padding: 0.5rem 1rem;
+    /* Internal padding for tidy logo/hamburger spacing */
   }
 
   /* Override scrolled state on mobile - keep full width, no shrink */
   .floating-nav.scrolled .nav-content-wrapper {
     max-width: 100%;
-    padding: 12px var(--layout-padding);
+    padding: 0.75rem 1rem;
     display: flex;
     justify-content: space-between;
   }
@@ -4763,8 +4768,34 @@ svg[class*="corner-smooth"] path {
 
   .footer-content-wrapper {
     width: 100%;
-    /* Restore padding for inner content */
-    padding: clamp(4rem, 8vw, 6rem) var(--layout-padding) 2rem;
+    /* Reduced content padding for mobile, increased left for social toast overlap */
+    padding: 2.5rem 1.5rem 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-top {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .footer-cta {
+    max-width: 100%;
+    margin-bottom: 0;
+    /* Push right to avoid social toast overlap */
+    padding-left: 3.5rem;
+  }
+
+  .footer-links-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 1rem;
+  }
+
+  /* Make contact column full width if needed, or keep 2 cols */
+  .footer-links-column.contact-column {
+    grid-column: span 2;
+    margin-top: 1rem;
   }
 
   /* Mobile Back to Top Bar - Breakout Style */
