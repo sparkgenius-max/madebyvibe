@@ -56,94 +56,113 @@ export function Footer() {
 
         <!-- Main Footer Container -->
         <div class="footer-container">
-            <!-- Top Section -->
-            <div class="footer-top">
-                <!-- CTA Section -->
-                <div class="footer-cta">
-                    <h3 class="footer-cta-title">Do you like<br>what you see?</h3>
-                    <div class="footer-cta-actions">
-                        ${Button({ text: 'Start a project', href: '#', variant: 'primary' })}
-                        <div class="footer-reviews">
-                            <span class="review-icon">G</span>
-                            <span class="review-stars">★★★★★</span>
-                            <span class="review-text">5.0 from 89 reviews</span>
+            <div class="footer-content-wrapper">
+                <!-- Top Section -->
+                <div class="footer-top">
+                    <!-- CTA Section -->
+                    <div class="footer-cta">
+                        <h3 class="footer-cta-title">Do you like<br>what you see?</h3>
+                        <div class="footer-cta-actions">
+                            ${Button({ text: 'Start a project', href: '#', variant: 'primary' })}
+                            <div class="footer-reviews">
+                                <span class="review-icon">G</span>
+                                <span class="review-stars">★★★★★</span>
+                                <span class="review-text">5.0 from 89 reviews</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Footer Links -->
+                    <div class="footer-links-grid">
+                        <div class="footer-links-column">
+                            <h4 class="footer-links-title">Learn</h4>
+                            <ul class="footer-links-list">
+                                <li><a href="/about">About</a></li>
+                                <li><a href="#">Culture</a></li>
+                                <li><a href="#">Testimonials</a></li>
+                                <li><a href="#">Processes</a></li>
+                                <li><a href="#">FAQs</a></li>
+                                <li><a href="#">Branding FAQs</a></li>
+                                <li><a href="#">Blog</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-links-column">
+                            <h4 class="footer-links-title">Explore</h4>
+                            <ul class="footer-links-list">
+                                <li><a href="/">Home</a></li>
+                                <li><a href="/works">Work <span class="new-badge">NEW</span></a></li>
+                                <li><a href="/services">Services</a></li>
+                                <li><a href="#">Careers</a></li>
+                                <li><a href="#">Sectors</a></li>
+                                <li><a href="#">Hex Test</a></li>
+                                <li><a href="/contact">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-links-column contact-column">
+                            <h4 class="footer-links-title">Get in touch</h4>
+                            <ul class="footer-contact-list">
+                                <li>
+                                    <span class="contact-icon">📞</span>
+                                    <span>+62 812 3456 7890</span>
+                                </li>
+                                <li>
+                                    <span class="contact-icon">✉️</span>
+                                    <span>hello@vibecreative.id</span>
+                                </li>
+                                <li>
+                                    <span class="contact-icon">📍</span>
+                                    <span>Vibe Creative<br>Malang, East Java<br>Indonesia</span>
+                                </li>
+                                <li>
+                                    <span class="contact-icon">🗺️</span>
+                                    <span>///topped.little.pirate</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Footer Links -->
-                <div class="footer-links-grid">
-                    <div class="footer-links-column">
-                        <h4 class="footer-links-title">Learn</h4>
-                        <ul class="footer-links-list">
-                            <li><a href="/about">About</a></li>
-                            <li><a href="#">Culture</a></li>
-                            <li><a href="#">Testimonials</a></li>
-                            <li><a href="#">Processes</a></li>
-                            <li><a href="#">FAQs</a></li>
-                            <li><a href="#">Branding FAQs</a></li>
-                            <li><a href="#">Blog</a></li>
-                        </ul>
+                <!-- Big Text SVG -->
+                <div class="footer-big-text">
+                    <a href="/contact" style="text-decoration: none; display: block;">
+                        <svg id="footerBigSvg" viewBox="0 0 1400 130" preserveAspectRatio="xMidYMid meet" class="footer-big-svg">
+                            <text id="footerBigText" x="0" y="105" fill="#FFFFFF" font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="110" font-weight="500">Let's work together.</text>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Bottom Bar -->
+                <div class="footer-bottom">
+                    <div class="footer-bottom-left">
+                        <span class="footer-brand">Vibe.</span>
+                        <span class="footer-copyright">© Vibe Creative 2025</span>
+                        <span class="footer-divider">|</span>
+                        <span class="footer-reg">Malang, Indonesia</span>
                     </div>
-                    <div class="footer-links-column">
-                        <h4 class="footer-links-title">Explore</h4>
-                        <ul class="footer-links-list">
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/works">Work <span class="new-badge">NEW</span></a></li>
-                            <li><a href="/services">Services</a></li>
-                            <li><a href="#">Careers</a></li>
-                            <li><a href="#">Sectors</a></li>
-                            <li><a href="#">Hex Test</a></li>
-                            <li><a href="/contact">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-links-column contact-column">
-                        <h4 class="footer-links-title">Get in touch</h4>
-                        <ul class="footer-contact-list">
-                            <li>
-                                <span class="contact-icon">📞</span>
-                                <span>+62 812 3456 7890</span>
-                            </li>
-                            <li>
-                                <span class="contact-icon">✉️</span>
-                                <span>hello@vibecreative.id</span>
-                            </li>
-                            <li>
-                                <span class="contact-icon">📍</span>
-                                <span>Vibe Creative<br>Malang, East Java<br>Indonesia</span>
-                            </li>
-                            <li>
-                                <span class="contact-icon">🗺️</span>
-                                <span>///topped.little.pirate</span>
-                            </li>
-                        </ul>
+                    <div class="footer-bottom-right">
+                        <a href="#">Web Design Malang</a>
+                        <span class="footer-divider">|</span>
+                        <a href="#">All Rights Reserved</a>
+                        <span class="footer-divider">|</span>
+                        <a href="#">Privacy Policy (you really care?)</a>
                     </div>
                 </div>
             </div>
-
-            <!-- Big Text SVG -->
-            <div class="footer-big-text">
-                <a href="/contact" style="text-decoration: none; display: block;">
-                    <svg id="footerBigSvg" viewBox="0 0 1400 130" preserveAspectRatio="xMidYMid meet" class="footer-big-svg">
-                        <text id="footerBigText" x="0" y="105" fill="#FFFFFF" font-family="'Inter', 'Helvetica Neue', sans-serif" font-size="110" font-weight="500">Let's work together.</text>
+            <!-- Mobile Back to Top Bar (Bottom of Screen) -->
+            <div class="footer-mobile-backtop">
+                <div class="mobile-backtop-logo-container">
+                    <span class="mobile-backtop-brand">Vibe.</span>
+                </div>
+                <div class="mobile-backtop-toast">
+                    <svg class="corner-smooth-top" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 20H0c11.05 0 20-8.95 20-20v20z" fill="var(--bg-section)" />
                     </svg>
-                </a>
-            </div>
-
-            <!-- Bottom Bar -->
-            <div class="footer-bottom">
-                <div class="footer-bottom-left">
-                    <span class="footer-brand">Vibe.</span>
-                    <span class="footer-copyright">© Vibe Creative 2025</span>
-                    <span class="footer-divider">|</span>
-                    <span class="footer-reg">Malang, Indonesia</span>
-                </div>
-                <div class="footer-bottom-right">
-                    <a href="#">Web Design Malang</a>
-                    <span class="footer-divider">|</span>
-                    <a href="#">All Rights Reserved</a>
-                    <span class="footer-divider">|</span>
-                    <a href="#">Privacy Policy (you really care?)</a>
+                    <a href="#" class="mobile-backtop-link" id="mobileBackToTop">
+                        Sh*t I've gone too far, send me back up <span class="finger-bounce">👆</span>
+                    </a>
+                    <svg class="corner-smooth-bottom-left" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 0v20H0c11.05 0 20-8.95 20-20z" fill="var(--bg-section)" />
+                    </svg>
                 </div>
             </div>
         </div>
@@ -155,6 +174,15 @@ export function initFooter() {
     const backToTop = document.getElementById('backToTop');
     if (backToTop) {
         backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // Mobile back to top button
+    const mobileBackToTop = document.getElementById('mobileBackToTop');
+    if (mobileBackToTop) {
+        mobileBackToTop.addEventListener('click', (e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
@@ -174,7 +202,7 @@ export function initFooter() {
                     svg.setAttribute('viewBox', `${bbox.x} 0 ${bbox.width} 130`);
                 }
             };
-            
+
             runAdjustment();
             requestAnimationFrame(runAdjustment);
         };
@@ -182,8 +210,8 @@ export function initFooter() {
         // Run immediately and after fonts load
         adjustText();
         document.fonts.ready.then(adjustText);
-        window.addEventListener('resize', adjustText); 
-        
+        window.addEventListener('resize', adjustText);
+
         // Additional check for pages where layout might shift (like contact/blog)
         setTimeout(adjustText, 100);
         setTimeout(adjustText, 500);

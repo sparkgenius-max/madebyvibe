@@ -4218,7 +4218,7 @@ svg[class*="corner-smooth"] path {
 
   position: relative;
 
-  padding: clamp(1.5rem, 3vw, 2.5rem);
+  padding: 0 clamp(1.5rem, 3vw, 2.5rem) clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .footer-container {
@@ -4264,7 +4264,7 @@ svg[class*="corner-smooth"] path {
 
   margin-left: clamp(1.5rem, 3vw, 2.5rem);
 
-  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+  margin-top: 0;
 }
 
 .footer-social .corner-smooth-top {
@@ -4709,6 +4709,11 @@ svg[class*="corner-smooth"] path {
   color: #ffffff;
 }
 
+/* Default hidden on desktop */
+.footer-mobile-backtop {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .footer-bottom {
     flex-direction: column;
@@ -4720,15 +4725,142 @@ svg[class*="corner-smooth"] path {
     font-size: clamp(2.5rem, 10vw, 5rem);
   }
 
-  .footer-social-breakout,
+  /* Hide duplicate logo in footer bottom */
+  .footer-bottom .footer-brand {
+    display: none;
+  }
+
+  /* Keep social icons visible at current position */
+  .footer-social-breakout {
+    display: block;
+  }
+
+  .footer-social {
+    margin-left: clamp(1.5rem, 3vw, 2.5rem);
+    margin-top: 0;
+    padding: 0rem 1rem calc(1rem + 16px) 0.5rem;
+  }
+
+  .footer-social .corner-smooth-top,
+  .footer-social .corner-smooth-bottom {
+    width: 24px;
+    height: 24px;
+  }
+
+  .footer-social .corner-smooth-bottom {
+    bottom: -24px;
+  }
+
+  /* Hide desktop back-to-top on mobile */
   .footer-backtop-breakout {
     display: none;
   }
 
   .footer-container {
-    border-radius: 24px 24px 0 0;
+    border-radius: 24px;
+    padding: 0;
+  }
+
+  .footer-content-wrapper {
+    width: 100%;
+    /* Restore padding for inner content */
+    padding: clamp(4rem, 8vw, 6rem) var(--layout-padding) 2rem;
+  }
+
+  /* Mobile Back to Top Bar - Breakout Style */
+  .footer-mobile-backtop {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    background: transparent;
+    border-radius: 0 0 24px 24px;
+
+    /* Container padding removed, so no negative margins needed */
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-top: 3rem;
+
+    /* Align logo with content left, toast goes to right edge */
+    padding: 0;
+    /* Remove padding, children handle it */
+    gap: 0;
+    /* No gap, let specific widths handle it or margins */
+  }
+
+  .mobile-backtop-logo-container {
+    flex-grow: 1;
+    /* Take up remaining space */
+
+    padding: 1.5rem var(--layout-padding);
+    height: auto;
+    display: flex;
+    align-items: center;
+    /* Bottom-left radius to match footer container */
+    border-bottom-left-radius: 24px;
+    margin-right: 1rem;
+    /* Gap between logo container and toast */
+  }
+
+  .mobile-backtop-brand {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    /* Footer background is dark */
+  }
+
+  .mobile-backtop-toast {
+    width: 60%;
+    background: var(--bg-section);
+    padding: 1.5rem;
+
+    /* Top-Left rounded for internal curve, Bottom-Right for container match */
+    border-radius: 24px 0 24px 0;
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Fix for sub-pixel rendering gap on bottom right corner */
+    box-shadow: 1px 1px 0 var(--bg-section);
+  }
+
+  /* Top vertical smoother */
+  .mobile-backtop-toast .corner-smooth-top {
+    position: absolute;
+    top: -20px;
+    right: 0;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    width: 20px;
+    height: 20px;
+  }
+
+  .mobile-backtop-toast .corner-smooth-bottom-left {
+    position: absolute;
+    right: 100%;
+    /* Sits to the left of the toast */
+    bottom: 0;
+    /* Aligned to the bottom edge */
+    width: 20px;
+    height: 20px;
+  }
+
+  .mobile-backtop-link {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
   }
 }
+
+/* Hide mobile back-to-top bar on desktop */
+
 
 /* ============================================
 

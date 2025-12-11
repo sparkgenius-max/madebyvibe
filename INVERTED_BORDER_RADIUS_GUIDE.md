@@ -108,3 +108,84 @@ The SVG `M20 0v20H0C11.05 20 20 11.05 20 0z` by default fills the **Top-Left** o
 2.  **Fill Color:** Ensure the `<path>` fill matches the **page background** (`var(--bg-section)`), NOT the card color.
 3.  **Z-Index:** Give the breakout container `z-index: 10` to sit above the image.
 4.  **Interaction:** If the breakout covers a large area, set `pointer-events: none` on the container and `pointer-events: auto` on the inner content so clicks pass through the invisible gaps.
+
+---
+
+## 6. Case C: Mobile Footer Toast (Bottom Breakout)
+**Goal:** A "Back to Top" toast stuck to the bottom of the visible viewport or footer container on mobile.
+
+**Structure:**
+```html
+<div class="footer-mobile-backtop">
+    <!-- 1. Logo Container (Left) -->
+    <div class="mobile-backtop-logo-container">Vibe.</div>
+
+    <!-- 2. Toast Container (Right) -->
+    <div class="mobile-backtop-toast">
+        <!-- Top SVG Smoother -->
+        <svg class="corner-smooth-top">...</svg>
+        
+        <!-- Content -->
+        <a href="#">Back to Top</a>
+    </div>
+</div>
+```
+
+**Key Implementation Details:**
+
+### 1. The Flexbox Stretch
+To avoid vertical gaps between the left logo container and the right toast block, the parent **must** use `align-items: stretch`.
+```css
+.footer-mobile-backtop {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch; /* CRITICAL: Ensures equal height */
+    padding: 0;
+    gap: 0;
+}
+```
+
+### 2. Complex Border Radius
+Instead of using SVGs for every corner, we use native border-radius where possible to match the parent container's rounded corners.
+
+*   **Footer Container (Parent):** `border-radius: 24px`
+*   **Logo Container:** `border-bottom-left-radius: 24px` (Matches parent)
+*   **Toast Container:** `border-radius: 24px 0 24px 0`
+    *   **Top-Left:** 24px (Internal curve start)
+    *   **Top-Right:** 0 (Flush edge)
+    *   **Bottom-Right:** 24px (Matches parent corner)
+    *   **Bottom-Left:** 0 (Flush with logo container)
+
+### 3. The Top Smoother SVG
+The internal curve on the top-left of the toast is smoothed by an SVG sitting **on top** of the block.
+
+*   **Position:** `absolute`
+*   **Top:** `-20px` (Sits exactly above the block)
+*   **Right:** `0` (Aligned to right edge)
+*   **Transform:** `none` (Default orientation matches top-right curve needs if drawn correctly, or rotated)
+
+### 4. Sub-Pixel Bleed Fix
+When overlapping dark backgrounds with rounded corners, sub-pixel rendering can sometimes reveal the background color of the parent container behind the radius, creating a thin "line" (often black or white).
+
+**The Fix:** Add a small box-shadow directly to the inner container to "bleed" the background color slightly outward, covering the gap without affecting layout.
+```css
+.mobile-backtop-toast {
+    box-shadow: 1px 1px 0 var(--bg-section);
+}
+```
+
+### 5. Full Width Strategy
+On mobile, if the footer has padding, the full-width toast bar cannot stretch to the edges.
+*   **Solution:** Remove padding from the main `.footer-container` on mobile.
+*   **Compensation:** Wrap the *rest* of the footer content (links, text) in a wrapper (e.g., `.footer-content-wrapper`) and apply the padding there.
+
+```css
+@media (max-width: 768px) {
+    .footer-container {
+        padding: 0; /* Full width for toast */
+    }
+    .footer-content-wrapper {
+        padding: clamp(...) /* Restore padding for content */
+    }
+}
+```
