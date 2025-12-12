@@ -363,7 +363,8 @@ export function initBlogDetailPage() {
         // Using center origin, so offset by half the SVG height, plus 1px adjustment
         const topOffset = titleRect.top - heroRightRect.top - svgHeight + 1;
         // For bottom SVG: position so visual top aligns with title bottom edge
-        const bottomOffset = heroRightRect.bottom - titleRect.bottom - svgHeight;
+        // Adding adjustment to slide SVG up and close the gap
+        const bottomOffset = heroRightRect.bottom - titleRect.bottom - svgHeight + 1.5;
 
         // Calculate HORIZONTAL position - left edge of image relative to hero-right
         const leftOffset = imageRect.left - heroRightRect.left;
