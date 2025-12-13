@@ -1819,7 +1819,7 @@ svg[class*="corner-smooth"] path {
 
   text-transform: uppercase;
 
-  color: var(--text-label);
+  color: rgba(255, 255, 255, 0.6);
 
   letter-spacing: 0.05em;
 }
@@ -1872,7 +1872,7 @@ svg[class*="corner-smooth"] path {
 
   height: 40px;
 
-  color: var(--text-on-dark);
+  color: #ffffff;
 
   display: flex;
 
@@ -1924,9 +1924,9 @@ svg[class*="corner-smooth"] path {
 
   right: var(--padding-viewport);
 
-  background: var(--toast-bg);
+  background: #000000;
 
-  color: var(--text-on-dark);
+  color: #ffffff;
 
   padding: 2rem 3rem 2rem 4rem;
 
