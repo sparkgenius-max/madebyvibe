@@ -1,68 +1,13 @@
+import { client } from '../lib/sanity.js';
+
 export function ServicesDropdown() {
     return `
     <div class="dropdown-menu services-dropdown">
         <!-- Left Column: Services List -->
         <div class="dropdown-col-left">
-            <div class="dropdown-list">
-                <a href="/services/brand-identity" class="dropdown-item group">
-                    <div class="dropdown-item-header">
-                        <h4 class="dropdown-item-title">Brand Identity</h4>
-                        <svg class="dropdown-arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <p class="dropdown-item-desc">Crafting memorable brands</p>
-                </a>
-                
-                <a href="/services/websites" class="dropdown-item group">
-                    <div class="dropdown-item-header">
-                        <h4 class="dropdown-item-title">Websites</h4>
-                        <svg class="dropdown-arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <p class="dropdown-item-desc">High-performance digital experiences</p>
-                </a>
-
-                <a href="/services/seo" class="dropdown-item group">
-                    <div class="dropdown-item-header">
-                        <h4 class="dropdown-item-title">SEO</h4>
-                        <svg class="dropdown-arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <p class="dropdown-item-desc">Get found by your audience</p>
-                </a>
-
-                <a href="/services/ui-ux-design" class="dropdown-item group">
-                    <div class="dropdown-item-header">
-                        <h4 class="dropdown-item-title">UI/UX Design</h4>
-                        <svg class="dropdown-arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <p class="dropdown-item-desc">User-centric interface design</p>
-                </a>
-
-                <a href="/services/e-commerce" class="dropdown-item group">
-                    <div class="dropdown-item-header">
-                        <h4 class="dropdown-item-title">E-Commerce</h4>
-                        <svg class="dropdown-arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <p class="dropdown-item-desc">Scalable online stores</p>
-                </a>
-
-                <a href="/services/illustration" class="dropdown-item group">
-                    <div class="dropdown-item-header">
-                        <h4 class="dropdown-item-title">Illustration</h4>
-                        <svg class="dropdown-arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <p class="dropdown-item-desc">Custom visual storytelling</p>
-                </a>
+            <div class="dropdown-list" id="services-dropdown-list">
+                <!-- Loading or default content -->
+                <div style="padding: 1rem; color: var(--text-secondary);">Loading...</div>
             </div>
         </div>
         
@@ -87,13 +32,52 @@ export function ServicesDropdown() {
     `;
 }
 
+export async function initServicesDropdown() {
+    const listContainer = document.getElementById('services-dropdown-list');
+    if (!listContainer) return;
+
+    // Fetch top services (limit 6)
+    const query = `*[_type == "service" && defined(slug.current)] | order(title asc)[0...6] {
+        title,
+        slug,
+        shortDescription
+    }`;
+
+    try {
+        const services = await client.fetch(query);
+
+        if (services.length > 0) {
+            const html = services.map(service => `
+                <a href="/services/${service.slug.current}" class="dropdown-item group">
+                    <div class="dropdown-item-header">
+                        <h4 class="dropdown-item-title">${service.title}</h4>
+                        <svg class="dropdown-arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <p class="dropdown-item-desc">${service.shortDescription || 'Learn more'}</p>
+                </a>
+            `).join('');
+
+            listContainer.innerHTML = html;
+        } else {
+            listContainer.innerHTML = '<div style="padding: 1rem;">No services found.</div>';
+        }
+
+    } catch (err) {
+        console.error('Error fetching services nav:', err);
+        // Fallback?
+        listContainer.innerHTML = '<a href="/services" class="dropdown-item group">View All Services</a>';
+    }
+}
+
 export function AboutDropdown() {
     return `
     <div class="dropdown-menu about-dropdown">
         <!-- Left Column: About Links -->
         <div class="dropdown-col-left">
             <div class="dropdown-list">
-                <a href="#" class="dropdown-item group">
+                <a href="/about" class="dropdown-item group">
                     <div class="dropdown-item-header">
                         <h4 class="dropdown-item-title">Our Story</h4>
                          <svg class="dropdown-arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -129,7 +113,7 @@ export function AboutDropdown() {
         <div class="dropdown-col-right">
             <div class="dropdown-cta-card">
                  <div>
-                    <a href="/culture" class="dropdown-cta-header group">
+                    <a href="/about" class="dropdown-cta-header group">
                         <h4 class="dropdown-cta-title">Culture</h4>
                         <svg class="dropdown-cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

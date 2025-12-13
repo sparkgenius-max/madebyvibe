@@ -1,50 +1,8 @@
-
+import { client, urlFor } from '../lib/sanity.js';
 import { WorkCard } from './work-card.js';
 import { SectionLabel } from './section-label.js';
 
 export function MoreWork() {
-    // Dummy Data for More Works
-    const otherWorks = [
-        {
-            title: "Rebranding a Tech Giant",
-            client: "TechCorp",
-            categories: ["Branding", "Strategy"],
-            year: "2024",
-            image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-            category: "Branding" // Fallback
-        },
-        {
-            title: "Digital Experience for Fashion",
-            client: "Vogueish",
-            categories: ["Web Design", "Development"],
-            year: "2023",
-            image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-            category: "Web"
-        },
-        {
-            title: "Sustainable Packaging Design",
-            client: "EcoGoods",
-            categories: ["Packaging", "Identity"],
-            year: "2023",
-            image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-            category: "Packaging"
-        },
-        {
-            title: "Future of Mobility",
-            client: "AutoMotion",
-            categories: ["Concept", "3D"],
-            year: "2024",
-            image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-            category: "Concept"
-        }
-    ];
-
-    // Force fixed height for consistency in slider
-    const cardsHtml = otherWorks.map(work => {
-        work.height = "513px"; // 684x513 ratio
-        return WorkCard(work);
-    }).join('');
-
     return `
     <section class="more-work-section">
         <div class="more-work-container">
@@ -58,13 +16,14 @@ export function MoreWork() {
             <!-- Row 2: Carousel -->
             <div class="more-work-slider-wrapper">
                 <div class="more-work-slider" id="moreWorkSlider">
-                    ${cardsHtml}
+                    <!-- Loading State / Initial Content -->
+                    <div style="padding: 2rem; color: var(--text-secondary);">Loading works...</div>
                 </div>
             </div>
 
             <!-- Row 3: Navigation -->
             <div class="more-work-nav">
-                <button class="blog-nav-btn prev btn-icon-only" id="moreWorkPrev" aria-label="Previous">
+                <button class="blog-nav-btn prev btn-icon-only" id="moreWorkPrev" aria-label="Previous" disabled>
                     <div class="btn-content">
                         <div class="btn-icon-group left">
                             <span class="btn-icon-primary">
@@ -81,7 +40,7 @@ export function MoreWork() {
                     </div>
                 </button>
                 <div class="nav-divider"></div>
-                <button class="blog-nav-btn next btn-icon-only" id="moreWorkNext" aria-label="Next">
+                <button class="blog-nav-btn next btn-icon-only" id="moreWorkNext" aria-label="Next" disabled>
                     <div class="btn-content">
                         <div class="btn-icon-group right">
                             <span class="btn-icon-primary">
@@ -104,13 +63,62 @@ export function MoreWork() {
     `;
 }
 
-export function initMoreWork() {
+
+
+export async function initMoreWork() {
     const slider = document.getElementById('moreWorkSlider');
     const prevBtn = document.getElementById('moreWorkPrev');
     const nextBtn = document.getElementById('moreWorkNext');
 
+    if (!slider) return;
+
+    // Fetch Content
+    const query = `*[_type == "work"]{
+      title,
+      client,
+      year,
+      categories,
+      mainImage
+    }`;
+
+    try {
+        console.log("Fetching works from Sanity...");
+        const works = await client.fetch(query);
+        console.log("Sanity response:", works);
+
+        if (works && works.length > 0) {
+            const cardsHtml = works.map(work => {
+                // Map Sanity data to WorkCard props
+                const cardData = {
+                    title: work.title,
+                    client: work.client,
+                    categories: work.categories || [],
+                    year: work.year,
+                    // Use urlFor to generate the image URL
+                    image: work.mainImage ? urlFor(work.mainImage).width(800).url() : '',
+                    height: "513px"
+                };
+                return WorkCard(cardData);
+            }).join('');
+
+            slider.innerHTML = cardsHtml;
+
+            // Re-enable buttons if needed
+            if (works.length > 0) {
+                if (nextBtn) nextBtn.removeAttribute('disabled');
+            }
+        } else {
+            slider.innerHTML = '<div style="padding: 2rem;">No works found.</div>';
+        }
+
+    } catch (err) {
+        console.error('Sanity fetch error:', err);
+        slider.innerHTML = '<div style="padding: 2rem;">Error loading works.</div>';
+    }
+
+    // Existing Logic continues below...
     const sliderWrapper = document.querySelector('.more-work-slider-wrapper');
-    if (!slider || !sliderWrapper) return;
+    if (!sliderWrapper) return;
 
     // Custom Cursor Logic
     let customCursor = document.querySelector('.more-work-cursor');

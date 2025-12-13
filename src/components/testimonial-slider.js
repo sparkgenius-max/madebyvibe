@@ -1,67 +1,8 @@
 import '../styles/testimonial.css';
 import { SectionLabel } from './section-label.js';
+import { client } from '../lib/sanity.js';
 
 export function TestimonialSlider() {
-    const testimonials = [
-        {
-            id: 1,
-            text: "I've been working with Andy and the Vibe team for around 12 months now. They've been nothing shy of perfect. The team completely designed and rebuilt my website using modern tech which has been such a positive change against my old website. Can't recommend Vibe enough",
-            name: "Daniel Poll",
-            company: "Noramble",
-            initial: "D"
-        },
-        {
-            id: 2,
-            text: "The level of creativity and attention to detail Vibe brings to the table is unmatched. They didn't just build a website; they crafted an experience that perfectly represents our brand values. The process was seamless from start to finish.",
-            name: "Sarah Jenks",
-            company: "TechFlow",
-            initial: "S"
-        },
-        {
-            id: 3,
-            text: "Working with Vibe was a game-changer for our startup. They understood our vision immediately and translated it into a digital product that exceeds our expectations. The team is responsive, talented, and truly cares about the outcome.",
-            name: "Mike Ross",
-            company: "Innovate",
-            initial: "M"
-        },
-        {
-            id: 4,
-            text: "We needed a complete rebrand and Vibe delivered. Their strategic approach combined with stunning visuals gave us exactly what we needed to stand out in a crowded market. Highly professional and easy to work with.",
-            name: "Jessica Lee",
-            company: "BrightStudio",
-            initial: "J"
-        },
-        {
-            id: 5,
-            text: "Exceptional service and top-tier design quality. The team at Vibe went above and beyond to ensure every interaction on our site felt polished. Our conversion rates have doubled since the launch.",
-            name: "Tom Chen",
-            company: "GrowthLabs",
-            initial: "T"
-        }
-    ];
-
-    const starsSvg = `
-        <svg class="star-icon" viewBox="0 0 24 24">
-            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-        </svg>
-    `;
-
-    const cards = testimonials.map(t => `
-        <div class="testimonial-card">
-            <div class="testimonial-stars">
-                ${starsSvg}${starsSvg}${starsSvg}${starsSvg}${starsSvg}
-            </div>
-            <p class="testimonial-text">${t.text}</p>
-            <div class="testimonial-user">
-                <div class="testimonial-avatar-initial">${t.initial}</div>
-                <div class="testimonial-user-info">
-                    <h4 class="testimonial-name">${t.name}</h4>
-                    <span class="testimonial-company">${t.company}</span>
-                </div>
-            </div>
-        </div>
-    `).join('');
-
     return `
     <section class="testimonial-section">
         <div class="testimonial-layout">
@@ -85,7 +26,7 @@ export function TestimonialSlider() {
             
             <div class="testimonial-slider-container">
                 <div class="testimonial-slider" id="testimonialSlider">
-                    ${cards}
+                    <div style="padding: 2rem; color: var(--text-secondary); white-space: nowrap;">Loading testimonials...</div>
                 </div>
             </div>
         </div>
@@ -93,12 +34,53 @@ export function TestimonialSlider() {
     `;
 }
 
-export function initTestimonialSlider() {
+export async function initTestimonialSlider() {
     const slider = document.getElementById('testimonialSlider');
     const prevBtn = document.getElementById('testimonialPrev');
     const nextBtn = document.getElementById('testimonialNext');
 
     if (!slider) return;
+
+    // Fetch testimonials
+    const query = `*[_type == "testimonial"] | order(_createdAt desc)`;
+
+    try {
+        const testimonials = await client.fetch(query);
+
+        if (testimonials.length > 0) {
+            const starsSvg = `
+                <svg class="star-icon" viewBox="0 0 24 24">
+                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
+            `;
+
+            const cards = testimonials.map(t => `
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        ${starsSvg}${starsSvg}${starsSvg}${starsSvg}${starsSvg}
+                    </div>
+                    <p class="testimonial-text">${t.text}</p>
+                    <div class="testimonial-user">
+                        <div class="testimonial-avatar-initial">${t.initial || t.name.charAt(0)}</div>
+                        <div class="testimonial-user-info">
+                            <h4 class="testimonial-name">${t.name}</h4>
+                            <span class="testimonial-company">${t.company || ''}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            slider.innerHTML = cards;
+
+            // Re-run scroll logic to enable/disable buttons based on new content width
+            updateNavButtons();
+        } else {
+            slider.innerHTML = '<div style="padding: 2rem; white-space: nowrap;">No testimonials found.</div>';
+        }
+    } catch (err) {
+        console.error('Error fetching testimonials:', err);
+        slider.innerHTML = '<div style="padding: 2rem; white-space: nowrap;">Error loading testimonials.</div>';
+    }
 
     let isDown = false;
     let startX;
@@ -122,9 +104,9 @@ export function initTestimonialSlider() {
     };
 
     // Check Scroll State for Buttons
-    const updateNavButtons = () => {
+    function updateNavButtons() {
         if (!prevBtn || !nextBtn) return;
-        
+
         if (slider.scrollLeft <= 10) {
             prevBtn.setAttribute('disabled', '');
         } else {
@@ -158,6 +140,7 @@ export function initTestimonialSlider() {
     }
 
     slider.addEventListener('scroll', updateNavButtons);
+    // Initial check (in case fetch fails or takes time, but called again after fetch)
     updateNavButtons();
 
     // Drag functionality

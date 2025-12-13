@@ -2,59 +2,6 @@ import { Button } from './button.js';
 import { SectionLabel } from './section-label.js';
 
 export function Blog() {
-    const posts = [
-        {
-            id: 1,
-            readTime: "2 min read",
-            title: "Why did Rise at Seven choose MadeByShape?",
-            excerpt: "It always has a feel good factor when another agency instructs us to totally rebrand their business, create a new digital environment and ...",
-            image: "/images/project-1.png"
-        },
-        {
-            id: 2,
-            readTime: "6 min read",
-            title: "Our Culture, Our Value & Our Studio",
-            excerpt: "In our own words, how important culture, values and studio environment is to us as a web design agency at MadeByShape",
-            image: "/images/project-2.png"
-        },
-        {
-            id: 3,
-            readTime: "10 min read",
-            title: "Why having a design agency matters",
-            excerpt: "Co-Founder insights on why we haven't turned to AI and still believe in human creativity...",
-            image: "/images/project-3.png"
-        },
-        {
-            id: 4,
-            readTime: "5 min read",
-            title: "The Future of Web Design in 2025",
-            excerpt: "Exploring the trends and technologies that will shape the digital landscape in the coming year...",
-            image: "/images/project-1-detail.png"
-        },
-        {
-            id: 5,
-            readTime: "8 min read",
-            title: "Building Brand Identity From Scratch",
-            excerpt: "A deep dive into our process of creating memorable brands that resonate with audiences...",
-            image: "/images/project-2.png"
-        }
-    ];
-
-    const cards = posts.map(post => `
-        <a href="/blog/${post.id}" class="blog-card-link">
-            <div class="blog-card">
-                <div class="blog-card-image">
-                    <img src="${post.image}" alt="${post.title}" class="blog-img" draggable="false">
-                </div>
-                <div class="blog-card-content">
-                    <span class="blog-read-time">● ${post.readTime}</span>
-                    <h3 class="blog-card-title">${post.title}</h3>
-                    <p class="blog-card-excerpt">${post.excerpt}</p>
-                </div>
-            </div>
-        </a>
-    `).join('');
-
     return `
     <section class="blog-section">
         <div class="blog-layout">
@@ -62,10 +9,10 @@ export function Blog() {
                 ${SectionLabel('Blog', 'blog-label')}
                 <h2 class="blog-heading">The latest from<br>our design studio</h2>
                 <div class="blog-cta-wrapper" style="margin-bottom: 2rem;">
-                    ${Button({ text: 'View the blog', variant: 'outline-dark', href: '#' })}
+                    ${Button({ text: 'View the blog', variant: 'outline-dark', href: '/blog' })}
                 </div>
                 <div class="blog-nav">
-                    <button class="blog-nav-btn prev btn-icon-only" id="blogPrev" aria-label="Previous">
+                    <button class="blog-nav-btn prev btn-icon-only" id="blogPrev" aria-label="Previous" disabled>
                         <div class="btn-content">
                             <div class="btn-icon-group left">
                                 <span class="btn-icon-primary">
@@ -81,7 +28,7 @@ export function Blog() {
                             </div>
                         </div>
                     </button>
-                    <button class="blog-nav-btn next btn-icon-only" id="blogNext" aria-label="Next">
+                    <button class="blog-nav-btn next btn-icon-only" id="blogNext" aria-label="Next" disabled>
                         <div class="btn-content">
                             <div class="btn-icon-group right">
                                 <span class="btn-icon-primary">
@@ -102,7 +49,7 @@ export function Blog() {
             
             <div class="blog-slider-container">
                 <div class="blog-slider" id="blogSlider">
-                    ${cards}
+                    <div style="padding: 2rem; color: var(--text-secondary);">Loading articles...</div>
                 </div>
             </div>
         </div>
@@ -110,12 +57,68 @@ export function Blog() {
     `;
 }
 
-export function initBlog() {
+import { client, urlFor } from '../lib/sanity.js';
+
+export async function initBlog() {
     const slider = document.getElementById('blogSlider');
     const prevBtn = document.getElementById('blogPrev');
     const nextBtn = document.getElementById('blogNext');
 
     if (!slider) return;
+
+    // Fetch Posts
+    // Query for posts, newest first
+    const query = `*[_type == "post"] | order(publishedAt desc) {
+        title,
+        slug,
+        readTime,
+        publishedAt,
+        mainImage,
+        "excerpt": array::join(body[0..0].children[].text, " ") 
+    }`;
+    // Note: The excerpt is a crude extraction from the first block of portable text.
+
+    try {
+        const posts = await client.fetch(query);
+
+        if (posts.length > 0) {
+            const cardsHtml = posts.map(post => {
+                const imageUrl = post.mainImage ? urlFor(post.mainImage).width(600).url() : '';
+                const link = `/blog/${post.slug?.current}`;
+                const excerptText = post.excerpt ? (post.excerpt.length > 100 ? post.excerpt.substring(0, 100) + '...' : post.excerpt) : '';
+
+                return `
+                <a href="${link}" class="blog-card-link">
+                    <div class="blog-card">
+                        <div class="blog-card-image">
+                            <img src="${imageUrl}" alt="${post.title}" class="blog-img" draggable="false">
+                        </div>
+                        <div class="blog-card-content">
+                            <span class="blog-read-time">● ${post.readTime || '5 min read'}</span>
+                            <h3 class="blog-card-title">${post.title}</h3>
+                            <p class="blog-card-excerpt">${excerptText}</p>
+                        </div>
+                    </div>
+                </a>
+                `;
+            }).join('');
+
+            slider.innerHTML = cardsHtml;
+
+            // Enable buttons
+            if (posts.length > 0) {
+                if (prevBtn) prevBtn.removeAttribute('disabled'); // Actually logic handles this later
+                // Re-run button updaters inside the scroll listener logic
+            }
+        } else {
+            slider.innerHTML = '<div style="padding: 2rem;">No posts found.</div>';
+        }
+
+    } catch (err) {
+        console.error('Blog fetch error:', err);
+        slider.innerHTML = '<div style="padding: 2rem;">Error loading posts.</div>';
+    }
+
 
     const sliderContainer = slider.closest('.blog-slider-container');
 

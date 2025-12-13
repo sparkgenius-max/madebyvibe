@@ -4,7 +4,7 @@ import './styles/work-gallery.css';
 import './styles/more-work.css';
 import { initHome } from './pages/home.js';
 import { Home } from './pages/home.js';
-import { Services } from './pages/services.js';
+import { Services, initServices } from './pages/services.js';
 import { ServiceDetail } from './pages/service-detail.js';
 import { Works, initWorks } from './pages/works.js';
 import { WorkDetailPage, initWorkDetailPage } from './pages/work-detail.js';
@@ -14,8 +14,13 @@ import { ContactPage, initContactPage } from './pages/contact.js';
 import { AboutPage, initAboutPage } from './pages/about.js';
 import { TeamPage, initTeamPage } from './pages/team.js';
 import { initDropdownBlur } from './components/dropdown-interactions.js';
-import { initBlog } from './components/blog.js';
+import { initServicesDropdown } from './components/dropdown-nav.js';
 import { initFooter } from './components/footer.js';
+import { initConsoleBrand } from './components/console-brand.js';
+import { initBlog } from './components/blog.js'; // Ensure initBlog is imported if used explicitly
+
+// Console Easter Egg
+initConsoleBrand();
 
 // Simple router logic
 const app = document.getElementById('app');
@@ -28,12 +33,12 @@ function render() {
 
     if (path === '/services') {
         app.innerHTML = Services();
-        initBlog();
-        initFooter();
+        initServices();
+        initBlog(); // Initialize blog component in footer/bottom
     } else if (path.startsWith('/services/')) {
         app.innerHTML = ServiceDetail();
+        initServiceDetail();
         initBlog();
-        initFooter();
     } else if (path === '/works') {
         app.innerHTML = Works();
         initWorks();
@@ -62,6 +67,9 @@ function render() {
         app.innerHTML = Home();
         initHome();
     }
+
+    // Initialize Global Nav Components
+    initServicesDropdown();
 
     // Initialize Theme Toggle, Scroll Navbar & Dropdown Blur (Global)
     initThemeToggle();

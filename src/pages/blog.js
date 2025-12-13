@@ -5,85 +5,10 @@ import { BigFooterMarquee } from '../components/big-marquee.js';
 import { Button } from '../components/button.js';
 import { SectionLabel } from '../components/section-label.js';
 import { initWorkCards } from '../components/work-card.js';
-
-// Sample Data
-const blogPosts = [
-    {
-        id: 1,
-        readTime: "2 min read",
-        title: "Why did Rise at Seven choose MadeByShape?",
-        excerpt: "It always has a feel good factor when another agency instructs us to totally rebrand their business...",
-        image: "/images/project-1.png",
-        category: "Agency Life"
-    },
-    {
-        id: 2,
-        readTime: "6 min read",
-        title: "Our Culture, Our Value & Our Studio",
-        excerpt: "In our own words, how important culture, values and studio environment is to us as a web design agency...",
-        image: "/images/project-2.png",
-        category: "Culture"
-    },
-    {
-        id: 3,
-        readTime: "10 min read",
-        title: "Why having a design agency matters",
-        excerpt: "Co-Founder insights on why we haven't turned to AI and still believe in human creativity...",
-        image: "/images/project-3.png",
-        category: "Opinion"
-    },
-    {
-        id: 4,
-        readTime: "5 min read",
-        title: "The Future of Web Design in 2025",
-        excerpt: "Exploring the trends and technologies that will shape the digital landscape in the coming year...",
-        image: "/images/project-1-detail.png",
-        category: "Trends"
-    },
-    {
-        id: 5,
-        readTime: "8 min read",
-        title: "Building Brand Identity From Scratch",
-        excerpt: "A deep dive into our process of creating memorable brands that resonate with audiences...",
-        image: "/images/project-2.png",
-        category: "Branding"
-    },
-    {
-        id: 6,
-        readTime: "4 min read",
-        title: "UX Best Practices for E-Commerce",
-        excerpt: "How to convert visitors into customers through intuitive and seamless user experiences...",
-        image: "/images/project-3.png",
-        category: "UX/UI"
-    },
-    {
-        id: 7,
-        readTime: "7 min read",
-        title: "Motion Design: Enhancing Interaction",
-        excerpt: "Using subtle animations to guide users and add delight without sacrificing performance...",
-        image: "/images/project-1.png",
-        category: "Design"
-    },
-    {
-        id: 8,
-        readTime: "5 min read",
-        title: "The Power of Typography",
-        excerpt: "Why font choice is more than just aesthetics—it's about voice, tone, and readability...",
-        image: "/images/project-2.png",
-        category: "Design"
-    },
-    {
-        id: 9,
-        readTime: "3 min read",
-        title: "SEO for Modern Websites",
-        excerpt: "Technical considerations for ensuring your beautiful site actually gets seen by people...",
-        image: "/images/project-3.png",
-        category: "Development"
-    }
-];
+import { client, urlFor } from '../lib/sanity.js';
 
 const BlogCard = (post) => `
-    <a href="/blog/${post.id}" class="blog-card-link work-card-new">
+    <a href="/blog/${post.slug}" class="blog-card-link work-card-new" data-categories="${post.categories ? post.categories.join(',') : ''}">
         <div>
             <div class="work-card-image-wrapper">
                 <img src="${post.image}" alt="${post.title}" class="blog-card-img">
@@ -91,37 +16,31 @@ const BlogCard = (post) => `
             <div class="blog-card-content">
                 <div class="blog-meta">
                     <span class="dot-small">●</span>
-                    <span class="read-time">${post.readTime}</span>
+                    <span class="read-time">${post.readTime || '5 min read'}</span>
                 </div>
                 <h3 class="blog-title">${post.title}</h3>
-                <p class="blog-excerpt">${post.excerpt}</p>
+                <p class="blog-excerpt">${post.excerpt || ''}</p>
             </div>
         </div>
     </a>
 `;
 
-const NewsletterBlock = () => `
-    <div class="blog-newsletter-block">
-        <div class="newsletter-content">
-            <h2 class="newsletter-title">Join our newsletter</h2>
-            <p class="newsletter-desc">Get the latest insights, trends, and news from Vibe delivered straight to your inbox.</p>
-            <form class="newsletter-form" onsubmit="event.preventDefault();">
-                <input type="email" placeholder="Your email address" class="newsletter-input" required>
-                ${Button({ text: 'Subscribe', variant: 'primary', icon: true })}
-            </form>
-        </div>
-        <div class="newsletter-visual">
-             <!-- Abstract Visual -->
-             <svg width="200" height="200" viewBox="0 0 200 200" fill="none" class="newsletter-svg">
-                <circle cx="100" cy="100" r="99" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
-                <circle cx="100" cy="100" r="60" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
-                <path d="M100 0v200M0 100h200" stroke="rgba(255,255,255,0.1)"/>
-             </svg>
-        </div>
-    </div>
-`;
+// Category definitions with display names
+const categories = [
+    { value: 'all', label: 'explore all' },
+    { value: 'web-development', label: 'web development' },
+    { value: 'web-design', label: 'web design' },
+    { value: 'branding', label: 'branding' },
+    { value: 'news-culture', label: 'news & culture' }
+];
 
 export function BlogPage() {
+    const filterHtml = categories.map((cat, i) => `
+        <a href="#" class="blog-filter-item ${i === 0 ? 'active' : ''}" data-filter="${cat.value}">
+            ${cat.label}<span class="count" data-count="${cat.value}">--</span>
+        </a>
+    `).join('');
+
     return `
     ${Navbar()}
     
@@ -130,27 +49,20 @@ export function BlogPage() {
             ${SectionLabel('The Blog')}
         </div>
         <div class="blog-filter-list">
-            <a href="#" class="blog-filter-item active">explore all<span class="count">437</span></a>
-            <a href="#" class="blog-filter-item">web development<span class="count">118</span></a>
-            <a href="#" class="blog-filter-item">web design<span class="count">128</span></a>
-            <a href="#" class="blog-filter-item">branding<span class="count">36</span></a>
-            <a href="#" class="blog-filter-item">news & culture<span class="count">145</span></a>
-            <a href="#" class="blog-filter-item">archive<span class="count">78</span></a>
+            ${filterHtml}
         </div>
     </div>
 
     <section class="blog-list-section">
-        <div class="blog-grid">
-            ${blogPosts.map(BlogCard).join('')}
+        <div class="blog-grid" id="blog-grid">
+            <div style="padding: 4rem; text-align: center; color: var(--text-secondary); grid-column: 1 / -1;">
+                Loading articles...
+            </div>
         </div>
 
         <!-- Pagination -->
-        <div class="blog-pagination">
-            <button class="pagination-btn active">1</button>
-            <button class="pagination-btn">2</button>
-            <button class="pagination-btn">3</button>
-            <span class="pagination-dots">...</span>
-            <button class="pagination-btn">Next</button>
+        <div class="blog-pagination" id="blog-pagination">
+            <!-- Will be populated dynamically -->
         </div>
     </section>
 
@@ -158,17 +70,121 @@ export function BlogPage() {
     `;
 }
 
-export function initBlogPage() {
+let allPosts = []; // Store all posts for filtering
+
+export async function initBlogPage() {
+    const blogGrid = document.getElementById('blog-grid');
+
+    if (blogGrid) {
+        // Fetch all posts with categories
+        const query = `*[_type == "post"] | order(publishedAt desc) {
+            title,
+            "slug": slug.current,
+            readTime,
+            categories,
+            publishedAt,
+            mainImage,
+            "excerpt": array::join(body[0..0].children[].text, " ")
+        }`;
+
+        try {
+            const posts = await client.fetch(query);
+
+            if (posts.length > 0) {
+                // Map to card format
+                allPosts = posts.map(post => ({
+                    title: post.title,
+                    slug: post.slug,
+                    readTime: post.readTime || '5 min read',
+                    categories: post.categories || [],
+                    image: post.mainImage ? urlFor(post.mainImage).width(600).url() : '',
+                    excerpt: post.excerpt ? (post.excerpt.length > 120 ? post.excerpt.substring(0, 120) + '...' : post.excerpt) : ''
+                }));
+
+                // Render all posts initially
+                renderPosts(allPosts);
+
+                // Update counts
+                updateCategoryCounts(allPosts);
+
+            } else {
+                blogGrid.innerHTML = '<div style="padding: 4rem; text-align: center; grid-column: 1 / -1;">No articles found.</div>';
+            }
+
+        } catch (err) {
+            console.error('Error fetching posts:', err);
+            blogGrid.innerHTML = '<div style="padding: 4rem; text-align: center; grid-column: 1 / -1;">Error loading articles.</div>';
+        }
+    }
+
+    // Setup filter click handlers
+    setupFilterHandlers();
+
     // Initialize footer JS and other components
     initFooter();
 
-    // Initialize custom cursor for blog cards (same as works page)
-    if (typeof initWorkCards === 'function') {
-        initWorkCards();
+    // Initialize custom cursor for blog cards
+    setTimeout(() => {
+        if (typeof initWorkCards === 'function') {
+            initWorkCards();
+        }
+    }, 100);
+}
+
+function renderPosts(posts) {
+    const blogGrid = document.getElementById('blog-grid');
+    if (!blogGrid) return;
+
+    if (posts.length > 0) {
+        blogGrid.innerHTML = posts.map(BlogCard).join('');
+        // Re-init cursor after render
+        setTimeout(() => {
+            if (typeof initWorkCards === 'function') {
+                initWorkCards();
+            }
+        }, 50);
     } else {
-        // Fallback or dynamic import if needed, but direct import is better
-        import('../components/work-card.js').then(module => {
-            if (module.initWorkCards) module.initWorkCards();
-        });
+        blogGrid.innerHTML = '<div style="padding: 4rem; text-align: center; grid-column: 1 / -1;">No articles found in this category.</div>';
     }
+}
+
+function updateCategoryCounts(posts) {
+    // Count for "all"
+    const allCount = document.querySelector('[data-count="all"]');
+    if (allCount) allCount.textContent = posts.length;
+
+    // Count for each category
+    categories.forEach(cat => {
+        if (cat.value === 'all') return;
+        const countEl = document.querySelector(`[data-count="${cat.value}"]`);
+        if (countEl) {
+            const count = posts.filter(p => p.categories && p.categories.includes(cat.value)).length;
+            countEl.textContent = count;
+        }
+    });
+}
+
+function setupFilterHandlers() {
+    const filterItems = document.querySelectorAll('.blog-filter-item');
+
+    filterItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            // Update active state
+            filterItems.forEach(f => f.classList.remove('active'));
+            item.classList.add('active');
+
+            // Get filter value
+            const filter = item.getAttribute('data-filter');
+
+            // Filter posts
+            if (filter === 'all') {
+                renderPosts(allPosts);
+            } else {
+                const filtered = allPosts.filter(p => p.categories && p.categories.includes(filter));
+                renderPosts(filtered);
+            }
+        });
+    });
 }

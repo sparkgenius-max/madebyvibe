@@ -2,7 +2,7 @@ import { Navbar } from '../components/navbar.js';
 import { Hero } from '../components/hero.js';
 import { Marquee } from '../components/marquee.js';
 import { About, initAbout } from '../components/about.js';
-import { WorksSection } from '../components/works-section.js';
+import { WorksSection, initWorksSection } from '../components/works-section.js';
 import { initWorkCards } from '../components/work-card.js';
 import { Expertise, initExpertise } from '../components/expertise.js';
 import { Blog, initBlog } from '../components/blog.js';
@@ -34,11 +34,13 @@ export function Home() {
   `;
 }
 
-export function initHome() {
+export async function initHome() {
     // Initialize interactive components after DOM is ready
+    await initWorksSection();
     initWorkCards();
     initAbout();
     initExpertise();
     initBlog();
     initFooter();
 }
+

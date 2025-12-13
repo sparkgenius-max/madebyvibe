@@ -1,13 +1,16 @@
-export function Button({ text, href, variant = 'primary', className = '', icon = true, direction = 'up-right' }) {
+export function Button({ text, href, variant = 'primary', className = '', icon = true, direction = 'up-right', target = '' }) {
     // If icon-only variant, we don't capitalize text as there is no text shown (or text is aria-label)
     // But let's process it anyway if text exists
     const processedText = text ? text.charAt(0).toUpperCase() + text.slice(1).toLowerCase() : '';
 
     const Tag = href ? 'a' : 'button';
-    const attr = href ? `href="${href}"` : '';
+    let attr = href ? `href="${href}"` : '';
+    if (target && href) {
+        attr += ` target="${target}" rel="noopener noreferrer"`;
+    }
 
     let iconSvg = '';
-    
+
     // Choose icon based on direction
     if (direction === 'left') {
         iconSvg = `

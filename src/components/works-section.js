@@ -1,115 +1,19 @@
 import { WorkCard } from './work-card.js';
 import { SectionLabel } from './section-label.js';
 import { Button } from './button.js';
-
-const worksData = {
-    left: [
-        {
-            image: '/images/project-1.png',
-            year: '2024',
-            client: 'TechNova Solutions',
-            title: 'Designing a memorable logo and comprehensive branding for a tech startup.',
-            height: '500px',
-            grayscale: true,
-            categories: ['Logo Design', 'Branding']
-        },
-        {
-            image: '/images/project-2.png',
-            year: '2023',
-            client: 'Urban Retail Co.',
-            title: 'Creating a fully designed and developed website for a retail business.',
-            height: '500px',
-            categories: ['Website Creation (Design & Development)']
-        },
-        {
-            image: '/images/project-3.png',
-            year: '2024',
-            client: 'Creative Studios',
-            title: 'Building a custom website with complete design and development.',
-            height: '500px',
-            categories: ['Website Creation (Design & Development)']
-        },
-        {
-            image: '/images/project-1.png',
-            year: '2024',
-            client: 'Global Marketing Agency',
-            title: 'Creating engaging Instagram posts for brand awareness.',
-            height: '500px',
-            categories: ['Instagram Posts']
-        },
-        {
-            image: '/images/project-2.png',
-            year: '2024',
-            client: 'Fashion Forward',
-            title: 'Crafting custom illustrations for marketing materials.',
-            height: '500px',
-            lightBg: true,
-            categories: ['Illustration']
-        }
-    ],
-    right: [
-        {
-            image: '/images/project-3.png',
-            year: '2024',
-            client: 'DataFlow Inc.',
-            title: 'Developing an eCommerce website with design and functionality.',
-            height: '500px',
-            categories: ['Website Creation (Design & Development)']
-        },
-        {
-            image: '/images/project-1.png',
-            year: '2024',
-            client: 'Content Creators Hub',
-            title: 'Designing professional LinkedIn posts for business networking.',
-            height: '500px',
-            categories: ['LinkedIn Posts']
-        },
-        {
-            image: '/images/project-2.png',
-            year: '2024',
-            client: 'AdVantage Media',
-            title: 'Creating eye-catching Instagram content for social media growth.',
-            height: '500px',
-            categories: ['Instagram Posts']
-        },
-        {
-            image: '/images/project-3.png',
-            year: '2024',
-            client: 'Innovate Corp',
-            title: 'Building a Shopify website with custom design and development.',
-            height: '500px',
-            categories: ['Website Creation (Design & Development)']
-        },
-        {
-            image: '/images/project-1.png',
-            year: '2024',
-            client: 'Shape Dynamics',
-            title: 'Crafting strategic LinkedIn posts for thought leadership.',
-            height: '500px',
-            darkBg: true,
-            categories: ['LinkedIn Posts']
-        }
-    ]
-};
+import { client, urlFor } from '../lib/sanity.js';
 
 export function WorksSection() {
     return `
     <section class="works-section">
         <div class="works-masonry">
             <!-- Left Column -->
-            <div class="works-column">
-                ${worksData.left.map(WorkCard).join('')}
-
-                <!-- CTA Block -->
-                <div class="works-cta-block">
-                    <h4 class="works-cta-title">Seen enough?</h4>
-                    <p class="works-cta-desc">Let's build your brand's future.</p>
-                    ${Button({ text: 'Start a Project', href: '/contact', variant: 'primary' })}
-                </div>
+            <div class="works-column" id="works-column-left">
+                <div style="padding: 2rem; color: var(--text-secondary);">Loading projects...</div>
             </div>
 
             <!-- Right Column -->
-            <div class="works-column">
+            <div class="works-column" id="works-column-right">
                 <!-- Testimonial Block -->
                 <div class="works-testimonial">
                     <div class="works-testimonial-content">
@@ -128,10 +32,69 @@ export function WorksSection() {
                         </div>
                     </div>
                 </div>
-
-                ${worksData.right.map(WorkCard).join('')}
+                
+                <div id="works-right-cards"></div>
             </div>
         </div>
     </section>
     `;
+}
+
+export async function initWorksSection() {
+    const leftColumn = document.getElementById('works-column-left');
+    const rightCardsContainer = document.getElementById('works-right-cards');
+
+    if (!leftColumn || !rightCardsContainer) return;
+
+    // Fetch all works
+    const query = `*[_type == "work"] | order(_createdAt desc) {
+        title,
+        "slug": slug.current,
+        client,
+        year,
+        categories,
+        mainImage
+    }`;
+
+    try {
+        const works = await client.fetch(query);
+
+        if (works.length > 0) {
+            // Map Sanity data to WorkCard format
+            const mappedWorks = works.map(work => ({
+                title: work.title,
+                slug: work.slug,
+                client: work.client || 'Client',
+                year: work.year || '2024',
+                categories: work.categories || [],
+                image: work.mainImage ? urlFor(work.mainImage).width(800).url() : '',
+                height: '500px'
+            }));
+
+            // Split into two columns
+            const half = Math.ceil(mappedWorks.length / 2);
+            const leftWorks = mappedWorks.slice(0, half);
+            const rightWorks = mappedWorks.slice(half);
+
+            // Render left column
+            leftColumn.innerHTML = leftWorks.map(WorkCard).join('') + `
+                <!-- CTA Block -->
+                <div class="works-cta-block">
+                    <h4 class="works-cta-title">Seen enough?</h4>
+                    <p class="works-cta-desc">Let's build your brand's future.</p>
+                    ${Button({ text: 'Start a Project', href: '/contact', variant: 'primary' })}
+                </div>
+            `;
+
+            // Render right column cards
+            rightCardsContainer.innerHTML = rightWorks.map(WorkCard).join('');
+
+        } else {
+            leftColumn.innerHTML = '<div style="padding: 2rem;">No projects found.</div>';
+        }
+
+    } catch (err) {
+        console.error('Error fetching works:', err);
+        leftColumn.innerHTML = '<div style="padding: 2rem;">Error loading projects.</div>';
+    }
 }

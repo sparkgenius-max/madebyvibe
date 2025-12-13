@@ -48,19 +48,16 @@ export function AboutPage() {
     `;
 }
 
-export function initAboutPage() {
+export async function initAboutPage() {
     initAboutHeroCarousel();
-    initTeamSection();
-    initTestimonialSlider();
+    await initTeamSection();
+    await initTestimonialSlider();
     initFooter();
 
-    // Initialize custom cursor for big marquee/footer text
+    // Initialize custom cursor for big marquee/footer text/team/testimonials
     import('../components/expertise.js').then(module => {
         if (module.initCustomCursor) module.initCustomCursor();
     }).catch(e => { });
-
-    // Initialize custom cursor for team and testimonial cards
-    initAboutCustomCursor();
 
     // Simple scroll reveals
     const revealElements = document.querySelectorAll('.story-text, .value-card, .team-member, .masonry-item');
@@ -74,43 +71,4 @@ export function initAboutPage() {
     }, { threshold: 0.1 });
 
     revealElements.forEach(el => revealObserver.observe(el));
-}
-
-function initAboutCustomCursor() {
-    // Create or get the cursor element
-    let cursor = document.getElementById('workCursor');
-    if (!cursor) {
-        cursor = document.createElement('div');
-        cursor.id = 'workCursor';
-        cursor.className = 'work-cursor';
-        cursor.innerHTML = `
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7 17L17 7M17 7H7M17 7V17" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        `;
-        document.body.appendChild(cursor);
-    }
-
-    // Select team cards and testimonial cards
-    const teamCards = document.querySelectorAll('.team-card');
-    const testimonialCards = document.querySelectorAll('.testimonial-card');
-
-    const allCards = [...teamCards, ...testimonialCards];
-
-    const moveCursor = (e) => {
-        cursor.style.left = `${e.clientX}px`;
-        cursor.style.top = `${e.clientY}px`;
-    };
-
-    allCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            cursor.classList.add('active');
-        });
-
-        card.addEventListener('mouseleave', () => {
-            cursor.classList.remove('active');
-        });
-
-        card.addEventListener('mousemove', moveCursor);
-    });
 }

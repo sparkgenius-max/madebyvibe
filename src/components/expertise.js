@@ -1,5 +1,6 @@
 import { Button } from './button.js';
 import { SectionLabel } from './section-label.js';
+import { client, urlFor } from '../lib/sanity.js';
 
 export function Expertise() {
     return `
@@ -26,53 +27,50 @@ export function Expertise() {
             </div>
 
             <div class="expertise-list" id="expertiseList">
-                <div class="expertise-item">
-                    <div class="expertise-item-content">
-                        <div class="expertise-img-wrapper">
-                            <img src="/images/project-1-detail.png" alt="Brand Identity" class="expertise-img">
-                        </div>
-                        <h3 class="expertise-name">Brand Identity</h3>
-                    </div>
-                </div>
-                <div class="expertise-item">
-                    <div class="expertise-item-content">
-                        <div class="expertise-img-wrapper">
-                            <img src="/images/project-2.png" alt="Websites" class="expertise-img">
-                        </div>
-                        <h3 class="expertise-name">Websites</h3>
-                    </div>
-                </div>
-                <div class="expertise-item">
-                    <div class="expertise-item-content">
-                        <div class="expertise-img-wrapper">
-                            <img src="/images/project-3.png" alt="SEO" class="expertise-img">
-                        </div>
-                        <h3 class="expertise-name">SEO</h3>
-                    </div>
-                </div>
-                <div class="expertise-item">
-                    <div class="expertise-item-content">
-                         <div class="expertise-img-wrapper">
-                            <img src="/images/project-1.png" alt="UI/UX Design" class="expertise-img">
-                        </div>
-                        <h3 class="expertise-name">UI/UX Design</h3>
-                    </div>
-                </div>
-                <div class="expertise-item">
-                    <div class="expertise-item-content">
-                         <div class="expertise-img-wrapper">
-                            <img src="/images/project-2.png" alt="E-Commerce" class="expertise-img">
-                        </div>
-                        <h3 class="expertise-name">E-Commerce</h3>
-                    </div>
-                </div>
+                <div style="padding: 2rem; color: var(--text-secondary);">Loading services...</div>
             </div>
         </div>
     </section>
     `;
 }
 
-export function initExpertise() {
+export async function initExpertise() {
+    const listContainer = document.getElementById('expertiseList');
+
+    // Only fetch if the list container exists (i.e. we are on a page with the Expertise section)
+    if (listContainer) {
+        const query = `*[_type == "service"] | order(_createdAt asc)`;
+
+        try {
+            const services = await client.fetch(query);
+
+            if (services.length > 0) {
+                const html = services.map(service => {
+                    const imageUrl = service.image ? urlFor(service.image).width(600).url() : '';
+
+                    return `
+                    <div class="expertise-item">
+                        <div class="expertise-item-content">
+                            <div class="expertise-img-wrapper">
+                                <img src="${imageUrl}" alt="${service.title}" class="expertise-img">
+                            </div>
+                            <h3 class="expertise-name">${service.title}</h3>
+                        </div>
+                    </div>
+                    `;
+                }).join('');
+
+                listContainer.innerHTML = html;
+            } else {
+                listContainer.innerHTML = '<div style="padding: 2rem;">No services found.</div>';
+            }
+        } catch (err) {
+            console.error('Error fetching services:', err);
+            listContainer.innerHTML = '<div style="padding: 2rem;">Error loading services.</div>';
+        }
+    }
+
+    // Initialize cursor (will handle BigFooterMarquee etc on other pages, and new items here)
     initCustomCursor();
 }
 
@@ -107,10 +105,13 @@ export function initCustomCursor() {
     }
 
     // Define targets: Expertise items, Big Marquee, Footer Big Text
+    // Note: Since initCustomCursor might be called after dynamic content load, we re-select
     const targets = [
         '.expertise-item-content',
         '.big-marquee-section',
-        '.footer-big-text'
+        '.footer-big-text',
+        '.team-card',
+        '.testimonial-card'
     ];
 
     // Clean up any existing active state (fix for persisting cursor on navigation)
@@ -120,7 +121,7 @@ export function initCustomCursor() {
         const elements = document.querySelectorAll(selector);
         elements.forEach(el => {
             // If element is already initialized, skip re-adding listeners
-            // BUT we must ensure the class 'hide-cursor' is applied if we want CSS-only cursor hiding
+            // BUT we must ensure the class 'hide-cursor-target' is applied if we want CSS-only cursor hiding
             if (!el.classList.contains('hide-cursor-target')) {
                 el.classList.add('hide-cursor-target');
             }

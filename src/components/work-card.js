@@ -16,8 +16,11 @@ export function WorkCard(work) {
     const tagsHtml = categories.map(tag => `<span class="work-category-capsule">${tag}</span>`).join('');
 
     // MOVED .work-card-tag-breakout OUTSIDE of .work-card-image-wrapper
+    // Use slug for URL if available, fallback to client name
+    const slugUrl = work.slug || work.client.toLowerCase().replace(/\s+/g, '-');
+
     return `
-    <a href="/works/${work.client.toLowerCase().replace(/\s+/g, '-')}" class="work-card-new group">
+    <a href="/works/${slugUrl}" class="work-card-new group">
         <div class="work-card-image-wrapper ${work.lightBg ? 'light-bg' : ''} ${work.darkBg ? 'dark-bg' : ''}" style="${heightStyle}">
              <img src="${work.image}" 
                   alt="${work.client}" 
