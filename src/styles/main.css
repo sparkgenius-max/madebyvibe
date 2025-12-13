@@ -6317,7 +6317,7 @@ svg[class*="corner-smooth"] path {
 
   height: 2.5rem;
 
-  background: var(--accent-brand);
+  background: unset;
 
   color: #000;
 
@@ -8745,6 +8745,16 @@ svg[class*="corner-smooth"] path {
   display: flex;
 
   justify-content: flex-end;
+
+  border-radius: 0;
+
+  border-top-left-radius: 0;
+
+  border-top-right-radius: 0;
+
+  border-bottom-right-radius: 0;
+
+  border-bottom-left-radius: 0;
 }
 
 .blog-hero-image-wrapper {
@@ -8752,9 +8762,9 @@ svg[class*="corner-smooth"] path {
 
   height: 90vh;
 
-  border-top-left-radius: 40px;
+  border-top-left-radius: 0 !important;
 
-  border-bottom-left-radius: 40px;
+  border-bottom-left-radius: 0;
 
   overflow: hidden;
 
@@ -8767,6 +8777,71 @@ svg[class*="corner-smooth"] path {
   height: 100%;
 
   object-fit: cover;
+
+  /* Desktop: top-left and bottom-left 40px, top-right and bottom-right 0px */
+  border-top-left-radius: 0;
+
+  border-bottom-left-radius: 40px;
+
+  border-top-right-radius: 0;
+
+  border-bottom-right-radius: 0;
+}
+
+/* Mobile Social Toast (Top Left) - Landscape Blank Toast */
+.blog-hero-social-toast {
+  display: none;
+  /* Hidden on desktop */
+}
+
+@media (max-width: 900px) {
+  .blog-hero-social-toast {
+    display: block;
+    background: var(--bg-section);
+    padding: 1rem 2rem;
+    border-radius: 0 0 24px 0;
+    min-width: 120px;
+    width: auto;
+    height: 45px;
+    position: absolute;
+    top: 0;
+    left: -1px;
+    z-index: 10;
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  .blog-hero-social-toast .corner-smooth-top {
+    position: absolute;
+    top: 0;
+    left: 114px;
+    right: -40px;
+    width: 35px;
+    height: 24px;
+    transform: rotate(90deg);
+  }
+
+  .blog-hero-social-toast .corner-smooth-bottom {
+    position: absolute;
+    top: 45px;
+    bottom: auto;
+    left: 9px;
+    width: 32px;
+    height: 24px;
+    transform: rotate(90deg);
+  }
+
+  .blog-hero-social-toast .corner-smooth-top path {
+    height: 18px;
+  }
+
+  /* Mobile: top-right, bottom-right, bottom-left 24px */
+  .blog-hero-img {
+    border-top-right-radius: 24px;
+    border-bottom-right-radius: 24px;
+    border-bottom-left-radius: 24px;
+    border-top-left-radius: 0;
+  }
 }
 
 /* Overlapping Title */
@@ -8858,9 +8933,29 @@ svg[class*="corner-smooth"] path {
 
   overflow: hidden;
 
-  background: var(--accent-brand);
+  background: unset;
 
-  padding: 2px;
+  background-color: unset;
+
+  padding: 0;
+
+  padding-top: 0;
+
+  padding-bottom: 0;
+
+  padding-left: 0;
+
+  padding-right: 0;
+
+  border: none;
+
+  border-style: none;
+
+  border-width: 0px;
+
+  border-color: rgba(0, 0, 0, 0);
+
+  border-image: none;
 }
 
 .author-avatar {
@@ -8872,7 +8967,9 @@ svg[class*="corner-smooth"] path {
 
   object-fit: cover;
 
-  background: var(--bg-outer);
+  background: unset;
+
+  background-color: unset;
 }
 
 .author-info {
@@ -9368,7 +9465,7 @@ tr:last-child td {
 
   /* Reduced height */
 
-  border-top-left-radius: 40px;
+  border-top-left-radius: 0;
 
   border-bottom-left-radius: 40px;
 
@@ -9856,9 +9953,9 @@ main.blog-detail-container {
 
   height: 60vh;
 
-  border-top-left-radius: 40px;
+  border-top-left-radius: 0;
 
-  border-bottom-left-radius: 40px;
+  border-bottom-left-radius: 0;
 }
 
 /* =====================================================
@@ -9922,11 +10019,21 @@ main.blog-detail-container {
 
   height: 60vh !important;
 
-  border-top-left-radius: 40px !important;
-
-  border-bottom-left-radius: 40px !important;
+  border-radius: 0 !important;
 
   overflow: hidden !important;
+}
+
+.blog-hero-image-wrapper img {
+  border-top-left-radius: 0 !important;
+
+  border-bottom-left-radius: 0 !important;
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
 }
 
 /* SVG Corners - Position at image left edge */
@@ -10103,9 +10210,9 @@ main.blog-detail-container {
 
   min-height: 400px !important;
 
-  border-top-left-radius: 40px !important;
+  border-top-left-radius: 0 !important;
 
-  border-bottom-left-radius: 40px !important;
+  border-bottom-left-radius: 0 !important;
 
   border-top-right-radius: 0 !important;
 
@@ -10304,9 +10411,9 @@ main.blog-detail-container {
 
   height: 100% !important;
 
-  border-top-left-radius: 40px !important;
+  border-top-left-radius: 0 !important;
 
-  border-bottom-left-radius: 40px !important;
+  border-bottom-left-radius: 0 !important;
 
   border-top-right-radius: 0 !important;
 
@@ -10321,6 +10428,10 @@ main.blog-detail-container {
   height: 100%;
 
   object-fit: cover;
+
+  border-top-left-radius: 0 !important;
+
+  border-bottom-left-radius: 0 !important;
 }
 
 /* SVG corners at left edge of image column */
@@ -11130,13 +11241,30 @@ main.blog-detail-container {
     min-height: 300px !important;
     margin: 0 !important;
     /* Special Radius for Toast Effect */
-    border-top-left-radius: 80px !important;
+    border-top-left-radius: 0 !important;
     border-top-right-radius: 20px !important;
     border-bottom-right-radius: 20px !important;
     border-bottom-left-radius: 20px !important;
     position: relative !important;
     right: auto !important;
     left: auto !important;
+  }
+
+  /* Restore bottom invert round svg for perfect toast effect */
+  .blog-hero-image-wrapper .corner-smooth-bottom {
+    display: block !important;
+    position: absolute !important;
+    top: 45px !important;
+    left: -1px !important;
+    width: 32px !important;
+    height: 32px !important;
+    transform: rotate(90deg) !important;
+    z-index: 25 !important;
+    pointer-events: none !important;
+  }
+
+  .blog-hero-image-wrapper .corner-smooth-bottom path {
+    fill: var(--bg-section) !important;
   }
 
   /* Hide SVGs on Mobile */

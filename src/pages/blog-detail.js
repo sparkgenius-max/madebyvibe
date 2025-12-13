@@ -49,6 +49,13 @@ export function BlogDetailPage() {
 
             <!-- Right: Image -->
             <div class="blog-hero-right">
+                <!-- Mobile Social Toast (Top Left) -->
+                <div class="blog-hero-social-toast">
+                    <svg class="corner-smooth-top" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0v32h32C14.3 32 0 17.7 0 0z" fill="#000000ff" />
+                    </svg>
+                </div>
+                
                 <!-- Inverted Corners - positioned at image left edge -->
                 <svg class="blog-corner blog-corner-top" width="32" height="32" viewBox="0 0 20 20" fill="none">
                     <path d="M20 0v20H0C11.05 20 20 11.05 20 0z" fill="var(--bg-outer)" />
@@ -57,8 +64,13 @@ export function BlogDetailPage() {
                     <path d="M20 0v20H0C11.05 20 20 11.05 20 0z" fill="var(--bg-outer)" />
                 </svg>
                 
+                <!-- Image Container -->
                 <div class="blog-hero-image-wrapper">
                     <img src="${post.image}" alt="${post.title}" class="blog-hero-img">
+                    <!-- Mobile SVG positioned at image left edge -->
+                    <svg class="corner-smooth-bottom" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 0v32h32C14.3 32 0 17.7 0 0z" fill="#000000" />
+                    </svg>
                 </div>
             </div>
         </section>
