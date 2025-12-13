@@ -32,14 +32,23 @@ export function ServicesDropdown() {
     `;
 }
 
+// Cache for navbar services to avoid redundant fetches
+let cachedServicesNav = null;
+
 export async function initServicesDropdown() {
     const listContainer = document.getElementById('services-dropdown-list');
     if (!listContainer) return;
 
+    // Use cached data if available
+    if (cachedServicesNav) {
+        renderServicesList(listContainer, cachedServicesNav);
+        return;
+    }
+
     // Fetch top services (limit 6)
     const query = `*[_type == "service" && defined(slug.current)] | order(title asc)[0...6] {
         title,
-        slug,
+        "slug": slug.current,
         shortDescription
     }`;
 
@@ -47,19 +56,8 @@ export async function initServicesDropdown() {
         const services = await client.fetch(query);
 
         if (services.length > 0) {
-            const html = services.map(service => `
-                <a href="/services/${service.slug.current}" class="dropdown-item group">
-                    <div class="dropdown-item-header">
-                        <h4 class="dropdown-item-title">${service.title}</h4>
-                        <svg class="dropdown-arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <p class="dropdown-item-desc">${service.shortDescription || 'Learn more'}</p>
-                </a>
-            `).join('');
-
-            listContainer.innerHTML = html;
+            cachedServicesNav = services; // Update cache
+            renderServicesList(listContainer, services);
         } else {
             listContainer.innerHTML = '<div style="padding: 1rem;">No services found.</div>';
         }
@@ -69,6 +67,22 @@ export async function initServicesDropdown() {
         // Fallback?
         listContainer.innerHTML = '<a href="/services" class="dropdown-item group">View All Services</a>';
     }
+}
+
+function renderServicesList(container, services) {
+    const html = services.map(service => `
+        <a href="/services/${service.slug}" class="dropdown-item group">
+            <div class="dropdown-item-header">
+                <h4 class="dropdown-item-title">${service.title}</h4>
+                <svg class="dropdown-arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <p class="dropdown-item-desc">${service.shortDescription || 'Learn more'}</p>
+        </a>
+    `).join('');
+
+    container.innerHTML = html;
 }
 
 export function AboutDropdown() {

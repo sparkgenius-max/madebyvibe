@@ -63,7 +63,7 @@ export function Footer() {
                     <div class="footer-cta">
                         <h3 class="footer-cta-title">Do you like<br>what you see?</h3>
                         <div class="footer-cta-actions">
-                            ${Button({ text: 'Start a project', href: '#', variant: 'primary' })}
+                            ${Button({ text: 'Start a project', href: '/contact', variant: 'primary' })}
                             <div class="footer-reviews">
                                 <span class="review-icon">G</span>
                                 <span class="review-stars">★★★★★</span>

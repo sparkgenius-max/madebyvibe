@@ -5,7 +5,7 @@ import './styles/more-work.css';
 import { initHome } from './pages/home.js';
 import { Home } from './pages/home.js';
 import { Services, initServices } from './pages/services.js';
-import { ServiceDetail } from './pages/service-detail.js';
+import { ServiceDetail, initServiceDetail } from './pages/service-detail.js';
 import { Works, initWorks } from './pages/works.js';
 import { WorkDetailPage, initWorkDetailPage } from './pages/work-detail.js';
 import { BlogPage, initBlogPage } from './pages/blog.js';
@@ -27,6 +27,9 @@ const app = document.getElementById('app');
 
 function render() {
     const path = window.location.pathname;
+
+    // Force scroll to top on page change
+    window.scrollTo(0, 0);
 
     // Clear dropdown blur overlay state before re-rendering
     document.body.classList.remove('dropdown-active');

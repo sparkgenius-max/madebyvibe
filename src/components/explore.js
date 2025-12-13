@@ -9,7 +9,7 @@ export function Explore() {
             name: "Lumina Brand",
             subtitle: "identity system",
             image: "/images/project-2.png",
-            link: "#"
+            link: "/works"
         },
         {
             id: 2,
@@ -18,7 +18,7 @@ export function Explore() {
             name: "Artisan Studio",
             subtitle: "website redesign",
             image: "/images/project-3.png",
-            link: "#"
+            link: "/works"
         },
         {
             id: 3,
@@ -28,7 +28,7 @@ export function Explore() {
             subtitle: "mobile experience",
             image: null,
             gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            link: "#"
+            link: "/works"
         },
         {
             id: 4,
@@ -38,7 +38,7 @@ export function Explore() {
             subtitle: "visual identity",
             image: null,
             gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-            link: "#"
+            link: "/works"
         },
         {
             id: 5,
@@ -48,7 +48,7 @@ export function Explore() {
             subtitle: "e-commerce platform",
             image: null,
             gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-            link: "#"
+            link: "/works"
         },
         {
             id: 6,
@@ -58,7 +58,7 @@ export function Explore() {
             subtitle: "dashboard design",
             image: null,
             gradient: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
-            link: "#"
+            link: "/works"
         },
         {
             id: 7,
@@ -68,7 +68,7 @@ export function Explore() {
             subtitle: "brand strategy",
             image: null,
             gradient: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
-            link: "#"
+            link: "/works"
         },
         {
             id: 8,
@@ -78,7 +78,7 @@ export function Explore() {
             subtitle: "startup website",
             image: null,
             gradient: "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)",
-            link: "#"
+            link: "/works"
         }
     ];
 

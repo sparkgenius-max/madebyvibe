@@ -11,8 +11,8 @@ export function About() {
                 Branding that elevates your digital presence.
             </p>
             <div class="about-actions">
-                ${Button({ text: 'About Vibe', variant: 'primary', href: '#' })}
-                ${Button({ text: 'Meet the Team', variant: 'outline-dark', href: '#' })}
+                ${Button({ text: 'About Vibe', variant: 'primary', href: '/about' })}
+                ${Button({ text: 'Meet the Team', variant: 'outline-dark', href: '/team' })}
             </div>
         </div>
     </section>

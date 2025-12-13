@@ -21,25 +21,29 @@ export function Expertise() {
                 <div class="expertise-col-3">
                     <div class="expertise-desc">
                         <p>We are a digital marketing agency with expertise,<br>and we're on a mission to help you take the next<br>step in your business.</p>
-                        ${Button({ text: 'See all services', variant: 'outline-dark', href: '#' })}
-                    </div>
-                </div>
-            </div>
-
-            <div class="expertise-list" id="expertiseList">
-                <div style="padding: 2rem; color: var(--text-secondary);">Loading services...</div>
+                ${Button({ text: 'See all services', variant: 'outline-dark', href: '/services' })}
             </div>
         </div>
-    </section>
-    `;
+    </div>
+
+    <div class="expertise-list" id="expertiseList">
+        <div style="padding: 2rem; color: var(--text-secondary);">Loading services...</div>
+    </div>
+</div>
+</section>
+`;
 }
 
 export async function initExpertise() {
     const listContainer = document.getElementById('expertiseList');
 
-    // Only fetch if the list container exists (i.e. we are on a page with the Expertise section)
+    // Only fetch if the listContainer exists
     if (listContainer) {
-        const query = `*[_type == "service"] | order(_createdAt asc)`;
+        const query = `*[_type == "service"] | order(_createdAt asc) {
+            title,
+            "slug": slug.current,
+            image
+        }`;
 
         try {
             const services = await client.fetch(query);
@@ -47,16 +51,19 @@ export async function initExpertise() {
             if (services.length > 0) {
                 const html = services.map(service => {
                     const imageUrl = service.image ? urlFor(service.image).width(600).url() : '';
+                    const link = service.slug ? `/services/${service.slug}` : '#';
 
                     return `
-                    <div class="expertise-item">
-                        <div class="expertise-item-content">
-                            <div class="expertise-img-wrapper">
-                                <img src="${imageUrl}" alt="${service.title}" class="expertise-img">
+                    <a href="${link}" class="expertise-item-link" style="text-decoration: none; color: inherit; display: block;">
+                        <div class="expertise-item">
+                            <div class="expertise-item-content">
+                                <div class="expertise-img-wrapper">
+                                    <img src="${imageUrl}" alt="${service.title}" class="expertise-img">
+                                </div>
+                                <h3 class="expertise-name">${service.title}</h3>
                             </div>
-                            <h3 class="expertise-name">${service.title}</h3>
                         </div>
-                    </div>
+                    </a>
                     `;
                 }).join('');
 

@@ -39,7 +39,17 @@ export async function initServiceDetail() {
     if (!container) return;
 
     // Get slug from URL
-    const slug = window.location.pathname.split('/services/')[1];
+    const path = window.location.pathname;
+    let slug = path.split('/services/')[1];
+
+    if (slug) {
+        // Clean slug: remove trailing slash
+        if (slug.endsWith('/')) {
+            slug = slug.slice(0, -1);
+        }
+    }
+
+    console.log('Service Detail - Init. Path:', path, 'Slug:', slug);
 
     if (!slug) {
         container.innerHTML = '<div style="padding: 4rem; text-align: center;">Service not found.</div>';
@@ -59,20 +69,17 @@ export async function initServiceDetail() {
     }`;
 
     try {
+        console.log('Service Detail - Fetching for slug:', slug);
         const service = await client.fetch(query, { slug });
+        console.log('Service Detail - Result:', service);
 
         if (service) {
             const heroTitle = service.detailHeroTitle || service.title || 'Service Detail';
             const imageUrl = service.detailImage
                 ? urlFor(service.detailImage).width(1920).url()
-                : 'https://res.cloudinary.com/dg2cqc3e9/video/upload/v1765123431/3249454-uhd_3840_2160_25fps_gurww6.mp4'; // Fallback to video placeholder if no image? 
-            // Note: LargeImageCTA handles images. If video, we might need a different component or assume it's an image.
-            // The original code passed a video URL to imageUrl property of LargeImageCTA. 
-            // LargeImageCTA likely handles <img> src. Converting video to img src won't work.
-            // However, Sanity usually serves images.
+                : 'https://res.cloudinary.com/dg2cqc3e9/video/upload/v1765123431/3249454-uhd_3840_2160_25fps_gurww6.mp4';
 
             const renderLargeImageCTA = () => {
-                // Check if it's a video URL (fallback) or Sanity Image
                 return LargeImageCTA({
                     buttonText: 'See our work',
                     buttonLink: '/works',
@@ -139,7 +146,8 @@ export async function initServiceDetail() {
             </div>
             `;
         } else {
-            container.innerHTML = '<div style="padding: 4rem; text-align: center;">Service not found.</div>';
+            console.warn('Service Detail - Service not found in Sanity for slug:', slug);
+            container.innerHTML = `<div style="padding: 4rem; text-align: center;">Service not found: ${slug}</div>`;
         }
     } catch (err) {
         console.error('Error fetching service detail:', err);

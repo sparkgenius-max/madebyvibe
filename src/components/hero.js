@@ -23,7 +23,7 @@ export function Hero() {
                         for future tech.
                     </h1>
                     <div class="cta-container">
-                        ${Button({ text: 'Start Project', variant: 'primary' })}
+                        ${Button({ text: 'Start Project', variant: 'primary', href: '/contact' })}
                     </div>
                 </div>
 

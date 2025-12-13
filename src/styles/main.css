@@ -11993,8 +11993,9 @@ main.blog-detail-container {
   right: -1px;
   /* Align flush with right */
   width: auto;
-  max-width: 975px;
-  min-width: 675px;
+  /* Increase overlap */
+  max-width: 1050px;
+  min-width: 775px;
 
   background: var(--bg-outer);
   /* Same as page background */
