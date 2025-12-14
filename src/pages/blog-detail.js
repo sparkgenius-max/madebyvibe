@@ -136,6 +136,21 @@ export async function initBlogDetailPage() {
                             <div class="blog-title-container">
                                 <h1 class="blog-hero-title">${post.title}</h1>
                             </div>
+
+                            <!-- Mobile TOC -->
+                            <div class="mobile-toc-wrapper" id="mobileTocWrapper">
+                                <details class="mobile-toc-details">
+                                    <summary class="mobile-toc-summary">
+                                        <span>Table of Contents</span>
+                                        <svg class="mobile-toc-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M6 9l6 6 6-6"/>
+                                        </svg>
+                                    </summary>
+                                    <ul class="mobile-toc-list" id="mobileTocList">
+                                        <!-- Injected via JS -->
+                                    </ul>
+                                </details>
+                            </div>
                         </div>
 
                         <div class="blog-hero-author">
@@ -264,17 +279,20 @@ export async function initBlogDetailPage() {
 function initTocAndProgress() {
     const article = document.querySelector('.blog-article-content');
     const tocList = document.getElementById('tocList');
+    const mobileTocList = document.getElementById('mobileTocList');
 
     // Generate TOC
-    if (article && tocList) {
+    if (article && (tocList || mobileTocList)) {
         const headings = article.querySelectorAll('h2');
-        tocList.innerHTML = '';
+        if (tocList) tocList.innerHTML = '';
+        if (mobileTocList) mobileTocList.innerHTML = '';
 
         headings.forEach((heading, index) => {
             if (!heading.id) {
                 heading.id = 'heading-' + index;
             }
 
+            // Desktop Item
             const li = document.createElement('li');
             const a = document.createElement('a');
             a.href = '#' + heading.id;
@@ -292,7 +310,30 @@ function initTocAndProgress() {
             });
 
             li.appendChild(a);
-            tocList.appendChild(li);
+            if (tocList) tocList.appendChild(li);
+
+            // Mobile Item
+            if (mobileTocList) {
+                const mobileLi = li.cloneNode(true);
+                const mobileLink = mobileLi.querySelector('a');
+
+                // Re-bind click event
+                mobileLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = document.getElementById(heading.id);
+                    if (target) {
+                        const offset = 100;
+                        const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({ top: elementPosition - offset, behavior: 'smooth' });
+
+                        // Close details
+                        const details = document.querySelector('.mobile-toc-details');
+                        if (details) details.removeAttribute('open');
+                    }
+                });
+
+                mobileTocList.appendChild(mobileLi);
+            }
         });
     }
 
