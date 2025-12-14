@@ -4,16 +4,20 @@
     position: relative;
     height: auto;
     border-radius: var(--radius-main);
-    overflow: hidden; /* Important to clip the image */
-    margin-bottom: 4rem; /* Spacing below the component */
+    overflow: hidden;
+    /* Important to clip the image */
+    margin-bottom: 0;
+    /* Spacing handled by parent grid/flex if needed, or minimal */
 }
 
 .sd-hero-image-wrapper {
     width: 100%;
-    height: 60vh; /* Fixed height for consistency */
+    height: 60vh;
+    /* Fixed height for consistency */
     min-height: 400px;
     position: relative;
-    background-color: var(--bg-section); /* Placeholder background */
+    background-color: var(--bg-section);
+    /* Placeholder background */
 }
 
 .sd-hero-image {
@@ -33,16 +37,20 @@
 }
 
 .sd-breakout-inner {
-    background-color: var(--bg-outer); /* Matches page background */
-    padding: 0 2rem 1.5rem 0; /* Padding to push content away from corner */
-    border-bottom-right-radius: 32px; /* Sharp corner for SVG connection */
+    background-color: var(--bg-outer);
+    /* Matches page background */
+    padding: 0 2rem 1.5rem 0;
+    /* Padding to push content away from corner */
+    border-bottom-right-radius: 32px;
+    /* Sharp corner for SVG connection */
 }
 
 /* SVG Smoothers */
 .breakout-corner-right {
     position: absolute;
     top: 0;
-    right: -20px; /* Width of SVG */
+    right: -20px;
+    /* Width of SVG */
     width: 20px;
     height: 20px;
     pointer-events: none;
@@ -50,7 +58,8 @@
 
 .breakout-corner-bottom {
     position: absolute;
-    bottom: -20px; /* Height of SVG */
+    bottom: -20px;
+    /* Height of SVG */
     left: 0;
     width: 20px;
     height: 20px;

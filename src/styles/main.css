@@ -12651,3 +12651,35 @@ main.blog-detail-container {
   background: rgba(0, 0, 0, 0.15);
   color: var(--text-primary);
 }
+
+/* ============================================
+
+   SERVICE DETAIL REFINEMENTS
+
+   ============================================ */
+
+/* 1. Reduce gap between hero text and hero image */
+.service-detail-hero {
+  min-height: auto !important;
+  justify-content: flex-start !important;
+  padding-top: 140px !important;
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem) !important;
+}
+
+.sd-hero-grid {
+  margin-bottom: 0 !important;
+}
+
+/* Ensure the image container sits closer to the text above */
+.service-detail-container {
+  padding-top: 0 !important;
+}
+
+.sd-hero-container {
+  margin-top: 0 !important;
+}
+
+/* 2. Add gap between content grid and marquee (96px ~ 6rem) */
+.sd-content-grid {
+  margin-bottom: clamp(4rem, 8vw, 6rem) !important;
+}

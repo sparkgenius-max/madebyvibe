@@ -79,11 +79,14 @@ export async function initServiceDetail() {
                 ? urlFor(service.detailImage).width(1920).url()
                 : 'https://res.cloudinary.com/dg2cqc3e9/video/upload/v1765123431/3249454-uhd_3840_2160_25fps_gurww6.mp4';
 
+            const isVideo = !service.detailImage;
+
             const renderLargeImageCTA = () => {
                 return LargeImageCTA({
                     buttonText: 'See our work',
                     buttonLink: '/works',
-                    imageUrl: imageUrl
+                    imageUrl: imageUrl,
+                    isVideo: isVideo
                 });
             }
 
