@@ -6154,6 +6154,10 @@ svg[class*="corner-smooth"] path {
 
     /* Slightly smaller gap for full width */
   }
+
+  #works-column-left {
+    margin-top: 8rem;
+  }
 }
 
 .works-column {
@@ -6359,6 +6363,41 @@ svg[class*="corner-smooth"] path {
 
 .author-role {
   color: var(--text-secondary);
+}
+
+
+/* Homepage Works Header Block */
+
+.works-header-block {
+  padding: 1rem 0 3rem;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 1.5rem;
+}
+
+.works-intro-heading {
+  font-family: var(--font-display);
+
+  font-size: clamp(3rem, 6vw, 4.5rem);
+
+  line-height: 1.1;
+
+  color: var(--text-on-dark);
+
+  font-weight: 400;
+
+  letter-spacing: -0.02em;
+}
+
+[data-theme="light"] .works-intro-heading {
+  color: var(--text-primary);
+}
+
+.works-header-block .section-label {
+  margin-bottom: 0;
 }
 
 /* CTA Block */

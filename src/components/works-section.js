@@ -14,23 +14,10 @@ export function WorksSection() {
 
             <!-- Right Column -->
             <div class="works-column" id="works-column-right">
-                <!-- Testimonial Block -->
-                <div class="works-testimonial">
-                    <div class="works-testimonial-content">
-                        <h3 class="testimonial-text">
-                            <svg class="quote-icon-large" viewBox="0 0 100 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M30 60C30 75 20 85 5 85V75C15 75 20 65 20 50H5V15H45V60H30ZM85 60C85 75 75 85 60 85V75C70 75 75 65 75 50H60V15H100V60H85Z"/>
-                            </svg>
-                            Vibe understands the client's concept & turns ideas into a reality
-                        </h3>
-                        <div class="testimonial-author">
-                            <div class="author-avatar" style="background: var(--accent-brand); color: #000;">S</div>
-                            <div class="author-info">
-                                <span class="author-name">Stacy</span>
-                                <span class="author-role">Miller Metcalfe</span>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Header Block -->
+                <div class="works-header-block">
+                    ${SectionLabel('Our work')}
+                    <h2 class="works-intro-heading">Take a look at <br> our projects</h2>
                 </div>
                 
                 <div id="works-right-cards"></div>
